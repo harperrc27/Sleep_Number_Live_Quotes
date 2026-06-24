@@ -1,0 +1,9 @@
+{
+  "name": "Sleep Quote Studio",
+  "short_name": "Sleep Quote",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f0e9",
+  "theme_color": "#17120f",
+  "icons": []
+}

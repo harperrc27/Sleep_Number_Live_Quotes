@@ -1,0 +1,372 @@
+{
+  "schemaVersion": 1,
+  "lastUpdated": "2026-06-24T00:00:11.865Z",
+  "sourceNotes": "Catalog updater ran with no active public sources. Add URLs in scripts/sources.json.",
+  "brands": [
+    {
+      "id": "tempur",
+      "name": "Tempur-Pedic",
+      "logoText": "TEMPUR",
+      "badge": "Premium",
+      "description": "Pressure relief and contouring foam feel."
+    },
+    {
+      "id": "sealy",
+      "name": "Sealy",
+      "logoText": "Sealy",
+      "badge": "Popular",
+      "description": "Supportive mattresses across value and premium lines."
+    },
+    {
+      "id": "stearns",
+      "name": "Stearns & Foster",
+      "logoText": "S&F",
+      "badge": "Luxury",
+      "description": "Luxury crafted mattress collections."
+    },
+    {
+      "id": "purple",
+      "name": "Purple",
+      "logoText": "Purple",
+      "badge": "Cooling",
+      "description": "Gel grid comfort and airflow-focused support."
+    },
+    {
+      "id": "beautyrest",
+      "name": "Beautyrest",
+      "logoText": "Beautyrest",
+      "badge": "Hybrid",
+      "description": "Pocketed coil support and comfort layers."
+    },
+    {
+      "id": "serta",
+      "name": "Serta",
+      "logoText": "Serta",
+      "badge": "Value",
+      "description": "Comfortable everyday mattress options."
+    }
+  ],
+  "products": [
+    {
+      "id": "tempur-adapt-queen-medium",
+      "brandId": "tempur",
+      "series": "TEMPUR-Adapt",
+      "model": "Medium",
+      "type": "Foam",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 2199,
+      "salePrice": 1999
+    },
+    {
+      "id": "tempur-proadapt-queen-medium-hybrid",
+      "brandId": "tempur",
+      "series": "TEMPUR-ProAdapt",
+      "model": "Medium Hybrid",
+      "type": "Hybrid",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 3399,
+      "salePrice": 2999
+    },
+    {
+      "id": "tempur-breeze-king-firm",
+      "brandId": "tempur",
+      "series": "TEMPUR-Breeze",
+      "model": "Firm",
+      "type": "Cooling Foam",
+      "size": "King",
+      "comfort": "Firm",
+      "retailPrice": 4899,
+      "salePrice": 4499
+    },
+    {
+      "id": "sealy-posturepedic-queen-plush",
+      "brandId": "sealy",
+      "series": "Posturepedic",
+      "model": "Plus Plush",
+      "type": "Hybrid",
+      "size": "Queen",
+      "comfort": "Plush",
+      "retailPrice": 1299,
+      "salePrice": 1099
+    },
+    {
+      "id": "sealy-essentials-full-medium",
+      "brandId": "sealy",
+      "series": "Essentials",
+      "model": "Medium",
+      "type": "Innerspring",
+      "size": "Full",
+      "comfort": "Medium",
+      "retailPrice": 699,
+      "salePrice": 599
+    },
+    {
+      "id": "stearns-estate-queen-firm",
+      "brandId": "stearns",
+      "series": "Estate",
+      "model": "Firm",
+      "type": "Luxury Hybrid",
+      "size": "Queen",
+      "comfort": "Firm",
+      "retailPrice": 2499,
+      "salePrice": 2299
+    },
+    {
+      "id": "purple-plus-queen",
+      "brandId": "purple",
+      "series": "Purple",
+      "model": "Plus",
+      "type": "GelFlex",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1899,
+      "salePrice": 1699
+    },
+    {
+      "id": "beautyrest-black-queen-medium",
+      "brandId": "beautyrest",
+      "series": "Black",
+      "model": "Medium",
+      "type": "Hybrid",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 3199,
+      "salePrice": 2799
+    },
+    {
+      "id": "serta-perfect-sleeper-queen-plush",
+      "brandId": "serta",
+      "series": "Perfect Sleeper",
+      "model": "Plush",
+      "type": "Hybrid",
+      "size": "Queen",
+      "comfort": "Plush",
+      "retailPrice": 1199,
+      "salePrice": 999
+    }
+  ],
+  "addons": [
+    {
+      "id": "none",
+      "category": "none",
+      "name": "None",
+      "description": "Skip this section.",
+      "price": 0
+    },
+    {
+      "id": "basic-foundation-queen",
+      "category": "foundation",
+      "name": "Basic Foundation",
+      "description": "Non-adjustable support base.",
+      "price": 249
+    },
+    {
+      "id": "low-profile-foundation",
+      "category": "foundation",
+      "name": "Low Profile Foundation",
+      "description": "Lower non-adjustable foundation.",
+      "price": 279
+    },
+    {
+      "id": "adjustable-basic",
+      "category": "adjustable-base",
+      "name": "Head-Up Adjustable Base",
+      "description": "Adjustable head positioning.",
+      "price": 699
+    },
+    {
+      "id": "adjustable-premium",
+      "category": "adjustable-base",
+      "name": "Premium Adjustable Base",
+      "description": "Head/foot adjust, massage, presets.",
+      "price": 1199
+    },
+    {
+      "id": "split-king-adjustable",
+      "category": "adjustable-base",
+      "name": "Split King Adjustable Base",
+      "description": "Dual-side adjustable support.",
+      "price": 1999
+    },
+    {
+      "id": "bed-frame",
+      "category": "furniture",
+      "name": "Bed Frame",
+      "description": "Simple metal support frame.",
+      "price": 99
+    },
+    {
+      "id": "headboard",
+      "category": "furniture",
+      "name": "Headboard",
+      "description": "Upholstered headboard option.",
+      "price": 399
+    },
+    {
+      "id": "nightstand",
+      "category": "furniture",
+      "name": "Nightstand",
+      "description": "Bedroom storage add-on.",
+      "price": 349
+    },
+    {
+      "id": "dresser",
+      "category": "furniture",
+      "name": "Dresser",
+      "description": "Matching bedroom dresser.",
+      "price": 899
+    },
+    {
+      "id": "waterproof-protector",
+      "category": "protection-layer",
+      "name": "Waterproof Mattress Protector",
+      "description": "Protects against spills and stains.",
+      "price": 129
+    },
+    {
+      "id": "cooling-protector",
+      "category": "protection-layer",
+      "name": "Cooling Protector",
+      "description": "Breathable protective layer.",
+      "price": 169
+    },
+    {
+      "id": "memory-topper",
+      "category": "comfort-layer",
+      "name": "Memory Foam Topper",
+      "description": "Adds pressure-relieving comfort.",
+      "price": 249
+    },
+    {
+      "id": "cooling-topper",
+      "category": "comfort-layer",
+      "name": "Cooling Topper",
+      "description": "Adds cooling comfort layer.",
+      "price": 299
+    },
+    {
+      "id": "cooling-pillow",
+      "category": "pillow",
+      "name": "Cooling Pillow",
+      "description": "Cooling comfort pillow.",
+      "price": 149
+    },
+    {
+      "id": "foam-pillow",
+      "category": "pillow",
+      "name": "Memory Foam Pillow",
+      "description": "Contour support pillow.",
+      "price": 119
+    },
+    {
+      "id": "sheet-set",
+      "category": "bedding",
+      "name": "Sheet Set",
+      "description": "Soft everyday sheet set.",
+      "price": 129
+    },
+    {
+      "id": "cooling-sheets",
+      "category": "bedding",
+      "name": "Cooling Sheet Set",
+      "description": "Breathable cooling sheets.",
+      "price": 199
+    },
+    {
+      "id": "plan-3",
+      "category": "protection-plan",
+      "name": "3-Year Protection Plan",
+      "description": "Basic accidental protection.",
+      "price": 149
+    },
+    {
+      "id": "plan-5",
+      "category": "protection-plan",
+      "name": "5-Year Complete Protection",
+      "description": "Recommended coverage for mattress/base/furniture.",
+      "price": 249
+    },
+    {
+      "id": "plan-10",
+      "category": "protection-plan",
+      "name": "10-Year Premium Protection",
+      "description": "Longest protection plan option.",
+      "price": 399
+    }
+  ],
+  "promos": [
+    {
+      "id": "mattress-200-off",
+      "type": "automatic",
+      "name": "$200 Mattress Savings",
+      "description": "Applies to mattress purchases over $999.",
+      "discountAmount": 200,
+      "conditions": {
+        "requiresProduct": true,
+        "minimumSubtotal": 999
+      }
+    },
+    {
+      "id": "adjustable-bundle-300",
+      "type": "automatic",
+      "name": "$300 Adjustable Base Bundle",
+      "description": "Applies when mattress and adjustable base are selected.",
+      "discountAmount": 300,
+      "conditions": {
+        "requiresCategories": [
+          "mattress",
+          "adjustable-base"
+        ],
+        "minimumSubtotal": 1499
+      }
+    },
+    {
+      "id": "premium-system-500",
+      "type": "automatic",
+      "name": "$500 Premium Sleep System Savings",
+      "description": "Applies to complete sleep systems over $4000.",
+      "discountAmount": 500,
+      "conditions": {
+        "minimumSubtotal": 4000
+      }
+    },
+    {
+      "id": "military",
+      "type": "toggle",
+      "name": "Military Discount",
+      "description": "Use only with valid qualification/verification.",
+      "discountPercent": 10
+    },
+    {
+      "id": "first-responder",
+      "type": "toggle",
+      "name": "First Responder Discount",
+      "description": "Use only with valid qualification/verification.",
+      "discountPercent": 10
+    },
+    {
+      "id": "teacher",
+      "type": "toggle",
+      "name": "Teacher Discount",
+      "description": "Use only with valid qualification/verification.",
+      "discountPercent": 10
+    },
+    {
+      "id": "manager-approval",
+      "type": "toggle",
+      "name": "Manager-Approved Discount",
+      "description": "Use only when a manager approves the override.",
+      "discountAmount": 100
+    },
+    {
+      "id": "price-match",
+      "type": "toggle",
+      "name": "Price Match",
+      "description": "Use when price match requirements are met.",
+      "discountAmount": 150
+    }
+  ],
+  "sourceResults": []
+}

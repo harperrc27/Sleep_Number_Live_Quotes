@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#17120f" />
+  <title>Sleep Quote Studio</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Daily catalog quote tool</p>
+        <h1>Sleep Quote Studio</h1>
+        <p class="subcopy">Refresh before work, then quote instantly from the cached catalog all day.</p>
+      </div>
+      <button id="installBtn" class="ghost hidden">Install app</button>
+    </header>
+
+    <section class="status-card">
+      <div>
+        <span class="status-dot" id="statusDot"></span>
+        <strong id="catalogStatus">Loading catalog...</strong>
+        <p id="catalogMeta">Checking saved data.</p>
+      </div>
+      <button id="refreshCatalogBtn">Refresh catalog</button>
+    </section>
+
+    <main class="quote-layout">
+      <section class="panel builder-panel">
+        <div class="step-header">
+          <div>
+            <p class="eyebrow" id="stepCounter">Step 1 of 8</p>
+            <h2 id="stepTitle">Choose mattress brand</h2>
+          </div>
+          <div class="progress"><span id="progressBar"></span></div>
+        </div>
+        <div id="stepBody" class="step-body"></div>
+        <div class="nav-row">
+          <button id="backBtn" class="secondary">Back</button>
+          <button id="nextBtn">Continue</button>
+        </div>
+      </section>
+
+      <aside class="panel summary-panel">
+        <div class="summary-head">
+          <div>
+            <p class="eyebrow">Live quote</p>
+            <h2 id="totalDue">$0</h2>
+          </div>
+          <span class="savings-pill" id="savingsPill">$0 saved</span>
+        </div>
+        <div id="miniSummary" class="mini-summary"></div>
+        <div id="promoList" class="promo-list"></div>
+        <button id="copyQuoteBtn" class="wide">Copy quote</button>
+        <button id="resetBtn" class="secondary wide">Start over</button>
+      </aside>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="app.js" type="module"></script>
+</body>
+</html>

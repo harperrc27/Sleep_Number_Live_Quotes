@@ -1,0 +1,15 @@
+{
+  "sources": [
+    {
+      "name": "Example public JSON feed",
+      "type": "json",
+      "url": ""
+    },
+    {
+      "name": "Example public promo page",
+      "type": "html",
+      "url": ""
+    }
+  ],
+  "notes": "Add public product/promo URLs here. Leave blank entries while testing the sample catalog."
+}
