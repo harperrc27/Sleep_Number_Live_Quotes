@@ -33,7 +33,7 @@ jobs:
         run: node scripts/update_catalog.mjs
 
       - name: Validate catalog schema
-        run: node -e "import('./src/quote-engine.mjs').then(m=>{const fs=require('fs');const c=JSON.parse(fs.readFileSync('data/catalog.json','utf8'));m.validateCatalogShape(c);})"
+        run: node scripts/validate_catalog.mjs
 
       - name: Commit changed catalog and report
         run: |
