@@ -1,15 +1,59 @@
 {
   "sources": [
     {
-      "name": "Example public JSON feed",
-      "type": "json",
-      "url": ""
+      "name": "Serta mattresses",
+      "type": "html",
+      "url": "https://www.serta.com/collections/mattresses",
+      "brandId": "serta"
     },
     {
-      "name": "Example public promo page",
+      "name": "Serta promotions",
       "type": "html",
-      "url": ""
+      "url": "https://www.serta.com/pages/promotions",
+      "brandId": "serta"
+    },
+    {
+      "name": "Beautyrest mattresses",
+      "type": "html",
+      "url": "https://www.beautyrest.com/collections/compare-mattresses",
+      "brandId": "beautyrest"
+    },
+    {
+      "name": "Beautyrest promotions",
+      "type": "html",
+      "url": "https://www.beautyrest.com/pages/promotions",
+      "brandId": "beautyrest"
+    },
+    {
+      "name": "Purple Restore Hybrid",
+      "type": "html",
+      "url": "https://purple.com/mattresses/restore",
+      "brandId": "purple"
+    },
+    {
+      "name": "Purple RestorePlus Hybrid",
+      "type": "html",
+      "url": "https://purple.com/mattresses/restore-plus",
+      "brandId": "purple"
+    },
+    {
+      "name": "Purple RestorePremier Hybrid",
+      "type": "html",
+      "url": "https://purple.com/mattresses/restore-premier",
+      "brandId": "purple"
+    },
+    {
+      "name": "Purple Original Mattress",
+      "type": "html",
+      "url": "https://purple.com/mattresses/purple-mattress",
+      "brandId": "purple"
+    },
+    {
+      "name": "Purple July 4th sale promos",
+      "type": "html",
+      "url": "https://purple.com/4th-july-mattress-sale",
+      "brandId": "purple"
     }
   ],
-  "notes": "Add public product/promo URLs here. Leave blank entries while testing the sample catalog."
+  "notes": "Serta/Beautyrest: Shopify static HTML with full JSON-LD prices. Purple: per-size JSON-LD prices on individual product pages. Tempur-Pedic/Sealy/Stearns use JS-only React SPA — not scrapable via static HTML. Update promo URLs seasonally. brandId overrides which catalog brand each source maps to."
 }

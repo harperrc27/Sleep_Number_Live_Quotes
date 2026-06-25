@@ -271,7 +271,7 @@ function bindStepEvents(step) {
   document.querySelectorAll('.card-option[data-id]').forEach(card => {
     card.addEventListener('click', () => {
       const id = card.dataset.id;
-      if (step === 'brand') { quote.brandId = id; quote.productId = null; }
+      if (step === 'brand') { quote.brandId = id; quote.productId = null; delete quote.sizeFilter; delete quote.comfortFilter; }
       if (step === 'mattress') quote.productId = id;
       if (step === 'base') quote.baseId = id;
       if (step === 'plans') quote.planId = id;

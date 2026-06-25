@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-24T00:00:11.865Z",
-  "sourceNotes": "Catalog updater ran with no active public sources. Add URLs in scripts/sources.json.",
+  "lastUpdated": "2026-06-25T04:07:50.622Z",
+  "sourceNotes": "Catalog updater ran. Imported products are merged ahead of starter sample data when recognized.",
   "brands": [
     {
       "id": "tempur",
@@ -47,6 +47,810 @@
     }
   ],
   "products": [
+    {
+      "id": "serta-mattresses-perfect-sleeper-hybrid-mattress-queen",
+      "brandId": "serta",
+      "series": "Perfect Sleeper Hybrid Mattress",
+      "model": "Perfect Sleeper Hybrid Mattress",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1599,
+      "salePrice": 999,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-five-star-mattress-queen",
+      "brandId": "serta",
+      "series": "Serta Five Star Mattress",
+      "model": "Serta Five Star Mattress",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1619,
+      "salePrice": 219,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-perfect-sleeper-sleep-excellence-queen",
+      "brandId": "serta",
+      "series": "Perfect Sleeper Sleep Excellence",
+      "model": "Perfect Sleeper Sleep Excellence",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 3250,
+      "salePrice": 1500,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-perfect-sleeper-hybrid-mattress-2023-version-queen",
+      "brandId": "serta",
+      "series": "Perfect Sleeper Hybrid Mattress 2023 Version",
+      "model": "Perfect Sleeper Hybrid Mattress 2023 Version",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1699,
+      "salePrice": 899,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-perfect-sleeper-innerspring-mattress-2023-version-queen",
+      "brandId": "serta",
+      "series": "Perfect Sleeper Innerspring Mattress 2023 Version",
+      "model": "Perfect Sleeper Innerspring Mattress 2023 Version",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1699,
+      "salePrice": 499,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-iseries-nxg-mattress-3500-hybrid-queen",
+      "brandId": "serta",
+      "series": "Serta® iSeries® NXG™ Mattress",
+      "model": "Serta® iSeries® NXG™ Mattress - 3500 Hybrid",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 3899,
+      "salePrice": 2299,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-classic-mattress-enhanced-queen",
+      "brandId": "serta",
+      "series": "Serta Classic Mattress",
+      "model": "Serta Classic Mattress - Enhanced",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 999,
+      "salePrice": 499,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-classic-mattress-standard-queen",
+      "brandId": "serta",
+      "series": "Serta Classic Mattress",
+      "model": "Serta Classic Mattress - Standard",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 799,
+      "salePrice": 299,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-perfect-sleeper-x-hybrid-mattress-level-one-queen",
+      "brandId": "serta",
+      "series": "Serta Perfect Sleeper X Hybrid Mattress",
+      "model": "Serta Perfect Sleeper X Hybrid Mattress - Level One",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 2399,
+      "salePrice": 1099,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-perfect-sleeper-x-hybrid-mattress-level-two-queen",
+      "brandId": "serta",
+      "series": "Serta Perfect Sleeper X Hybrid Mattress",
+      "model": "Serta Perfect Sleeper X Hybrid Mattress - Level Two",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 2499,
+      "salePrice": 1499,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-perfect-sleeper-x-quilted-hybrid-mattress-level-one-queen",
+      "brandId": "serta",
+      "series": "Serta Perfect Sleeper X Quilted Hybrid Mattress",
+      "model": "Serta Perfect Sleeper X Quilted Hybrid Mattress - Level One",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 2399,
+      "salePrice": 699,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-perfect-sleeper-x-quilted-hybrid-mattress-level-two-queen",
+      "brandId": "serta",
+      "series": "Serta Perfect Sleeper X Quilted Hybrid Mattress",
+      "model": "Serta Perfect Sleeper X Quilted Hybrid Mattress - Level Two",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 2499,
+      "salePrice": 1499,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-perfect-sleeper-innerspring-mattress-cascade-canyon-queen",
+      "brandId": "serta",
+      "series": "Perfect Sleeper Innerspring Mattress Cascade Canyon",
+      "model": "Perfect Sleeper Innerspring Mattress Cascade Canyon",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1199,
+      "salePrice": 699,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-icomfort-mattress-standard-queen",
+      "brandId": "serta",
+      "series": "Serta iComfort Mattress",
+      "model": "Serta iComfort Mattress - Standard",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 2499,
+      "salePrice": 899,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-icomfort-mattress-enhanced-queen",
+      "brandId": "serta",
+      "series": "Serta iComfort Mattress",
+      "model": "Serta iComfort Mattress - Enhanced",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 2599,
+      "salePrice": 1299,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-perfect-sleeper-pro-mattress-level-one-queen",
+      "brandId": "serta",
+      "series": "Serta Perfect Sleeper Pro Mattress",
+      "model": "Serta Perfect Sleeper Pro Mattress - Level One",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 2499,
+      "salePrice": 1399,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-perfect-sleeper-pro-mattress-level-two-queen",
+      "brandId": "serta",
+      "series": "Serta Perfect Sleeper Pro Mattress",
+      "model": "Serta Perfect Sleeper Pro Mattress - Level Two",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 3099,
+      "salePrice": 1799,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-perfect-sleeper-pro-mattress-level-three-queen",
+      "brandId": "serta",
+      "series": "Serta Perfect Sleeper Pro Mattress",
+      "model": "Serta Perfect Sleeper Pro Mattress - Level Three",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 3399,
+      "salePrice": 2299,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-iseries-nxg-mattress-1500-hybrid-firm-queen",
+      "brandId": "serta",
+      "series": "Serta® iSeries® NXG™ Mattress",
+      "model": "Serta® iSeries® NXG™ Mattress - 1500 Hybrid Firm",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Firm",
+      "retailPrice": 2599,
+      "salePrice": 1599,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-iseries-nxg-mattress-2500-hybrid-queen",
+      "brandId": "serta",
+      "series": "Serta® iSeries® NXG™ Mattress",
+      "model": "Serta® iSeries® NXG™ Mattress - 2500 Hybrid",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 2899,
+      "salePrice": 1899,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-iseries-nxg-mattress-4500-hybrid-ultra-plush-queen",
+      "brandId": "serta",
+      "series": "Serta® iSeries® NXG™ Mattress",
+      "model": "Serta® iSeries® NXG™ Mattress - 4500 Hybrid Ultra Plush",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Plush",
+      "retailPrice": 4099,
+      "salePrice": 2499,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-iseries-nxg-mattress-1500-firm-foam-queen",
+      "brandId": "serta",
+      "series": "Serta® iSeries® NXG™ Mattress",
+      "model": "Serta® iSeries® NXG™ Mattress - 1500 Firm Foam",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Firm",
+      "retailPrice": 2599,
+      "salePrice": 1599,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-iseries-nxg-mattress-2500-plush-foam-queen",
+      "brandId": "serta",
+      "series": "Serta® iSeries® NXG™ Mattress",
+      "model": "Serta® iSeries® NXG™ Mattress - 2500 Plush Foam",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Plush",
+      "retailPrice": 2899,
+      "salePrice": 1899,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-iseries-nxg-mattress-3500-medium-foam-queen",
+      "brandId": "serta",
+      "series": "Serta® iSeries® NXG™ Mattress",
+      "model": "Serta® iSeries® NXG™ Mattress - 3500 Medium Foam",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 3899,
+      "salePrice": 2299,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-iseries-nxg-mattress-4500-ultra-plush-foam-queen",
+      "brandId": "serta",
+      "series": "Serta® iSeries® NXG™ Mattress",
+      "model": "Serta® iSeries® NXG™ Mattress - 4500 Ultra Plush Foam",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Plush",
+      "retailPrice": 4099,
+      "salePrice": 2499,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-perfect-sleeper-innerspring-mattress-cascade-ridge-plush-12-5-q",
+      "brandId": "serta",
+      "series": "Perfect Sleeper Innerspring Mattress Cascade Ridge Plush 12.5\"",
+      "model": "Perfect Sleeper Innerspring Mattress Cascade Ridge Plush 12.5\"",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Plush",
+      "retailPrice": 999,
+      "salePrice": 599,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-perfect-sleeper-innerspring-mattress-cascade-range-queen",
+      "brandId": "serta",
+      "series": "Perfect Sleeper Innerspring Mattress Cascade Range",
+      "model": "Perfect Sleeper Innerspring Mattress Cascade Range",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1499,
+      "salePrice": 899,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-icomfortpro-mattress-level-one-queen",
+      "brandId": "serta",
+      "series": "Serta iComfortPro Mattress Level One",
+      "model": "Serta iComfortPro Mattress Level One",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 2899,
+      "salePrice": 1399,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-icomfortpro-mattress-level-two-queen",
+      "brandId": "serta",
+      "series": "Serta iComfortPro Mattress Level Two",
+      "model": "Serta iComfortPro Mattress Level Two",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 3499,
+      "salePrice": 1999,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "serta-mattresses-serta-icomfortpro-mattress-level-three-queen",
+      "brandId": "serta",
+      "series": "Serta iComfortPro Mattress Level Three",
+      "model": "Serta iComfortPro Mattress Level Three",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 5399,
+      "salePrice": 3099,
+      "sourceUrl": "https://www.serta.com/collections/mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-level-two-hybrid-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest Level Two Hybrid",
+      "model": "Beautyrest Level Two Hybrid",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1499,
+      "salePrice": 999,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautysleep-by-beautyrest-dream-weaver-queen",
+      "brandId": "beautyrest",
+      "series": "BeautySleep® by Beautyrest® Dream Weaver™",
+      "model": "BeautySleep® by Beautyrest® Dream Weaver™",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1099,
+      "salePrice": 399,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautysleep-by-beautyrest-dream-weaver-hybrid-queen",
+      "brandId": "beautyrest",
+      "series": "BeautySleep® by Beautyrest® Dream Weaver™ Hybrid",
+      "model": "BeautySleep® by Beautyrest® Dream Weaver™ Hybrid",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1199,
+      "salePrice": 699,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautysleep-by-beautyrest-soothing-nights-mattress-in-a-bo",
+      "brandId": "beautyrest",
+      "series": "BeautySleep® by Beautyrest® Soothing Nights™ Mattress In A Box",
+      "model": "BeautySleep® by Beautyrest® Soothing Nights™ Mattress In A Box",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1499,
+      "salePrice": 229,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-black-series-one-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest Black Series One",
+      "model": "Beautyrest Black Series One",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 3199,
+      "salePrice": 1749,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-black-series-three-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest Black Series Three",
+      "model": "Beautyrest Black Series Three",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 4599,
+      "salePrice": 2849,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-black-series-two-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest Black Series Two",
+      "model": "Beautyrest Black Series Two",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 3799,
+      "salePrice": 2449,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-black-series-four-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest Black Series Four",
+      "model": "Beautyrest Black Series Four",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 5899,
+      "salePrice": 4249,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-black-hybrid-series-three-xcs-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest Black Hybrid Series Three XCS",
+      "model": "Beautyrest Black Hybrid Series Three XCS",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 4699,
+      "salePrice": 2849,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-black-hybrid-series-four-xcs-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest Black Hybrid Series Four XCS",
+      "model": "Beautyrest Black Hybrid Series Four XCS",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 5799,
+      "salePrice": 3149,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-black-hybrid-series-four-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest Black Hybrid Series Four",
+      "model": "Beautyrest Black Hybrid Series Four",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 5899,
+      "salePrice": 4249,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-black-hybrid-series-one-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest Black Hybrid Series One",
+      "model": "Beautyrest Black Hybrid Series One",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 3099,
+      "salePrice": 1649,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-black-hybrid-series-three-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest Black Hybrid Series Three",
+      "model": "Beautyrest Black Hybrid Series Three",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 4599,
+      "salePrice": 2749,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-level-two-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest Level Two",
+      "model": "Beautyrest Level Two",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1499,
+      "salePrice": 899,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-level-one-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest Level One",
+      "model": "Beautyrest Level One",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1249,
+      "salePrice": 599,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-world-class-hybrid-level-four-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest World Class Hybrid Level Four",
+      "model": "Beautyrest World Class Hybrid Level Four",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 2399,
+      "salePrice": 1499,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-world-class-hybrid-level-three-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest World Class Hybrid Level Three",
+      "model": "Beautyrest World Class Hybrid Level Three",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1799,
+      "salePrice": 1199,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-world-class-level-four-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest World Class Level Four",
+      "model": "Beautyrest World Class Level Four",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 2399,
+      "salePrice": 1499,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-world-class-level-three-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest World Class Level Three",
+      "model": "Beautyrest World Class Level Three",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1999,
+      "salePrice": 1199,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-black-hybrid-series-two-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest Black Hybrid Series Two",
+      "model": "Beautyrest Black Hybrid Series Two",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 4099,
+      "salePrice": 2649,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "beautyrest-mattresses-beautyrest-black-hybrid-series-five-xcs-plush-queen",
+      "brandId": "beautyrest",
+      "series": "Beautyrest Black Hybrid Series Five XCS Plush",
+      "model": "Beautyrest Black Hybrid Series Five XCS Plush",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Plush",
+      "retailPrice": 6499,
+      "salePrice": 4349,
+      "sourceUrl": "https://www.beautyrest.com/collections/compare-mattresses"
+    },
+    {
+      "id": "purple-restore-hybrid-restore-hybrid-mattress-queen",
+      "brandId": "purple",
+      "series": "Restore® Hybrid Mattress",
+      "model": "Restore® Hybrid Mattress",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 2699,
+      "salePrice": 2399,
+      "sourceUrl": "https://purple.com/mattresses/restore"
+    },
+    {
+      "id": "purple-restore-hybrid-restore-hybrid-mattress-king",
+      "brandId": "purple",
+      "series": "Restore® Hybrid Mattress",
+      "model": "Restore® Hybrid Mattress",
+      "type": "Mattress",
+      "size": "King",
+      "comfort": "Medium",
+      "retailPrice": 3399,
+      "salePrice": 3099,
+      "sourceUrl": "https://purple.com/mattresses/restore"
+    },
+    {
+      "id": "purple-restore-hybrid-restore-hybrid-mattress-full",
+      "brandId": "purple",
+      "series": "Restore® Hybrid Mattress",
+      "model": "Restore® Hybrid Mattress",
+      "type": "Mattress",
+      "size": "Full",
+      "comfort": "Medium",
+      "retailPrice": 2499,
+      "salePrice": 2199,
+      "sourceUrl": "https://purple.com/mattresses/restore"
+    },
+    {
+      "id": "purple-restore-hybrid-restore-hybrid-mattress-twin-xl",
+      "brandId": "purple",
+      "series": "Restore® Hybrid Mattress",
+      "model": "Restore® Hybrid Mattress",
+      "type": "Mattress",
+      "size": "Twin XL",
+      "comfort": "Medium",
+      "retailPrice": 2299,
+      "salePrice": 1999,
+      "sourceUrl": "https://purple.com/mattresses/restore"
+    },
+    {
+      "id": "purple-restoreplus-hybrid-restoreplus-hybrid-mattress-queen",
+      "brandId": "purple",
+      "series": "RestorePlus® Hybrid Mattress",
+      "model": "RestorePlus® Hybrid Mattress",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 3599,
+      "salePrice": 3299,
+      "sourceUrl": "https://purple.com/mattresses/restore-plus"
+    },
+    {
+      "id": "purple-restoreplus-hybrid-restoreplus-hybrid-mattress-king",
+      "brandId": "purple",
+      "series": "RestorePlus® Hybrid Mattress",
+      "model": "RestorePlus® Hybrid Mattress",
+      "type": "Mattress",
+      "size": "King",
+      "comfort": "Medium",
+      "retailPrice": 4399,
+      "salePrice": 4099,
+      "sourceUrl": "https://purple.com/mattresses/restore-plus"
+    },
+    {
+      "id": "purple-restoreplus-hybrid-restoreplus-hybrid-mattress-full",
+      "brandId": "purple",
+      "series": "RestorePlus® Hybrid Mattress",
+      "model": "RestorePlus® Hybrid Mattress",
+      "type": "Mattress",
+      "size": "Full",
+      "comfort": "Medium",
+      "retailPrice": 3499,
+      "salePrice": 3199,
+      "sourceUrl": "https://purple.com/mattresses/restore-plus"
+    },
+    {
+      "id": "purple-restoreplus-hybrid-restoreplus-hybrid-mattress-twin-xl",
+      "brandId": "purple",
+      "series": "RestorePlus® Hybrid Mattress",
+      "model": "RestorePlus® Hybrid Mattress",
+      "type": "Mattress",
+      "size": "Twin XL",
+      "comfort": "Medium",
+      "retailPrice": 3099,
+      "salePrice": 2799,
+      "sourceUrl": "https://purple.com/mattresses/restore-plus"
+    },
+    {
+      "id": "purple-restorepremier-hybrid-restorepremier-hybrid-mattress-queen",
+      "brandId": "purple",
+      "series": "RestorePremier® Hybrid Mattress",
+      "model": "RestorePremier® Hybrid Mattress",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 4399,
+      "salePrice": 3899,
+      "sourceUrl": "https://purple.com/mattresses/restore-premier"
+    },
+    {
+      "id": "purple-restorepremier-hybrid-restorepremier-hybrid-mattress-king",
+      "brandId": "purple",
+      "series": "RestorePremier® Hybrid Mattress",
+      "model": "RestorePremier® Hybrid Mattress",
+      "type": "Mattress",
+      "size": "King",
+      "comfort": "Medium",
+      "retailPrice": 5199,
+      "salePrice": 4699,
+      "sourceUrl": "https://purple.com/mattresses/restore-premier"
+    },
+    {
+      "id": "purple-restorepremier-hybrid-restorepremier-hybrid-mattress-twin-xl",
+      "brandId": "purple",
+      "series": "RestorePremier® Hybrid Mattress",
+      "model": "RestorePremier® Hybrid Mattress",
+      "type": "Mattress",
+      "size": "Twin XL",
+      "comfort": "Medium",
+      "retailPrice": 3799,
+      "salePrice": 3299,
+      "sourceUrl": "https://purple.com/mattresses/restore-premier"
+    },
+    {
+      "id": "purple-original-mattress-the-purple-mattress-queen",
+      "brandId": "purple",
+      "series": "The Purple Mattress®",
+      "model": "The Purple Mattress®",
+      "type": "Mattress",
+      "size": "Queen",
+      "comfort": "Medium",
+      "retailPrice": 1599,
+      "salePrice": 1449,
+      "sourceUrl": "https://purple.com/mattresses/purple-mattress"
+    },
+    {
+      "id": "purple-original-mattress-the-purple-mattress-twin",
+      "brandId": "purple",
+      "series": "The Purple Mattress®",
+      "model": "The Purple Mattress®",
+      "type": "Mattress",
+      "size": "Twin",
+      "comfort": "Medium",
+      "retailPrice": 1099,
+      "salePrice": 949,
+      "sourceUrl": "https://purple.com/mattresses/purple-mattress"
+    },
+    {
+      "id": "purple-original-mattress-the-purple-mattress-king",
+      "brandId": "purple",
+      "series": "The Purple Mattress®",
+      "model": "The Purple Mattress®",
+      "type": "Mattress",
+      "size": "King",
+      "comfort": "Medium",
+      "retailPrice": 2199,
+      "salePrice": 2049,
+      "sourceUrl": "https://purple.com/mattresses/purple-mattress"
+    },
+    {
+      "id": "purple-original-mattress-the-purple-mattress-full",
+      "brandId": "purple",
+      "series": "The Purple Mattress®",
+      "model": "The Purple Mattress®",
+      "type": "Mattress",
+      "size": "Full",
+      "comfort": "Medium",
+      "retailPrice": 1499,
+      "salePrice": 1349,
+      "sourceUrl": "https://purple.com/mattresses/purple-mattress"
+    },
+    {
+      "id": "purple-original-mattress-the-purple-mattress-twin-xl",
+      "brandId": "purple",
+      "series": "The Purple Mattress®",
+      "model": "The Purple Mattress®",
+      "type": "Mattress",
+      "size": "Twin XL",
+      "comfort": "Medium",
+      "retailPrice": 1299,
+      "salePrice": 1149,
+      "sourceUrl": "https://purple.com/mattresses/purple-mattress"
+    },
     {
       "id": "tempur-adapt-queen-medium",
       "brandId": "tempur",
@@ -298,6 +1102,118 @@
   ],
   "promos": [
     {
+      "id": "serta-promotions-900-savings",
+      "type": "toggle",
+      "name": "$900 savings",
+      "description": "Imported from Serta promotions. Review eligibility before using.",
+      "discountAmount": 900
+    },
+    {
+      "id": "serta-promotions-700-savings",
+      "type": "toggle",
+      "name": "$700 savings",
+      "description": "Imported from Serta promotions. Review eligibility before using.",
+      "discountAmount": 700
+    },
+    {
+      "id": "serta-promotions-600-savings",
+      "type": "toggle",
+      "name": "$600 savings",
+      "description": "Imported from Serta promotions. Review eligibility before using.",
+      "discountAmount": 600
+    },
+    {
+      "id": "beautyrest-promotions-1000-savings",
+      "type": "toggle",
+      "name": "$1000 savings",
+      "description": "Imported from Beautyrest promotions. Review eligibility before using.",
+      "discountAmount": 1000
+    },
+    {
+      "id": "beautyrest-promotions-500-savings",
+      "type": "toggle",
+      "name": "$500 savings",
+      "description": "Imported from Beautyrest promotions. Review eligibility before using.",
+      "discountAmount": 500
+    },
+    {
+      "id": "beautyrest-promotions-300-savings",
+      "type": "toggle",
+      "name": "$300 savings",
+      "description": "Imported from Beautyrest promotions. Review eligibility before using.",
+      "discountAmount": 300
+    },
+    {
+      "id": "purple-july-4th-sale-promos-800-off",
+      "type": "toggle",
+      "name": "$800 off",
+      "description": "Imported from Purple July 4th sale promos. Review eligibility before using.",
+      "discountAmount": 800
+    },
+    {
+      "id": "purple-july-4th-sale-promos-250-off",
+      "type": "toggle",
+      "name": "$250 off",
+      "description": "Imported from Purple July 4th sale promos. Review eligibility before using.",
+      "discountAmount": 250
+    },
+    {
+      "id": "purple-july-4th-sale-promos-150-off",
+      "type": "toggle",
+      "name": "$150 off",
+      "description": "Imported from Purple July 4th sale promos. Review eligibility before using.",
+      "discountAmount": 150
+    },
+    {
+      "id": "purple-july-4th-sale-promos-500-off",
+      "type": "toggle",
+      "name": "$500 off",
+      "description": "Imported from Purple July 4th sale promos. Review eligibility before using.",
+      "discountAmount": 500
+    },
+    {
+      "id": "purple-july-4th-sale-promos-300-off",
+      "type": "toggle",
+      "name": "$300 off",
+      "description": "Imported from Purple July 4th sale promos. Review eligibility before using.",
+      "discountAmount": 300
+    },
+    {
+      "id": "purple-july-4th-sale-promos-200-off",
+      "type": "toggle",
+      "name": "$200 off",
+      "description": "Imported from Purple July 4th sale promos. Review eligibility before using.",
+      "discountAmount": 200
+    },
+    {
+      "id": "purple-july-4th-sale-promos-100-off",
+      "type": "toggle",
+      "name": "$100 off",
+      "description": "Imported from Purple July 4th sale promos. Review eligibility before using.",
+      "discountAmount": 100
+    },
+    {
+      "id": "purple-july-4th-sale-promos-20-off",
+      "type": "toggle",
+      "name": "20% off",
+      "description": "Imported from Purple July 4th sale promos. Review eligibility before using.",
+      "discountPercent": 20
+    },
+    {
+      "id": "purple-july-4th-sale-promos-25-off",
+      "type": "toggle",
+      "name": "25% off",
+      "description": "Imported from Purple July 4th sale promos. Review eligibility before using.",
+      "discountPercent": 25
+    },
+    {
+      "id": "purple-july-4th-sale-promos-10-off",
+      "type": "toggle",
+      "name": "10% off",
+      "description": "Imported from Purple July 4th sale promos. Review eligibility before using.",
+      "discountPercent": 10
+    },
+    {
       "id": "mattress-200-off",
       "type": "automatic",
       "name": "$200 Mattress Savings",
@@ -368,5 +1284,69 @@
       "discountAmount": 150
     }
   ],
-  "sourceResults": []
+  "sourceResults": [
+    {
+      "name": "Serta mattresses",
+      "url": "https://www.serta.com/collections/mattresses",
+      "ok": true,
+      "importedProducts": 30,
+      "importedPromos": 0
+    },
+    {
+      "name": "Serta promotions",
+      "url": "https://www.serta.com/pages/promotions",
+      "ok": true,
+      "importedProducts": 30,
+      "importedPromos": 3
+    },
+    {
+      "name": "Beautyrest mattresses",
+      "url": "https://www.beautyrest.com/collections/compare-mattresses",
+      "ok": true,
+      "importedProducts": 51,
+      "importedPromos": 3
+    },
+    {
+      "name": "Beautyrest promotions",
+      "url": "https://www.beautyrest.com/pages/promotions",
+      "ok": true,
+      "importedProducts": 51,
+      "importedPromos": 6
+    },
+    {
+      "name": "Purple Restore Hybrid",
+      "url": "https://purple.com/mattresses/restore",
+      "ok": true,
+      "importedProducts": 55,
+      "importedPromos": 6
+    },
+    {
+      "name": "Purple RestorePlus Hybrid",
+      "url": "https://purple.com/mattresses/restore-plus",
+      "ok": true,
+      "importedProducts": 59,
+      "importedPromos": 6
+    },
+    {
+      "name": "Purple RestorePremier Hybrid",
+      "url": "https://purple.com/mattresses/restore-premier",
+      "ok": true,
+      "importedProducts": 62,
+      "importedPromos": 6
+    },
+    {
+      "name": "Purple Original Mattress",
+      "url": "https://purple.com/mattresses/purple-mattress",
+      "ok": true,
+      "importedProducts": 67,
+      "importedPromos": 6
+    },
+    {
+      "name": "Purple July 4th sale promos",
+      "url": "https://purple.com/4th-july-mattress-sale",
+      "ok": true,
+      "importedProducts": 67,
+      "importedPromos": 16
+    }
+  ]
 }

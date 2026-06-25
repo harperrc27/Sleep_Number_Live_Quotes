@@ -86,28 +86,65 @@ function extractProductsFromHtml(html, source) {
   for (const match of jsonLdMatches) {
     try {
       const parsed = JSON.parse(cleanJson(match[1]));
-      const nodes = flattenJsonLd(parsed);
+      const nodes = collectProductNodes(parsed);
       for (const node of nodes) {
-        if (!String(node['@type'] || '').toLowerCase().includes('product')) continue;
-        const offer = Array.isArray(node.offers) ? node.offers[0] : node.offers || {};
-        const price = moneyNumber(offer.price || offer.lowPrice || node.price);
-        if (!node.name || !price) continue;
+        const offerArr = Array.isArray(node.offers) ? node.offers : node.offers ? [node.offers] : [];
+        const offer = offerArr[0] || {};
+        // AggregateOffer (Shopify collection pages) uses lowPrice/highPrice
+        // Drupal Commerce uses price + priceSpecification.StrikethroughPrice for retail
+        const rawName = node.name || '';
+        const cleanName = stripSizePrefix(rawName);
+        const salePrice = moneyNumber(offer.price || offer.lowPrice || node.price);
+        const strikethru = offer.priceSpecification?.price;
+        const retailPrice = moneyNumber(offer.highPrice || strikethru || offer.price || offer.lowPrice || node.price) || salePrice;
+        if (!cleanName || !salePrice) continue;
+        const size = guessSize(rawName) || normalizeSize(node.size);
         products.push({
-          id: slug(`${source.name}-${node.name}`),
-          brandId: guessBrandId(node.brand?.name || node.brand || node.name),
-          series: guessSeries(node.name),
-          model: node.name,
+          id: slug(`${source.name}-${cleanName}${size ? '-' + size : ''}`),
+          brandId: source.brandId || guessBrandId(node.brand?.name || node.brand || rawName),
+          series: guessSeries(cleanName),
+          model: cleanName,
           type: 'Mattress',
-          size: guessSize(node.name),
-          comfort: guessComfort(node.name),
-          retailPrice: price,
-          salePrice: price,
+          size: size || 'Queen',
+          comfort: guessComfort(cleanName),
+          retailPrice: Math.max(salePrice, retailPrice),
+          salePrice,
           sourceUrl: source.url
         });
       }
     } catch {}
   }
   return dedupeById(products);
+}
+
+// Recursively collect all Product nodes from any JSON-LD structure:
+// - Handles top-level Product nodes
+// - ProductGroup.hasVariant[] (Purple/Drupal Commerce format)
+// - CollectionPage.mainEntity > ItemList.itemListElement[].item (Shopify format)
+// - @graph arrays at any level
+function collectProductNodes(value) {
+  const nodes = [];
+  if (!value || typeof value !== 'object') return nodes;
+  const arr = Array.isArray(value) ? value : [value];
+  for (const item of arr) {
+    const t = String(item['@type'] || '').toLowerCase();
+    if (t === 'product') {
+      nodes.push(item);
+    } else if (t === 'productgroup' && Array.isArray(item.hasVariant)) {
+      for (const v of item.hasVariant) {
+        if (String(v['@type'] || '').toLowerCase() === 'product') nodes.push(v);
+      }
+    } else {
+      if (item['@graph']) nodes.push(...collectProductNodes(item['@graph']));
+      if (item.mainEntity) nodes.push(...collectProductNodes(item.mainEntity));
+      if (Array.isArray(item.itemListElement)) {
+        for (const li of item.itemListElement) {
+          if (li.item) nodes.push(...collectProductNodes(li.item));
+        }
+      }
+    }
+  }
+  return nodes;
 }
 
 function extractPromosFromHtml(html, source) {
@@ -132,6 +169,21 @@ function extractPromosFromHtml(html, source) {
 function flattenJsonLd(value) {
   const arr = Array.isArray(value) ? value : [value];
   return arr.flatMap(item => item['@graph'] ? flattenJsonLd(item['@graph']) : [item]);
+}
+
+function normalizeSize(raw = '') {
+  const v = String(raw).toLowerCase().replace(/_/g, ' ').trim();
+  const map = { 'twin xl': 'Twin XL', twin: 'Twin', full: 'Full', queen: 'Queen', king: 'King', 'california king': 'California King', 'split king': 'Split King' };
+  return map[v] || '';
+}
+
+// Remove leading size token from product names like "Queen Restore® Hybrid Mattress"
+function stripSizePrefix(name = '') {
+  const sizes = ['Split King', 'California King', 'Cal King', 'Twin XL', 'Twin', 'Full', 'Queen', 'King'];
+  for (const size of sizes) {
+    if (name.toLowerCase().startsWith(size.toLowerCase() + ' ')) return name.slice(size.length).trim();
+  }
+  return name;
 }
 
 function cleanJson(value) { return value.replace(/&quot;/g, '"').trim(); }
