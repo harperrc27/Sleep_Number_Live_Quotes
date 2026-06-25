@@ -186,7 +186,7 @@ function renderBrand() {
 
 function renderMattress() {
   const products = filteredProducts();
-  if (!quote.brandId) return `<p class="helper">Choose a Sleep Number series first so the mattress list stays clean.</p>`;
+  if (!quote.brandId) return `<p class="helper">Choose a collection first so the mattress list stays clean.</p>`;
   return `
     <div class="form-grid">
       <label class="field"><span>Size</span><select data-field="sizeFilter">${options(['All', ...unique(products.map(p => p.size))], quote.sizeFilter || 'All')}</select></label>
