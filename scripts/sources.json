@@ -1,6 +1,6 @@
 {
   "apiBase": "https://www.sleepnumber.com/api/storefront",
-  "note": "Beds, furniture, sheets, pads, pillows and integrated bases are priced live from the Sleep Number Storefront REST API. Bases, delivery, warranty, tax and compatibility are curated from researched live data (some are not exposed as API price endpoints).",
+  "note": "Beds, furniture, sheets, pads, pillows and bases are priced live from the Sleep Number Storefront REST API (bases from their bundle products so sale pricing is captured). Delivery, warranty/protection, tax and compatibility are curated.",
   "taxRateDefault": 5.5,
   "sizeOrder": ["Twin", "Twin XL", "Full", "Queen", "King", "California King", "Split King", "Split California King", "FlexTop King", "FlexTop California King"],
 
@@ -16,25 +16,23 @@
     { "slug": "mattresses-climate-collection", "brandId": "climate", "series": "Climate Collection" }
   ],
 
-  "integratedBaseCategory": "integrated-base",
-
   "basesByBrand": {
     "comfortmode": [
-      { "id": "cm-foundation", "name": "Foundation", "kind": "foundation", "price": 299, "desc": "Low-profile foundation." },
-      { "id": "cm-foundation-legs", "name": "Foundation & Legs", "kind": "foundation", "price": 599, "desc": "Foundation with modular legs." },
-      { "id": "cm-adjustable", "name": "Adjustable Base", "kind": "adjustable", "price": 999, "desc": "Head + foot articulation." }
+      { "id": "cm-foundation", "name": "Foundation", "kind": "foundation", "bundleSlug": "cm-foundation", "desc": "Low-profile foundation." },
+      { "id": "cm-foundation-legs", "name": "Foundation & Legs", "kind": "foundation", "bundleSlug": "cm-foundation-legs", "desc": "Foundation with modular legs." },
+      { "id": "cm-adjustable", "name": "Adjustable Base", "kind": "adjustable", "bundleSlug": "cm-adjustable-base", "desc": "Head + foot articulation." }
     ],
     "comfortnext": [
-      { "id": "cn-foundation", "name": "Foundation", "kind": "foundation", "price": 299, "desc": "Low-profile foundation." },
-      { "id": "cn-foundation-legs", "name": "Foundation & Legs", "kind": "foundation", "price": 599, "desc": "Foundation with modular legs." },
-      { "id": "cn-adjustable", "name": "Adjustable Base", "kind": "adjustable", "price": 1199, "desc": "Head + foot articulation." },
-      { "id": "cn-flexfit2", "name": "FlexFit 2 Adjustable Base", "kind": "flexfit", "price": 1799, "desc": "Partner Snore, foot warming, presets." },
-      { "id": "cn-flexfit3", "name": "FlexFit 3 Adjustable Base", "kind": "flexfit", "price": 2399, "salePrice": 2079, "desc": "Full articulation, massage, underbed light." }
+      { "id": "cn-foundation", "name": "Foundation", "kind": "foundation", "bundleSlug": "cn-foundation", "desc": "Low-profile foundation." },
+      { "id": "cn-foundation-legs", "name": "Foundation & Legs", "kind": "foundation", "bundleSlug": "cn-foundation-legs", "desc": "Foundation with modular legs." },
+      { "id": "cn-adjustable", "name": "Adjustable Base", "kind": "adjustable", "bundleSlug": "cn-adjustable-base", "desc": "Head + foot articulation." },
+      { "id": "cn-flexfit2", "name": "FlexFit 2 Adjustable Base", "kind": "flexfit", "bundleSlug": "cn-flexfit2", "desc": "Partner Snore, foot warming, presets." },
+      { "id": "cn-flexfit3", "name": "FlexFit 3 Adjustable Base", "kind": "flexfit", "bundleSlug": "cn-flexfit3", "desc": "Full articulation, massage, underbed light." }
     ],
     "climate": [
-      { "id": "cl-integrated", "name": "Integrated Base", "kind": "integrated", "perSizeFromSlug": "ib-1080", "default": true, "desc": "Required base. Per-size pricing from live API." },
-      { "id": "cl-integrated-frame", "name": "Integrated Base & Frame", "kind": "integrated", "perSizeFromSlug": "ibf-1080", "desc": "Integrated base with frame." },
-      { "id": "cl-flexfit2", "name": "FlexFit 2 Adjustable Base", "kind": "flexfit", "price": 1999, "desc": "Adjustable upgrade for ClimateCool." }
+      { "id": "cl-integrated", "name": "Integrated Base", "kind": "integrated", "bundleSlug": "cc-ib-1080", "default": true, "desc": "Required base. Slim integrated support." },
+      { "id": "cl-integrated-frame", "name": "Integrated Base & Frame", "kind": "integrated", "bundleSlug": "cc-ibf-1080", "desc": "Integrated base with frame." },
+      { "id": "cl-flexfit2", "name": "FlexFit 2 Adjustable Base", "kind": "flexfit", "bundleSlug": "cc-ff2-1080-2025", "desc": "Adjustable upgrade for ClimateCool." }
     ]
   },
   "baseRequiredBrands": ["climate"],
@@ -70,20 +68,26 @@
   ],
 
   "delivery": [
-    { "id": "del-doorstep", "name": "Doorstep Delivery", "price": 0, "desc": "Curbside / doorstep drop-off (accessories & bedding ship free)." },
-    { "id": "del-inhome", "name": "In-Home Delivery & Setup", "price": 199.99, "default": true, "desc": "Professional in-home delivery, setup and packaging removal for your smart bed." },
-    { "id": "del-inhome-removal", "name": "In-Home Setup + Mattress Removal", "price": 269.99, "desc": "In-home setup plus haul-away of one old mattress." }
+    { "id": "del-standard", "name": "Standard Delivery", "price": 100, "desc": "Doorstep / threshold delivery of your smart bed." },
+    { "id": "del-inhome", "name": "In-Home Delivery & Setup", "price": 250, "default": true, "desc": "Professional in-home delivery, full setup and packaging removal." },
+    { "id": "del-inhome-removal", "name": "In-Home Delivery, Setup + Mattress Removal", "price": 350, "desc": "In-home setup plus haul-away of one old mattress." }
   ],
   "disposalFees": [
-    { "id": "haul-base", "name": "Old base / foundation haul-away", "price": 50, "desc": "Remove an old foundation or adjustable base." }
+    { "id": "haul-old", "name": "Old mattress / base removal", "price": 99.99, "desc": "Haul-away and disposal of one old mattress or base." }
   ],
   "deliveryNote": "No delivery promotion is currently active. In-home setup is the standard option for smart beds.",
 
   "warranty": [
-    { "id": "warranty-15yr", "name": "15-Year Limited Warranty", "price": 0, "included": true, "desc": "Standard on all smart beds - included at no charge." },
-    { "id": "warranty-base", "name": "Adjustable Base Limited Warranty", "price": 0, "included": true, "desc": "2-year full + limited coverage on adjustable bases - included." }
+    { "id": "warranty-15yr", "name": "15-Year Limited Warranty", "included": true, "desc": "Standard on all smart beds - included at no charge." },
+    { "id": "warranty-base", "name": "Adjustable Base Limited Warranty", "included": true, "desc": "2-year full + limited coverage on adjustable bases - included.", "appliesTo": { "baseKinds": ["adjustable", "flexfit"] } }
   ],
-  "warrantyNote": "No paid extended warranty is offered on smart beds; the 15-year limited warranty is included.",
+  "protectionPlans": [
+    { "id": "pp-premium", "name": "Premium Protection Plan (5-Year)", "price": 199.99, "retail": 249.99, "desc": "Accidental damage, stains and structural coverage for your smart bed.", "appliesTo": { "allBeds": true } },
+    { "id": "pp-climate", "name": "Climate Series Protection (5-Year)", "price": 299.99, "retail": 349.99, "desc": "Extended coverage tailored to Climate temperature-control systems.", "appliesTo": { "brands": ["climate"] } },
+    { "id": "pp-base", "name": "Adjustable Base Extended Service (3-Year)", "price": 99.99, "desc": "Extends parts & labor on FlexFit adjustable bases beyond the included warranty.", "appliesTo": { "baseKinds": ["adjustable", "flexfit"] } },
+    { "id": "pp-furniture", "name": "Furniture Protection Plan (5-Year)", "price": 149.99, "retail": 179.99, "desc": "Accidental damage & stain coverage for upholstered furniture.", "appliesTo": { "requiresFurniture": true } }
+  ],
+  "warrantyNote": "The 15-year limited warranty is included. Optional paid protection plans vary by store and may carry promos - confirm current pricing at checkout.",
 
   "promos": [
     { "id": "military-first-responder", "type": "toggle", "name": "Military / First Responder", "description": "5% off for verified active military, veterans, and first responders.", "discountPercent": 5 }
