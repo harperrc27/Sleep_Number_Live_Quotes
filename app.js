@@ -3,7 +3,7 @@ const CACHE_KEY = 'sleep_quote_catalog_v1';
 const QUOTE_KEY = 'sleep_quote_draft_v1';
 
 const steps = [
-  { id: 'brand', title: 'Choose mattress brand' },
+  { id: 'brand', title: 'Choose Sleep Number series' },
   { id: 'mattress', title: 'Pick the mattress' },
   { id: 'base', title: 'Choose a base' },
   { id: 'furniture', title: 'Add furniture' },
@@ -186,7 +186,7 @@ function renderBrand() {
 
 function renderMattress() {
   const products = filteredProducts();
-  if (!quote.brandId) return `<p class="helper">Choose a brand first so the mattress list stays clean.</p>`;
+  if (!quote.brandId) return `<p class="helper">Choose a collection first so the mattress list stays clean.</p>`;
   return `
     <div class="form-grid">
       <label class="field"><span>Size</span><select data-field="sizeFilter">${options(['All', ...unique(products.map(p => p.size))], quote.sizeFilter || 'All')}</select></label>
@@ -427,7 +427,7 @@ async function copyQuote() {
   const calc = calculateQuote();
   const product = catalog?.products?.find(p => p.id === quote.productId);
   const text = [
-    'Sleep System Quote',
+    'Sleep Number Quick Quote',
     product ? `Mattress: ${product.series} ${product.model} (${product.size}, ${product.comfort})` : 'Mattress: Not selected',
     ...calc.lines.map(l => `${l.label}: ${money(l.amount)}`),
     '',

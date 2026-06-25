@@ -1,15 +1,25 @@
 {
   "sources": [
     {
-      "name": "Example public JSON feed",
-      "type": "json",
-      "url": ""
+      "name": "Sleep Number Mattresses",
+      "type": "html",
+      "url": "https://www.sleepnumber.com/mattresses"
     },
     {
-      "name": "Example public promo page",
+      "name": "Sleep Number Smart Bases",
       "type": "html",
-      "url": ""
+      "url": "https://www.sleepnumber.com/smart-bases"
+    },
+    {
+      "name": "Sleep Number Accessories",
+      "type": "html",
+      "url": "https://www.sleepnumber.com/accessories"
+    },
+    {
+      "name": "Sleep Number Deals & Promotions",
+      "type": "html",
+      "url": "https://www.sleepnumber.com/deals"
     }
   ],
-  "notes": "Add public product/promo URLs here. Leave blank entries while testing the sample catalog."
+  "notes": "All sources point to sleepnumber.com. The updater will attempt to pull current pricing and promotions from these pages."
 }
