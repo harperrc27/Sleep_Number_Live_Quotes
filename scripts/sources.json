@@ -1,41 +1,23 @@
 {
-  "sources": [
-    {
-      "name": "Sleep Number c2 Smart Bed",
-      "type": "html",
-      "url": "https://www.sleepnumber.com/beds/c2-smart-bed",
-      "brandId": "classic"
-    },
-    {
-      "name": "Sleep Number c4 Smart Bed",
-      "type": "html",
-      "url": "https://www.sleepnumber.com/beds/c4-smart-bed",
-      "brandId": "classic"
-    },
-    {
-      "name": "Sleep Number p5 Smart Bed",
-      "type": "html",
-      "url": "https://www.sleepnumber.com/beds/p5-smart-bed",
-      "brandId": "performance"
-    },
-    {
-      "name": "Sleep Number p6 Smart Bed",
-      "type": "html",
-      "url": "https://www.sleepnumber.com/beds/p6-smart-bed",
-      "brandId": "performance"
-    },
-    {
-      "name": "Sleep Number i8 Smart Bed",
-      "type": "html",
-      "url": "https://www.sleepnumber.com/beds/i8-smart-bed",
-      "brandId": "innovation"
-    },
-    {
-      "name": "Sleep Number i10 Smart Bed",
-      "type": "html",
-      "url": "https://www.sleepnumber.com/beds/i10-smart-bed",
-      "brandId": "innovation"
-    }
+  "apiBase": "https://www.sleepnumber.com/api/storefront",
+  "note": "Bed pricing is pulled live from Sleep Number's Storefront REST API. Each collection category endpoint (/categories/{slug}) returns products[] whose variants[] carry real per-size regular/sale pricing in cents. Brands, addons, and promos are curated in data/catalog.json and preserved across live updates.",
+  "type": "Smart Bed",
+  "comfort": "Adjustable",
+  "collections": [
+    { "slug": "mattresses-comfortmode-collection", "brandId": "comfortmode", "series": "ComfortMode Collection" },
+    { "slug": "mattresses-comfortnext-collection", "brandId": "comfortnext", "series": "ComfortNext Collection" },
+    { "slug": "mattresses-climate-collection", "brandId": "climate", "series": "Climate Collection" }
   ],
-  "notes": "Sleep Number's site is a JavaScript SPA — static HTML scraping may not yield prices. If all sources fail, the hand-curated starter catalog in data/catalog.json is used. Update prices manually in catalog.json from the current Sleep Number price sheet."
+  "sizeOrder": [
+    "Twin",
+    "Twin XL",
+    "Full",
+    "Queen",
+    "King",
+    "California King",
+    "Split King",
+    "Split California King",
+    "FlexTop King",
+    "FlexTop California King"
+  ]
 }

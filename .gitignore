@@ -1,0 +1,10 @@
+# Playwright MCP scrape/test artifacts
+.playwright-mcp/
+
+# Node
+node_modules/
+
+# Logs & OS cruft
+*.log
+.DS_Store
+Thumbs.db
