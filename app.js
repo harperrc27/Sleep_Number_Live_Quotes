@@ -3,8 +3,8 @@ const CACHE_KEY = 'sleep_quote_catalog_v1';
 const QUOTE_KEY = 'sleep_quote_draft_v1';
 
 const steps = [
-  { id: 'brand', title: 'Choose mattress brand' },
-  { id: 'mattress', title: 'Pick the mattress' },
+  { id: 'brand', title: 'Choose your series' },
+  { id: 'mattress', title: 'Pick your Smart Bed' },
   { id: 'base', title: 'Choose a base' },
   { id: 'furniture', title: 'Add furniture' },
   { id: 'layers', title: 'Protection and comfort layers' },
@@ -186,7 +186,7 @@ function renderBrand() {
 
 function renderMattress() {
   const products = filteredProducts();
-  if (!quote.brandId) return `<p class="helper">Choose a brand first so the mattress list stays clean.</p>`;
+  if (!quote.brandId) return `<p class="helper">Choose a series first so only those Smart Beds appear.</p>`;
   return `
     <div class="form-grid">
       <label class="field"><span>Size</span><select data-field="sizeFilter">${options(['All', ...unique(products.map(p => p.size))], quote.sizeFilter || 'All')}</select></label>
@@ -271,7 +271,7 @@ function bindStepEvents(step) {
   document.querySelectorAll('.card-option[data-id]').forEach(card => {
     card.addEventListener('click', () => {
       const id = card.dataset.id;
-      if (step === 'brand') { quote.brandId = id; quote.productId = null; }
+      if (step === 'brand') { quote.brandId = id; quote.productId = null; delete quote.sizeFilter; delete quote.comfortFilter; }
       if (step === 'mattress') quote.productId = id;
       if (step === 'base') quote.baseId = id;
       if (step === 'plans') quote.planId = id;

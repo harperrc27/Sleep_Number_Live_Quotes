@@ -1,150 +1,602 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-24T00:00:11.865Z",
-  "sourceNotes": "Catalog updater ran with no active public sources. Add URLs in scripts/sources.json.",
+  "lastUpdated": "2026-06-25T04:56:53.196Z",
+  "sourceNotes": "Bed pricing is pulled live from Sleep Number's Storefront REST API. Each collection category endpoint (/categories/{slug}) returns products[] whose variants[] carry real per-size regular/sale pricing in cents. Brands, addons, and promos are curated in data/catalog.json and preserved across live updates.",
   "brands": [
     {
-      "id": "tempur",
-      "name": "Tempur-Pedic",
-      "logoText": "TEMPUR",
+      "id": "comfortmode",
+      "name": "ComfortMode™ Collection",
+      "logoText": "ComfortMode",
+      "badge": "Essential",
+      "description": "Foam Sleep Number smart beds with dual-adjustable firmness (each side 0–100) and SleepIQ® sleep tracking."
+    },
+    {
+      "id": "comfortnext",
+      "name": "ComfortNext™ Collection",
+      "logoText": "ComfortNext",
+      "badge": "Most Popular",
+      "description": "Enhanced comfort layers and edge support, FlexFit® adjustable-base ready, with responsive DualAir™ and SleepIQ®."
+    },
+    {
+      "id": "climate",
+      "name": "Climate™ Collection",
+      "logoText": "Climate",
       "badge": "Premium",
-      "description": "Pressure relief and contouring foam feel."
-    },
-    {
-      "id": "sealy",
-      "name": "Sealy",
-      "logoText": "Sealy",
-      "badge": "Popular",
-      "description": "Supportive mattresses across value and premium lines."
-    },
-    {
-      "id": "stearns",
-      "name": "Stearns & Foster",
-      "logoText": "S&F",
-      "badge": "Luxury",
-      "description": "Luxury crafted mattress collections."
-    },
-    {
-      "id": "purple",
-      "name": "Purple",
-      "logoText": "Purple",
-      "badge": "Cooling",
-      "description": "Gel grid comfort and airflow-focused support."
-    },
-    {
-      "id": "beautyrest",
-      "name": "Beautyrest",
-      "logoText": "Beautyrest",
-      "badge": "Hybrid",
-      "description": "Pocketed coil support and comfort layers."
-    },
-    {
-      "id": "serta",
-      "name": "Serta",
-      "logoText": "Serta",
-      "badge": "Value",
-      "description": "Comfortable everyday mattress options."
+      "description": "Temperature-balancing smart beds — ClimateCool® actively cools; Climate360® both heats and cools each side."
     }
   ],
   "products": [
     {
-      "id": "tempur-adapt-queen-medium",
-      "brandId": "tempur",
-      "series": "TEMPUR-Adapt",
-      "model": "Medium",
-      "type": "Foam",
-      "size": "Queen",
-      "comfort": "Medium",
-      "retailPrice": 2199,
-      "salePrice": 1999
+      "id": "comfortmode-twin",
+      "brandId": "comfortmode",
+      "series": "ComfortMode Collection",
+      "model": "ComfortMode Smart Bed",
+      "type": "Smart Bed",
+      "size": "Twin",
+      "comfort": "Adjustable",
+      "retailPrice": 1099,
+      "salePrice": 999
     },
     {
-      "id": "tempur-proadapt-queen-medium-hybrid",
-      "brandId": "tempur",
-      "series": "TEMPUR-ProAdapt",
-      "model": "Medium Hybrid",
-      "type": "Hybrid",
-      "size": "Queen",
-      "comfort": "Medium",
-      "retailPrice": 3399,
-      "salePrice": 2999
-    },
-    {
-      "id": "tempur-breeze-king-firm",
-      "brandId": "tempur",
-      "series": "TEMPUR-Breeze",
-      "model": "Firm",
-      "type": "Cooling Foam",
-      "size": "King",
-      "comfort": "Firm",
-      "retailPrice": 4899,
-      "salePrice": 4499
-    },
-    {
-      "id": "sealy-posturepedic-queen-plush",
-      "brandId": "sealy",
-      "series": "Posturepedic",
-      "model": "Plus Plush",
-      "type": "Hybrid",
-      "size": "Queen",
-      "comfort": "Plush",
-      "retailPrice": 1299,
+      "id": "comfortmode-twin-xl",
+      "brandId": "comfortmode",
+      "series": "ComfortMode Collection",
+      "model": "ComfortMode Smart Bed",
+      "type": "Smart Bed",
+      "size": "Twin XL",
+      "comfort": "Adjustable",
+      "retailPrice": 1199,
       "salePrice": 1099
     },
     {
-      "id": "sealy-essentials-full-medium",
-      "brandId": "sealy",
-      "series": "Essentials",
-      "model": "Medium",
-      "type": "Innerspring",
+      "id": "comfortmode-lux-twin-xl",
+      "brandId": "comfortmode",
+      "series": "ComfortMode Collection",
+      "model": "ComfortMode Lux Smart Bed",
+      "type": "Smart Bed",
+      "size": "Twin XL",
+      "comfort": "Adjustable",
+      "retailPrice": 1599,
+      "salePrice": 1499
+    },
+    {
+      "id": "comfortmode-full",
+      "brandId": "comfortmode",
+      "series": "ComfortMode Collection",
+      "model": "ComfortMode Smart Bed",
+      "type": "Smart Bed",
       "size": "Full",
-      "comfort": "Medium",
-      "retailPrice": 699,
-      "salePrice": 599
+      "comfort": "Adjustable",
+      "retailPrice": 1299,
+      "salePrice": 1199
     },
     {
-      "id": "stearns-estate-queen-firm",
-      "brandId": "stearns",
-      "series": "Estate",
-      "model": "Firm",
-      "type": "Luxury Hybrid",
-      "size": "Queen",
-      "comfort": "Firm",
-      "retailPrice": 2499,
-      "salePrice": 2299
-    },
-    {
-      "id": "purple-plus-queen",
-      "brandId": "purple",
-      "series": "Purple",
-      "model": "Plus",
-      "type": "GelFlex",
-      "size": "Queen",
-      "comfort": "Medium",
+      "id": "comfortmode-lux-full",
+      "brandId": "comfortmode",
+      "series": "ComfortMode Collection",
+      "model": "ComfortMode Lux Smart Bed",
+      "type": "Smart Bed",
+      "size": "Full",
+      "comfort": "Adjustable",
       "retailPrice": 1899,
-      "salePrice": 1699
+      "salePrice": 1799
     },
     {
-      "id": "beautyrest-black-queen-medium",
-      "brandId": "beautyrest",
-      "series": "Black",
-      "model": "Medium",
-      "type": "Hybrid",
+      "id": "comfortmode-queen",
+      "brandId": "comfortmode",
+      "series": "ComfortMode Collection",
+      "model": "ComfortMode Smart Bed",
+      "type": "Smart Bed",
       "size": "Queen",
-      "comfort": "Medium",
-      "retailPrice": 3199,
-      "salePrice": 2799
+      "comfort": "Adjustable",
+      "retailPrice": 1599,
+      "salePrice": 1499
     },
     {
-      "id": "serta-perfect-sleeper-queen-plush",
-      "brandId": "serta",
-      "series": "Perfect Sleeper",
-      "model": "Plush",
-      "type": "Hybrid",
+      "id": "comfortmode-lux-queen",
+      "brandId": "comfortmode",
+      "series": "ComfortMode Collection",
+      "model": "ComfortMode Lux Smart Bed",
+      "type": "Smart Bed",
       "size": "Queen",
-      "comfort": "Plush",
-      "retailPrice": 1199,
-      "salePrice": 999
+      "comfort": "Adjustable",
+      "retailPrice": 2099,
+      "salePrice": 1999
+    },
+    {
+      "id": "comfortmode-king",
+      "brandId": "comfortmode",
+      "series": "ComfortMode Collection",
+      "model": "ComfortMode Smart Bed",
+      "type": "Smart Bed",
+      "size": "King",
+      "comfort": "Adjustable",
+      "retailPrice": 1899,
+      "salePrice": 1799
+    },
+    {
+      "id": "comfortmode-lux-king",
+      "brandId": "comfortmode",
+      "series": "ComfortMode Collection",
+      "model": "ComfortMode Lux Smart Bed",
+      "type": "Smart Bed",
+      "size": "King",
+      "comfort": "Adjustable",
+      "retailPrice": 2499,
+      "salePrice": 2399
+    },
+    {
+      "id": "comfortmode-california-king",
+      "brandId": "comfortmode",
+      "series": "ComfortMode Collection",
+      "model": "ComfortMode Smart Bed",
+      "type": "Smart Bed",
+      "size": "California King",
+      "comfort": "Adjustable",
+      "retailPrice": 1899,
+      "salePrice": 1799
+    },
+    {
+      "id": "comfortmode-lux-california-king",
+      "brandId": "comfortmode",
+      "series": "ComfortMode Collection",
+      "model": "ComfortMode Lux Smart Bed",
+      "type": "Smart Bed",
+      "size": "California King",
+      "comfort": "Adjustable",
+      "retailPrice": 2499,
+      "salePrice": 2399
+    },
+    {
+      "id": "comfortmode-split-king",
+      "brandId": "comfortmode",
+      "series": "ComfortMode Collection",
+      "model": "ComfortMode Smart Bed",
+      "type": "Smart Bed",
+      "size": "Split King",
+      "comfort": "Adjustable",
+      "retailPrice": 2299,
+      "salePrice": 2199
+    },
+    {
+      "id": "comfortmode-lux-split-king",
+      "brandId": "comfortmode",
+      "series": "ComfortMode Collection",
+      "model": "ComfortMode Lux Smart Bed",
+      "type": "Smart Bed",
+      "size": "Split King",
+      "comfort": "Adjustable",
+      "retailPrice": 2999,
+      "salePrice": 2899
+    },
+    {
+      "id": "comfortnext-twin-xl",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Smart Bed",
+      "type": "Smart Bed",
+      "size": "Twin XL",
+      "comfort": "Adjustable",
+      "retailPrice": 2599,
+      "salePrice": 2079.2
+    },
+    {
+      "id": "comfortnext-lux-twin-xl",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Lux Smart Bed",
+      "type": "Smart Bed",
+      "size": "Twin XL",
+      "comfort": "Adjustable",
+      "retailPrice": 3599,
+      "salePrice": 2879.2
+    },
+    {
+      "id": "comfortnext-full",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Smart Bed",
+      "type": "Smart Bed",
+      "size": "Full",
+      "comfort": "Adjustable",
+      "retailPrice": 2899,
+      "salePrice": 2319.2
+    },
+    {
+      "id": "comfortnext-lux-full",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Lux Smart Bed",
+      "type": "Smart Bed",
+      "size": "Full",
+      "comfort": "Adjustable",
+      "retailPrice": 3899,
+      "salePrice": 3119.2
+    },
+    {
+      "id": "comfortnext-queen",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Smart Bed",
+      "type": "Smart Bed",
+      "size": "Queen",
+      "comfort": "Adjustable",
+      "retailPrice": 2999,
+      "salePrice": 2399.2
+    },
+    {
+      "id": "comfortnext-lux-queen",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Lux Smart Bed",
+      "type": "Smart Bed",
+      "size": "Queen",
+      "comfort": "Adjustable",
+      "retailPrice": 3999,
+      "salePrice": 3199.2
+    },
+    {
+      "id": "comfortnext-ultra-queen",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Ultra Smart Bed",
+      "type": "Smart Bed",
+      "size": "Queen",
+      "comfort": "Adjustable",
+      "retailPrice": 4499,
+      "salePrice": 3599.2
+    },
+    {
+      "id": "comfortnext-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Smart Bed",
+      "type": "Smart Bed",
+      "size": "King",
+      "comfort": "Adjustable",
+      "retailPrice": 3499,
+      "salePrice": 2799.2
+    },
+    {
+      "id": "comfortnext-lux-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Lux Smart Bed",
+      "type": "Smart Bed",
+      "size": "King",
+      "comfort": "Adjustable",
+      "retailPrice": 4499,
+      "salePrice": 3599.2
+    },
+    {
+      "id": "comfortnext-ultra-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Ultra Smart Bed",
+      "type": "Smart Bed",
+      "size": "King",
+      "comfort": "Adjustable",
+      "retailPrice": 5299,
+      "salePrice": 4239.2
+    },
+    {
+      "id": "comfortnext-california-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Smart Bed",
+      "type": "Smart Bed",
+      "size": "California King",
+      "comfort": "Adjustable",
+      "retailPrice": 3499,
+      "salePrice": 2799.2
+    },
+    {
+      "id": "comfortnext-lux-california-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Lux Smart Bed",
+      "type": "Smart Bed",
+      "size": "California King",
+      "comfort": "Adjustable",
+      "retailPrice": 4499,
+      "salePrice": 3599.2
+    },
+    {
+      "id": "comfortnext-ultra-california-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Ultra Smart Bed",
+      "type": "Smart Bed",
+      "size": "California King",
+      "comfort": "Adjustable",
+      "retailPrice": 5299,
+      "salePrice": 4239.2
+    },
+    {
+      "id": "comfortnext-split-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Smart Bed",
+      "type": "Smart Bed",
+      "size": "Split King",
+      "comfort": "Adjustable",
+      "retailPrice": 4699,
+      "salePrice": 3759.2
+    },
+    {
+      "id": "comfortnext-lux-split-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Lux Smart Bed",
+      "type": "Smart Bed",
+      "size": "Split King",
+      "comfort": "Adjustable",
+      "retailPrice": 6299,
+      "salePrice": 5039.2
+    },
+    {
+      "id": "comfortnext-ultra-split-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Ultra Smart Bed",
+      "type": "Smart Bed",
+      "size": "Split King",
+      "comfort": "Adjustable",
+      "retailPrice": 6899,
+      "salePrice": 5519.2
+    },
+    {
+      "id": "comfortnext-split-california-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Smart Bed",
+      "type": "Smart Bed",
+      "size": "Split California King",
+      "comfort": "Adjustable",
+      "retailPrice": 4699,
+      "salePrice": 3759.2
+    },
+    {
+      "id": "comfortnext-lux-split-california-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Lux Smart Bed",
+      "type": "Smart Bed",
+      "size": "Split California King",
+      "comfort": "Adjustable",
+      "retailPrice": 6299,
+      "salePrice": 5039.2
+    },
+    {
+      "id": "comfortnext-ultra-split-california-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Ultra Smart Bed",
+      "type": "Smart Bed",
+      "size": "Split California King",
+      "comfort": "Adjustable",
+      "retailPrice": 6899,
+      "salePrice": 5519.2
+    },
+    {
+      "id": "comfortnext-flextop-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Smart Bed",
+      "type": "Smart Bed",
+      "size": "FlexTop King",
+      "comfort": "Adjustable",
+      "retailPrice": 4399,
+      "salePrice": 3519.2
+    },
+    {
+      "id": "comfortnext-lux-flextop-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Lux Smart Bed",
+      "type": "Smart Bed",
+      "size": "FlexTop King",
+      "comfort": "Adjustable",
+      "retailPrice": 5999,
+      "salePrice": 4799.2
+    },
+    {
+      "id": "comfortnext-ultra-flextop-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Ultra Smart Bed",
+      "type": "Smart Bed",
+      "size": "FlexTop King",
+      "comfort": "Adjustable",
+      "retailPrice": 6599,
+      "salePrice": 5279.2
+    },
+    {
+      "id": "comfortnext-flextop-california-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Smart Bed",
+      "type": "Smart Bed",
+      "size": "FlexTop California King",
+      "comfort": "Adjustable",
+      "retailPrice": 4399,
+      "salePrice": 3519.2
+    },
+    {
+      "id": "comfortnext-lux-flextop-california-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Lux Smart Bed",
+      "type": "Smart Bed",
+      "size": "FlexTop California King",
+      "comfort": "Adjustable",
+      "retailPrice": 5999,
+      "salePrice": 4799.2
+    },
+    {
+      "id": "comfortnext-ultra-flextop-california-king",
+      "brandId": "comfortnext",
+      "series": "ComfortNext Collection",
+      "model": "ComfortNext Ultra Smart Bed",
+      "type": "Smart Bed",
+      "size": "FlexTop California King",
+      "comfort": "Adjustable",
+      "retailPrice": 6599,
+      "salePrice": 5279.2
+    },
+    {
+      "id": "climatecool-queen",
+      "brandId": "climate",
+      "series": "Climate Collection",
+      "model": "ClimateCool Smart Bed",
+      "type": "Smart Bed",
+      "size": "Queen",
+      "comfort": "Adjustable",
+      "retailPrice": 5000,
+      "salePrice": 4250
+    },
+    {
+      "id": "climate360-queen",
+      "brandId": "climate",
+      "series": "Climate Collection",
+      "model": "Climate360 Smart Bed",
+      "type": "Smart Bed",
+      "size": "Queen",
+      "comfort": "Adjustable",
+      "retailPrice": 9999,
+      "salePrice": 8499.15
+    },
+    {
+      "id": "climatecool-king",
+      "brandId": "climate",
+      "series": "Climate Collection",
+      "model": "ClimateCool Smart Bed",
+      "type": "Smart Bed",
+      "size": "King",
+      "comfort": "Adjustable",
+      "retailPrice": 5900,
+      "salePrice": 5015
+    },
+    {
+      "id": "climate360-king",
+      "brandId": "climate",
+      "series": "Climate Collection",
+      "model": "Climate360 Smart Bed",
+      "type": "Smart Bed",
+      "size": "King",
+      "comfort": "Adjustable",
+      "retailPrice": 12999,
+      "salePrice": 11049.15
+    },
+    {
+      "id": "climatecool-california-king",
+      "brandId": "climate",
+      "series": "Climate Collection",
+      "model": "ClimateCool Smart Bed",
+      "type": "Smart Bed",
+      "size": "California King",
+      "comfort": "Adjustable",
+      "retailPrice": 5900,
+      "salePrice": 5015
+    },
+    {
+      "id": "climate360-california-king",
+      "brandId": "climate",
+      "series": "Climate Collection",
+      "model": "Climate360 Smart Bed",
+      "type": "Smart Bed",
+      "size": "California King",
+      "comfort": "Adjustable",
+      "retailPrice": 12999,
+      "salePrice": 11049.15
+    },
+    {
+      "id": "climatecool-split-king",
+      "brandId": "climate",
+      "series": "Climate Collection",
+      "model": "ClimateCool Smart Bed",
+      "type": "Smart Bed",
+      "size": "Split King",
+      "comfort": "Adjustable",
+      "retailPrice": 6850,
+      "salePrice": 5822.5
+    },
+    {
+      "id": "climate360-split-king",
+      "brandId": "climate",
+      "series": "Climate Collection",
+      "model": "Climate360 Smart Bed",
+      "type": "Smart Bed",
+      "size": "Split King",
+      "comfort": "Adjustable",
+      "retailPrice": 14999,
+      "salePrice": 12749.15
+    },
+    {
+      "id": "climatecool-split-california-king",
+      "brandId": "climate",
+      "series": "Climate Collection",
+      "model": "ClimateCool Smart Bed",
+      "type": "Smart Bed",
+      "size": "Split California King",
+      "comfort": "Adjustable",
+      "retailPrice": 6850,
+      "salePrice": 5822.5
+    },
+    {
+      "id": "climate360-split-california-king",
+      "brandId": "climate",
+      "series": "Climate Collection",
+      "model": "Climate360 Smart Bed",
+      "type": "Smart Bed",
+      "size": "Split California King",
+      "comfort": "Adjustable",
+      "retailPrice": 14999,
+      "salePrice": 12749.15
+    },
+    {
+      "id": "climatecool-flextop-king",
+      "brandId": "climate",
+      "series": "Climate Collection",
+      "model": "ClimateCool Smart Bed",
+      "type": "Smart Bed",
+      "size": "FlexTop King",
+      "comfort": "Adjustable",
+      "retailPrice": 6850,
+      "salePrice": 5822.5
+    },
+    {
+      "id": "climate360-flextop-king",
+      "brandId": "climate",
+      "series": "Climate Collection",
+      "model": "Climate360 Smart Bed",
+      "type": "Smart Bed",
+      "size": "FlexTop King",
+      "comfort": "Adjustable",
+      "retailPrice": 14499,
+      "salePrice": 12324.15
+    },
+    {
+      "id": "climatecool-flextop-california-king",
+      "brandId": "climate",
+      "series": "Climate Collection",
+      "model": "ClimateCool Smart Bed",
+      "type": "Smart Bed",
+      "size": "FlexTop California King",
+      "comfort": "Adjustable",
+      "retailPrice": 6850,
+      "salePrice": 5822.5
+    },
+    {
+      "id": "climate360-flextop-california-king",
+      "brandId": "climate",
+      "series": "Climate Collection",
+      "model": "Climate360 Smart Bed",
+      "type": "Smart Bed",
+      "size": "FlexTop California King",
+      "comfort": "Adjustable",
+      "retailPrice": 14499,
+      "salePrice": 12324.15
     }
   ],
   "addons": [
@@ -156,217 +608,242 @@
       "price": 0
     },
     {
-      "id": "basic-foundation-queen",
+      "id": "integrated-base",
       "category": "foundation",
-      "name": "Basic Foundation",
-      "description": "Non-adjustable support base.",
-      "price": 249
-    },
-    {
-      "id": "low-profile-foundation",
-      "category": "foundation",
-      "name": "Low Profile Foundation",
-      "description": "Lower non-adjustable foundation.",
-      "price": 279
-    },
-    {
-      "id": "adjustable-basic",
-      "category": "adjustable-base",
-      "name": "Head-Up Adjustable Base",
-      "description": "Adjustable head positioning.",
-      "price": 699
-    },
-    {
-      "id": "adjustable-premium",
-      "category": "adjustable-base",
-      "name": "Premium Adjustable Base",
-      "description": "Head/foot adjust, massage, presets.",
-      "price": 1199
-    },
-    {
-      "id": "split-king-adjustable",
-      "category": "adjustable-base",
-      "name": "Split King Adjustable Base",
-      "description": "Dual-side adjustable support.",
-      "price": 1999
-    },
-    {
-      "id": "bed-frame",
-      "category": "furniture",
-      "name": "Bed Frame",
-      "description": "Simple metal support frame.",
-      "price": 99
-    },
-    {
-      "id": "headboard",
-      "category": "furniture",
-      "name": "Headboard",
-      "description": "Upholstered headboard option.",
-      "price": 399
-    },
-    {
-      "id": "nightstand",
-      "category": "furniture",
-      "name": "Nightstand",
-      "description": "Bedroom storage add-on.",
-      "price": 349
-    },
-    {
-      "id": "dresser",
-      "category": "furniture",
-      "name": "Dresser",
-      "description": "Matching bedroom dresser.",
-      "price": 899
-    },
-    {
-      "id": "waterproof-protector",
-      "category": "protection-layer",
-      "name": "Waterproof Mattress Protector",
-      "description": "Protects against spills and stains.",
-      "price": 129
-    },
-    {
-      "id": "cooling-protector",
-      "category": "protection-layer",
-      "name": "Cooling Protector",
-      "description": "Breathable protective layer.",
-      "price": 169
-    },
-    {
-      "id": "memory-topper",
-      "category": "comfort-layer",
-      "name": "Memory Foam Topper",
-      "description": "Adds pressure-relieving comfort.",
-      "price": 249
-    },
-    {
-      "id": "cooling-topper",
-      "category": "comfort-layer",
-      "name": "Cooling Topper",
-      "description": "Adds cooling comfort layer.",
+      "name": "Integrated Base",
+      "description": "Sleep Number integrated platform base.",
       "price": 299
     },
     {
-      "id": "cooling-pillow",
-      "category": "pillow",
-      "name": "Cooling Pillow",
-      "description": "Cooling comfort pillow.",
-      "price": 149
+      "id": "integrated-base-frame",
+      "category": "foundation",
+      "name": "Integrated Base & Frame",
+      "description": "Sleep Number integrated platform base.",
+      "price": 599
     },
     {
-      "id": "foam-pillow",
-      "category": "pillow",
-      "name": "Memory Foam Pillow",
-      "description": "Contour support pillow.",
-      "price": 119
+      "id": "adjustable-base-twin-xl",
+      "category": "adjustable-base",
+      "name": "Adjustable Base — Twin XL",
+      "description": "Adjustable head & foot positions with wireless remote.",
+      "price": 1199
     },
     {
-      "id": "sheet-set",
+      "id": "adjustable-base-full",
+      "category": "adjustable-base",
+      "name": "Adjustable Base — Full",
+      "description": "Adjustable head & foot positions with wireless remote.",
+      "price": 1399
+    },
+    {
+      "id": "adjustable-base-queen",
+      "category": "adjustable-base",
+      "name": "Adjustable Base — Queen",
+      "description": "Adjustable head & foot positions with wireless remote.",
+      "price": 1399
+    },
+    {
+      "id": "adjustable-base-king",
+      "category": "adjustable-base",
+      "name": "Adjustable Base — King",
+      "description": "Adjustable head & foot positions with wireless remote.",
+      "price": 2199
+    },
+    {
+      "id": "adjustable-base-california-king",
+      "category": "adjustable-base",
+      "name": "Adjustable Base — California King",
+      "description": "Adjustable head & foot positions with wireless remote.",
+      "price": 2199
+    },
+    {
+      "id": "adjustable-base-split-king",
+      "category": "adjustable-base",
+      "name": "Adjustable Base — Split King",
+      "description": "Adjustable head & foot positions with wireless remote.",
+      "price": 2299
+    },
+    {
+      "id": "soft-modern-upholstered-bed",
+      "category": "furniture",
+      "name": "Soft Modern Upholstered Bed",
+      "description": "Sleep Number upholstered furniture.",
+      "price": 1819.99
+    },
+    {
+      "id": "tailored-panel-upholstered-headboard",
+      "category": "furniture",
+      "name": "Tailored Panel Upholstered Headboard",
+      "description": "Sleep Number upholstered furniture.",
+      "price": 629.99
+    },
+    {
+      "id": "lifestyle-collection-side-table",
+      "category": "furniture",
+      "name": "Lifestyle Collection Side Table",
+      "description": "Sleep Number upholstered furniture.",
+      "price": 230.99
+    },
+    {
+      "id": "lifestyle-collection-support-bar",
+      "category": "furniture",
+      "name": "Lifestyle Collection Support Bar",
+      "description": "Sleep Number upholstered furniture.",
+      "price": 209.99
+    },
+    {
+      "id": "true-temp-plush-mattress-layer",
+      "category": "comfort-layer",
+      "name": "True Temp Plush Mattress Layer",
+      "description": "Temperature comfort layer.",
+      "price": 125.99
+    },
+    {
+      "id": "dualtemp-layer",
+      "category": "comfort-layer",
+      "name": "DualTemp Layer",
+      "description": "Temperature comfort layer.",
+      "price": 769.99
+    },
+    {
+      "id": "warming-layer",
+      "category": "comfort-layer",
+      "name": "Warming Layer",
+      "description": "Temperature comfort layer.",
+      "price": 140
+    },
+    {
+      "id": "total-protection-mattress-pad",
+      "category": "protection-layer",
+      "name": "Total Protection Mattress Pad",
+      "description": "Mattress protection layer.",
+      "price": 90.99
+    },
+    {
+      "id": "climate-total-protection-mattress-pad",
+      "category": "protection-layer",
+      "name": "Climate Total Protection Mattress Pad",
+      "description": "Mattress protection layer.",
+      "price": 97.99
+    },
+    {
+      "id": "total-encasement-mattress-cover",
+      "category": "protection-layer",
+      "name": "Total Encasement Mattress Cover",
+      "description": "Mattress protection layer.",
+      "price": 90.99
+    },
+    {
+      "id": "true-temp-sheet-set",
       "category": "bedding",
-      "name": "Sheet Set",
-      "description": "Soft everyday sheet set.",
-      "price": 129
+      "name": "True Temp Sheet Set",
+      "description": "Sleep Number bedding.",
+      "price": 146.99
     },
     {
-      "id": "cooling-sheets",
+      "id": "supima-cotton-sheet-set",
       "category": "bedding",
-      "name": "Cooling Sheet Set",
-      "description": "Breathable cooling sheets.",
-      "price": 199
+      "name": "Supima Cotton Sheet Set",
+      "description": "Sleep Number bedding.",
+      "price": 160.99
     },
     {
-      "id": "plan-3",
-      "category": "protection-plan",
-      "name": "3-Year Protection Plan",
-      "description": "Basic accidental protection.",
-      "price": 149
+      "id": "essential-fit-cotton-sheet-set",
+      "category": "bedding",
+      "name": "Essential Fit Cotton Sheet Set",
+      "description": "Sleep Number bedding.",
+      "price": 83.99
     },
     {
-      "id": "plan-5",
-      "category": "protection-plan",
-      "name": "5-Year Complete Protection",
-      "description": "Recommended coverage for mattress/base/furniture.",
-      "price": 249
+      "id": "comfortfit-pillow",
+      "category": "pillow",
+      "name": "ComfortFit Pillow",
+      "description": "Sleep Number pillow.",
+      "price": 69.99
     },
     {
-      "id": "plan-10",
+      "id": "true-temp-plush-pillow",
+      "category": "pillow",
+      "name": "True Temp Plush Pillow",
+      "description": "Sleep Number pillow.",
+      "price": 76.99
+    },
+    {
+      "id": "downcomfort-pillow",
+      "category": "pillow",
+      "name": "DownComfort Pillow",
+      "description": "Sleep Number pillow.",
+      "price": 139.99
+    },
+    {
+      "id": "trial-100-night",
       "category": "protection-plan",
-      "name": "10-Year Premium Protection",
-      "description": "Longest protection plan option.",
-      "price": 399
+      "name": "100-Night Trial (Included)",
+      "description": "Risk-free in-home trial. Included at no charge.",
+      "price": 0
+    },
+    {
+      "id": "warranty-15-year",
+      "category": "protection-plan",
+      "name": "15-Year Limited Warranty (Included)",
+      "description": "Standard limited warranty. Included at no charge.",
+      "price": 0
+    },
+    {
+      "id": "in-home-delivery-setup",
+      "category": "protection-plan",
+      "name": "In-Home Delivery & Setup",
+      "description": "Professional in-home delivery and smart bed setup (required for smart beds).",
+      "price": 199.99
     }
   ],
   "promos": [
     {
-      "id": "mattress-200-off",
+      "id": "free-delivery",
       "type": "automatic",
-      "name": "$200 Mattress Savings",
-      "description": "Applies to mattress purchases over $999.",
-      "discountAmount": 200,
+      "name": "Free In-Home Delivery & Setup",
+      "description": "Current Sleep Number offer: free in-home delivery and setup with any smart bed.",
+      "discountAmount": 199.99,
       "conditions": {
-        "requiresProduct": true,
-        "minimumSubtotal": 999
+        "requiresProduct": true
       }
     },
     {
-      "id": "adjustable-bundle-300",
-      "type": "automatic",
-      "name": "$300 Adjustable Base Bundle",
-      "description": "Applies when mattress and adjustable base are selected.",
-      "discountAmount": 300,
+      "id": "military-first-responder",
+      "type": "toggle",
+      "name": "Military / First Responder Discount",
+      "description": "SheerID-verified discount for active military, veterans, and first responders.",
+      "discountPercent": 20
+    },
+    {
+      "id": "manager-bundle",
+      "type": "toggle",
+      "name": "Manager Bundle Override",
+      "description": "Apply only with manager approval for qualifying accessory bundles.",
+      "discountPercent": 10,
       "conditions": {
-        "requiresCategories": [
-          "mattress",
-          "adjustable-base"
-        ],
-        "minimumSubtotal": 1499
+        "minimumSubtotal": 500
       }
-    },
-    {
-      "id": "premium-system-500",
-      "type": "automatic",
-      "name": "$500 Premium Sleep System Savings",
-      "description": "Applies to complete sleep systems over $4000.",
-      "discountAmount": 500,
-      "conditions": {
-        "minimumSubtotal": 4000
-      }
-    },
-    {
-      "id": "military",
-      "type": "toggle",
-      "name": "Military Discount",
-      "description": "Use only with valid qualification/verification.",
-      "discountPercent": 10
-    },
-    {
-      "id": "first-responder",
-      "type": "toggle",
-      "name": "First Responder Discount",
-      "description": "Use only with valid qualification/verification.",
-      "discountPercent": 10
-    },
-    {
-      "id": "teacher",
-      "type": "toggle",
-      "name": "Teacher Discount",
-      "description": "Use only with valid qualification/verification.",
-      "discountPercent": 10
-    },
-    {
-      "id": "manager-approval",
-      "type": "toggle",
-      "name": "Manager-Approved Discount",
-      "description": "Use only when a manager approves the override.",
-      "discountAmount": 100
-    },
-    {
-      "id": "price-match",
-      "type": "toggle",
-      "name": "Price Match",
-      "description": "Use when price match requirements are met.",
-      "discountAmount": 150
     }
   ],
-  "sourceResults": []
+  "sourceResults": [
+    {
+      "slug": "mattresses-comfortmode-collection",
+      "brandId": "comfortmode",
+      "ok": true,
+      "products": 13
+    },
+    {
+      "slug": "mattresses-comfortnext-collection",
+      "brandId": "comfortnext",
+      "ok": true,
+      "products": 25
+    },
+    {
+      "slug": "mattresses-climate-collection",
+      "brandId": "climate",
+      "ok": true,
+      "products": 14
+    }
+  ]
 }

@@ -1,15 +1,23 @@
 {
-  "sources": [
-    {
-      "name": "Example public JSON feed",
-      "type": "json",
-      "url": ""
-    },
-    {
-      "name": "Example public promo page",
-      "type": "html",
-      "url": ""
-    }
+  "apiBase": "https://www.sleepnumber.com/api/storefront",
+  "note": "Bed pricing is pulled live from Sleep Number's Storefront REST API. Each collection category endpoint (/categories/{slug}) returns products[] whose variants[] carry real per-size regular/sale pricing in cents. Brands, addons, and promos are curated in data/catalog.json and preserved across live updates.",
+  "type": "Smart Bed",
+  "comfort": "Adjustable",
+  "collections": [
+    { "slug": "mattresses-comfortmode-collection", "brandId": "comfortmode", "series": "ComfortMode Collection" },
+    { "slug": "mattresses-comfortnext-collection", "brandId": "comfortnext", "series": "ComfortNext Collection" },
+    { "slug": "mattresses-climate-collection", "brandId": "climate", "series": "Climate Collection" }
   ],
-  "notes": "Add public product/promo URLs here. Leave blank entries while testing the sample catalog."
+  "sizeOrder": [
+    "Twin",
+    "Twin XL",
+    "Full",
+    "Queen",
+    "King",
+    "California King",
+    "Split King",
+    "Split California King",
+    "FlexTop King",
+    "FlexTop California King"
+  ]
 }
