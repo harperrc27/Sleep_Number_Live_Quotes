@@ -1,15 +1,47 @@
 {
   "sources": [
     {
-      "name": "Example public JSON feed",
-      "type": "json",
-      "url": ""
+      "name": "Sleep Number mattresses",
+      "type": "html",
+      "url": "https://www.sleepnumber.com/collections/beds",
+      "notes": "Main mattress/bed collection page. Extracts JSON-LD product data when available."
     },
     {
-      "name": "Example public promo page",
+      "name": "Sleep Number c-Series",
       "type": "html",
-      "url": ""
+      "url": "https://www.sleepnumber.com/collections/c-series-smart-bed",
+      "notes": "c2, c4 series"
+    },
+    {
+      "name": "Sleep Number p-Series",
+      "type": "html",
+      "url": "https://www.sleepnumber.com/collections/p-series-smart-bed",
+      "notes": "p5, p6 series"
+    },
+    {
+      "name": "Sleep Number i-Series",
+      "type": "html",
+      "url": "https://www.sleepnumber.com/collections/i-series-smart-bed",
+      "notes": "i8, i10 series"
+    },
+    {
+      "name": "Sleep Number FlexFit bases",
+      "type": "html",
+      "url": "https://www.sleepnumber.com/collections/adjustable-bases",
+      "notes": "FlexFit 1, 2, 3 adjustable bases"
+    },
+    {
+      "name": "Sleep Number accessories",
+      "type": "html",
+      "url": "https://www.sleepnumber.com/collections/accessories",
+      "notes": "Hardware, replacement parts, accessories"
+    },
+    {
+      "name": "Sleep Number bedding",
+      "type": "html",
+      "url": "https://www.sleepnumber.com/collections/bedding",
+      "notes": "Sheets, pillows, protectors"
     }
   ],
-  "notes": "Add public product/promo URLs here. Leave blank entries while testing the sample catalog."
+  "notes": "Public Sleep Number product/category pages. The updater fetches these and extracts structured product data (JSON-LD) or falls back to HTML parsing. Configure as empty strings to disable a source. All imported prices are marked verificationRequired."
 }

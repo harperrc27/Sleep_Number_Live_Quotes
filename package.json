@@ -1,0 +1,14 @@
+{
+  "name": "sleep-number-quote-studio",
+  "version": "1.0.0",
+  "description": "Sleep Number internal sales quote tool — mobile-first PWA for GitHub Pages",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/quote.test.mjs",
+    "refresh:catalog": "node scripts/update_catalog.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
