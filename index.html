@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#17120f" />
-  <title>Sleep Quote Studio</title>
+  <meta name="theme-color" content="#0b1f39" />
+  <title>Sleep Number Quote Assistant</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -12,11 +12,14 @@
   <div class="app-shell">
     <header class="hero">
       <div>
-        <p class="eyebrow">Daily catalog quote tool</p>
-        <h1>Sleep Quote Studio</h1>
-        <p class="subcopy">Refresh before work, then quote instantly from the cached catalog all day.</p>
+        <p class="eyebrow">Mobile-first quote assistant</p>
+        <h1>Sleep Number Quote Assistant</h1>
+        <p class="subcopy">Refresh your public catalog snapshot once, then quote instantly from cache all day on mobile or desktop.</p>
       </div>
-      <button id="installBtn" class="ghost hidden">Install app</button>
+      <div class="hero-actions">
+        <button id="newQuoteBtn" class="secondary">New quote</button>
+        <button id="installBtn" class="ghost hidden">Install app</button>
+      </div>
     </header>
 
     <section class="status-card">
@@ -32,8 +35,8 @@
       <section class="panel builder-panel">
         <div class="step-header">
           <div>
-            <p class="eyebrow" id="stepCounter">Step 1 of 8</p>
-            <h2 id="stepTitle">Choose mattress brand</h2>
+            <p class="eyebrow" id="stepCounter">Step 1 of 11</p>
+            <h2 id="stepTitle">Customer basics</h2>
           </div>
           <div class="progress"><span id="progressBar"></span></div>
         </div>
@@ -47,15 +50,15 @@
       <aside class="panel summary-panel">
         <div class="summary-head">
           <div>
-            <p class="eyebrow">Live quote</p>
+            <p class="eyebrow">Running quote total</p>
             <h2 id="totalDue">$0</h2>
           </div>
           <span class="savings-pill" id="savingsPill">$0 saved</span>
         </div>
         <div id="miniSummary" class="mini-summary"></div>
         <div id="promoList" class="promo-list"></div>
-        <button id="copyQuoteBtn" class="wide">Copy quote</button>
-        <button id="resetBtn" class="secondary wide">Start over</button>
+        <button id="copyQuoteBtn" class="wide">Copy quote summary</button>
+        <button id="resetBtn" class="secondary wide">Reset quote</button>
       </aside>
     </main>
   </div>

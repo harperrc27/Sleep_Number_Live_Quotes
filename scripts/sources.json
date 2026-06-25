@@ -1,15 +1,15 @@
 {
   "sources": [
     {
-      "name": "Example public JSON feed",
-      "type": "json",
-      "url": ""
+      "name": "Sleep Number mattresses",
+      "type": "html",
+      "url": "https://www.sleepnumber.com/categories/mattresses"
     },
     {
-      "name": "Example public promo page",
+      "name": "Sleep Number promotions",
       "type": "html",
-      "url": ""
+      "url": "https://www.sleepnumber.com/promotions"
     }
   ],
-  "notes": "Add public product/promo URLs here. Leave blank entries while testing the sample catalog."
+  "notes": "Only include publicly accessible pages. Avoid authenticated/internal endpoints."
 }

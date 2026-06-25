@@ -1,9 +1,8 @@
 {
-  "name": "Sleep Quote Studio",
-  "short_name": "Sleep Quote",
-  "start_url": "./",
+  "name": "Sleep Number Quote Assistant",
+  "short_name": "SN Quotes",
+  "start_url": ".",
   "display": "standalone",
-  "background_color": "#f5f0e9",
-  "theme_color": "#17120f",
-  "icons": []
+  "background_color": "#f7f9fc",
+  "theme_color": "#0b1f39"
 }

@@ -1,0 +1,9 @@
+{
+  "name": "sleep-number-live-quotes",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "refresh:catalog": "node scripts/update_catalog.mjs"
+  }
+}
