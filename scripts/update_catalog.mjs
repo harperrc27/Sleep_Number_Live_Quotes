@@ -1,8 +1,10 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { validateCatalogShape } from '../src/quote-engine.mjs';
 
 const root = process.cwd();
 const catalogPath = path.join(root, 'data', 'catalog.json');
+const reportPath = path.join(root, 'data', 'refresh-report.json');
 const sourcesPath = path.join(root, 'scripts', 'sources.json');
 
 const moneyNumber = (value) => {
@@ -10,137 +12,237 @@ const moneyNumber = (value) => {
   return Number.isFinite(n) ? Math.round(n) : 0;
 };
 
-async function main() {
-  const catalog = JSON.parse(await fs.readFile(catalogPath, 'utf8'));
-  const config = JSON.parse(await fs.readFile(sourcesPath, 'utf8'));
-  const activeSources = (config.sources || []).filter(s => s.url && /^https?:\/\//.test(s.url));
+const slug = (value) => String(value).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 90);
 
-  const importedProducts = [];
-  const importedPromos = [];
-  const sourceResults = [];
-
-  for (const source of activeSources) {
-    try {
-      const res = await fetch(source.url, { headers: { 'user-agent': 'SleepQuoteStudio/1.0 (+GitHub Actions catalog updater)' } });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const text = await res.text();
-      if (source.type === 'json') {
-        const data = JSON.parse(text);
-        importedProducts.push(...extractFromJson(data, source));
-      } else {
-        importedProducts.push(...extractProductsFromHtml(text, source));
-        importedPromos.push(...extractPromosFromHtml(text, source));
-      }
-      sourceResults.push({ name: source.name, url: source.url, ok: true, importedProducts: importedProducts.length, importedPromos: importedPromos.length });
-    } catch (error) {
-      sourceResults.push({ name: source.name, url: source.url, ok: false, error: error.message });
-    }
-  }
-
-  const nextCatalog = {
-    ...catalog,
-    lastUpdated: new Date().toISOString(),
-    sourceNotes: activeSources.length
-      ? 'Catalog updater ran. Imported products are merged ahead of starter sample data when recognized.'
-      : 'Catalog updater ran with no active public sources. Add URLs in scripts/sources.json.',
-    sourceResults
-  };
-
-  if (importedProducts.length) {
-    nextCatalog.products = mergeById(importedProducts, catalog.products || []);
-  }
-  if (importedPromos.length) {
-    nextCatalog.promos = mergeById(importedPromos, catalog.promos || []);
-  }
-
-  await fs.writeFile(catalogPath, JSON.stringify(nextCatalog, null, 2) + '\n');
-  console.log(`Catalog updated: ${nextCatalog.products.length} products, ${nextCatalog.promos.length} promos.`);
+function flattenJsonLd(value) {
+  const arr = Array.isArray(value) ? value : [value];
+  return arr.flatMap((item) => item?.['@graph'] ? flattenJsonLd(item['@graph']) : [item]);
 }
 
 function extractFromJson(data, source) {
-  const products = [];
-  const candidates = Array.isArray(data) ? data : data.products || data.items || data.results || [];
-  for (const item of candidates) {
+  const items = Array.isArray(data) ? data : data?.products || data?.items || data?.results || [];
+  return items.flatMap((item) => {
     const name = item.name || item.title || item.productName;
     const price = moneyNumber(item.salePrice ?? item.price ?? item.currentPrice ?? item.offerPrice);
-    if (!name || !price) continue;
-    products.push({
+    if (!name || !price) return [];
+    return [{
       id: slug(`${source.name}-${name}`),
-      brandId: guessBrandId(item.brand || name),
-      series: item.series || item.collection || 'Imported',
-      model: name,
-      type: item.type || item.category || 'Mattress',
+      name,
+      brand: item.brand || 'Sleep Number',
+      category: 'mattress',
+      subcategory: item.type || item.category || 'smart-bed',
+      series: item.series || 'Imported',
+      model: item.model || name,
       size: item.size || 'Queen',
-      comfort: item.comfort || item.feel || 'Medium',
-      retailPrice: moneyNumber(item.retailPrice ?? item.msrp ?? price),
+      price,
+      regularPrice: moneyNumber(item.regularPrice ?? item.msrp ?? price),
       salePrice: price,
-      sourceUrl: source.url
-    });
-  }
-  return products;
+      priceLabel: 'Imported from public JSON source',
+      availability: item.availability || 'unknown',
+      imageUrl: item.imageUrl || '',
+      productUrl: item.productUrl || source.url,
+      description: item.description || '',
+      tags: [item.comfort || 'Medium'].filter(Boolean),
+      compatibleWith: [],
+      requires: [],
+      warnings: [],
+      sourceUrls: [source.url],
+      lastVerified: new Date().toISOString(),
+      confidenceScore: 0.75
+    }];
+  });
 }
 
-function extractProductsFromHtml(html, source) {
+function extractFromHtml(html, source) {
   const products = [];
+  const promotions = [];
   const jsonLdMatches = [...html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
+
   for (const match of jsonLdMatches) {
     try {
-      const parsed = JSON.parse(cleanJson(match[1]));
-      const nodes = flattenJsonLd(parsed);
+      const nodes = flattenJsonLd(JSON.parse(match[1].replace(/&quot;/g, '"').trim()));
       for (const node of nodes) {
-        if (!String(node['@type'] || '').toLowerCase().includes('product')) continue;
+        if (!String(node?.['@type'] || '').toLowerCase().includes('product')) continue;
         const offer = Array.isArray(node.offers) ? node.offers[0] : node.offers || {};
         const price = moneyNumber(offer.price || offer.lowPrice || node.price);
         if (!node.name || !price) continue;
         products.push({
           id: slug(`${source.name}-${node.name}`),
-          brandId: guessBrandId(node.brand?.name || node.brand || node.name),
-          series: guessSeries(node.name),
+          name: node.name,
+          brand: node.brand?.name || node.brand || 'Sleep Number',
+          category: 'mattress',
+          subcategory: 'smart-bed',
+          series: node.name,
           model: node.name,
-          type: 'Mattress',
-          size: guessSize(node.name),
-          comfort: guessComfort(node.name),
-          retailPrice: price,
+          size: 'Queen',
+          price,
+          regularPrice: price,
           salePrice: price,
-          sourceUrl: source.url
+          priceLabel: 'Structured data extraction',
+          availability: offer.availability || 'unknown',
+          imageUrl: Array.isArray(node.image) ? node.image[0] : (node.image || ''),
+          productUrl: node.url || source.url,
+          description: node.description || '',
+          tags: [],
+          compatibleWith: [],
+          requires: [],
+          warnings: [],
+          sourceUrls: [source.url],
+          lastVerified: new Date().toISOString(),
+          confidenceScore: 0.85
         });
       }
     } catch {}
   }
-  return dedupeById(products);
+
+  const plain = html
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ');
+
+  for (const match of plain.matchAll(/\$([0-9,]+)\s*(off|savings|discount)/gi)) {
+    const amount = moneyNumber(match[1]);
+    if (!amount) continue;
+    promotions.push({
+      id: slug(`${source.name}-${match[0]}`),
+      name: match[0],
+      description: 'Imported from public promo text. Verification required before use.',
+      publicLegalText: 'Verify qualification and legal terms before final quote.',
+      sourceUrl: source.url,
+      type: 'toggle',
+      discountAmount: amount,
+      discountPercent: null,
+      freeItem: null,
+      requiredCategories: [],
+      excludedCategories: [],
+      requiredProducts: [],
+      excludedProducts: [],
+      requiredMinimum: 0,
+      stackable: null,
+      customerQualificationRequired: true,
+      verificationRequired: true,
+      priority: 50,
+      confidenceScore: 0.55,
+      startDate: null,
+      endDate: null,
+      expirationLabel: 'Verify'
+    });
+  }
+
+  return { products, promotions };
 }
 
-function extractPromosFromHtml(html, source) {
-  const text = html.replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
-  const promos = [];
-  const patterns = [
-    /\$([0-9,]+)\s*(off|savings|discount)/gi,
-    /(save|get)\s*\$([0-9,]+)/gi,
-    /([0-9]{1,2})%\s*off/gi
-  ];
-  for (const pattern of patterns) {
-    for (const match of text.matchAll(pattern)) {
-      const raw = match[0].trim();
-      const amount = moneyNumber(match[1] || match[2]);
-      if (!amount) continue;
-      promos.push({ id: slug(`${source.name}-${raw}`), type: 'toggle', name: raw, description: `Imported from ${source.name}. Review eligibility before using.`, discountAmount: raw.includes('%') ? undefined : amount, discountPercent: raw.includes('%') ? amount : undefined });
+function mergeById(primary, fallback) {
+  const map = new Map(primary.map((item) => [item.id, item]));
+  for (const item of fallback) if (!map.has(item.id)) map.set(item.id, item);
+  return [...map.values()];
+}
+
+function diffCatalog(prev, next) {
+  const prevProducts = new Map((prev.products || []).map((p) => [p.id, p]));
+  const nextProducts = new Map((next.products || []).map((p) => [p.id, p]));
+  const prevPromos = new Map((prev.promotions || []).map((p) => [p.id, p]));
+  const nextPromos = new Map((next.promotions || []).map((p) => [p.id, p]));
+
+  const productsAdded = [...nextProducts.keys()].filter((id) => !prevProducts.has(id));
+  const productsRemoved = [...prevProducts.keys()].filter((id) => !nextProducts.has(id));
+  const pricesChanged = [...nextProducts.keys()].filter((id) => prevProducts.has(id) && Number(prevProducts.get(id).price) !== Number(nextProducts.get(id).price));
+  const promosChanged = [...nextPromos.keys()].filter((id) => !prevPromos.has(id) || JSON.stringify(prevPromos.get(id)) !== JSON.stringify(nextPromos.get(id)));
+  const missingPrices = (next.products || []).filter((p) => !Number.isFinite(Number(p.price)) || Number(p.price) <= 0).map((p) => p.id);
+  const lowConfidenceItems = (next.products || []).filter((p) => Number(p.confidenceScore || 0) < 0.7).map((p) => p.id);
+  const sourceFailures = (next.sources || []).filter((s) => s.status !== 'ok').map((s) => s.id);
+
+  return {
+    generatedAt: new Date().toISOString(),
+    productsAdded,
+    productsRemoved,
+    pricesChanged,
+    promosChanged,
+    brokenPages: sourceFailures,
+    missingPrices,
+    lowConfidenceItems,
+    sourceFailures
+  };
+}
+
+async function main() {
+  const previous = JSON.parse(await fs.readFile(catalogPath, 'utf8'));
+  const config = JSON.parse(await fs.readFile(sourcesPath, 'utf8'));
+
+  const activeSources = (config.sources || []).filter((s) => s.url && /^https?:\/\//.test(s.url));
+  const importedProducts = [];
+  const importedPromotions = [];
+  const sourceResults = [];
+
+  for (const source of activeSources) {
+    try {
+      const res = await fetch(source.url, { headers: { 'user-agent': 'SleepNumberQuoteAssistant/1.0 (GitHub Actions refresh)' } });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      const text = await res.text();
+      if (source.type === 'json') {
+        importedProducts.push(...extractFromJson(JSON.parse(text), source));
+      } else {
+        const extracted = extractFromHtml(text, source);
+        importedProducts.push(...extracted.products);
+        importedPromotions.push(...extracted.promotions);
+      }
+
+      sourceResults.push({
+        id: slug(source.name),
+        name: source.name,
+        url: source.url,
+        type: source.type || 'html',
+        status: 'ok',
+        httpStatus: res.status,
+        lastChecked: new Date().toISOString(),
+        error: null
+      });
+    } catch (error) {
+      sourceResults.push({
+        id: slug(source.name),
+        name: source.name,
+        url: source.url,
+        type: source.type || 'html',
+        status: 'failed',
+        httpStatus: null,
+        lastChecked: new Date().toISOString(),
+        error: error.message
+      });
     }
   }
-  return dedupeById(promos).slice(0, 12);
+
+  const next = {
+    ...previous,
+    metadata: {
+      ...(previous.metadata || {}),
+      schemaVersion: 2,
+      generatedAt: new Date().toISOString(),
+      lastUpdated: new Date().toISOString(),
+      sourceNotes: activeSources.length ? 'Catalog refresh completed from configured public sources.' : 'No active public sources configured. Existing catalog retained.'
+    },
+    sources: sourceResults,
+    sourceHealth: {
+      total: sourceResults.length,
+      ok: sourceResults.filter((s) => s.status === 'ok').length,
+      failed: sourceResults.filter((s) => s.status !== 'ok').length,
+      warnings: sourceResults.filter((s) => s.status !== 'ok').length
+    },
+    products: importedProducts.length ? mergeById(importedProducts, previous.products || []) : (previous.products || []),
+    promotions: importedPromotions.length ? mergeById(importedPromotions, previous.promotions || []) : (previous.promotions || [])
+  };
+
+  validateCatalogShape(next);
+
+  const report = diffCatalog(previous, next);
+  await fs.writeFile(catalogPath, JSON.stringify(next, null, 2) + '\n');
+  await fs.writeFile(reportPath, JSON.stringify(report, null, 2) + '\n');
+
+  console.log(`Catalog refresh complete. Products: ${next.products.length}. Promotions: ${next.promotions.length}.`);
 }
 
-function flattenJsonLd(value) {
-  const arr = Array.isArray(value) ? value : [value];
-  return arr.flatMap(item => item['@graph'] ? flattenJsonLd(item['@graph']) : [item]);
-}
-
-function cleanJson(value) { return value.replace(/&quot;/g, '"').trim(); }
-function mergeById(primary, fallback) { return [...dedupeById(primary), ...fallback.filter(x => !primary.some(p => p.id === x.id))]; }
-function dedupeById(items) { return [...new Map(items.map(item => [item.id, item])).values()]; }
-function slug(value) { return String(value).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 80); }
-function guessBrandId(value = '') { const v = String(value).toLowerCase(); if (v.includes('tempur')) return 'tempur'; if (v.includes('sealy')) return 'sealy'; if (v.includes('stearns')) return 'stearns'; if (v.includes('purple')) return 'purple'; if (v.includes('beautyrest')) return 'beautyrest'; if (v.includes('serta')) return 'serta'; return 'sealy'; }
-function guessSeries(value = '') { return String(value).split(/[-–|]/)[0].trim() || 'Imported'; }
-function guessSize(value = '') { const v = String(value).toLowerCase(); return ['Twin XL', 'Twin', 'Full', 'Queen', 'King', 'California King'].find(s => v.includes(s.toLowerCase())) || 'Queen'; }
-function guessComfort(value = '') { const v = String(value).toLowerCase(); if (v.includes('plush')) return 'Plush'; if (v.includes('firm')) return 'Firm'; if (v.includes('soft')) return 'Soft'; return 'Medium'; }
-
-main().catch(error => { console.error(error); process.exit(1); });
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
