@@ -12,9 +12,9 @@
   <div class="app-shell">
     <header class="hero">
       <div>
-        <p class="eyebrow">Daily catalog quote tool</p>
+        <p class="eyebrow">Speed quote tool</p>
         <h1>Sleep Quote Studio</h1>
-        <p class="subcopy">Refresh before work, then quote instantly from the cached catalog all day.</p>
+        <p class="subcopy">Tap, tap, done. Build a live Sleep Number quote in seconds — keyboard 1-9 to pick, Enter to advance.</p>
       </div>
       <button id="installBtn" class="ghost hidden">Install app</button>
     </header>
@@ -25,22 +25,24 @@
         <strong id="catalogStatus">Loading catalog...</strong>
         <p id="catalogMeta">Checking saved data.</p>
       </div>
-      <button id="refreshCatalogBtn">Refresh catalog</button>
+      <button id="refreshCatalogBtn" class="secondary">Refresh</button>
     </section>
 
     <main class="quote-layout">
       <section class="panel builder-panel">
         <div class="step-header">
-          <div>
-            <p class="eyebrow" id="stepCounter">Step 1 of 8</p>
-            <h2 id="stepTitle">Choose mattress brand</h2>
+          <div class="step-headline">
+            <p class="eyebrow" id="stepCounter">Step 1 of 7</p>
+            <h2 id="stepTitle">Pick a collection</h2>
+            <p class="step-sub" id="stepSub"></p>
           </div>
           <div class="progress"><span id="progressBar"></span></div>
         </div>
+        <div class="pills" id="stepPills"></div>
         <div id="stepBody" class="step-body"></div>
         <div class="nav-row">
-          <button id="backBtn" class="secondary">Back</button>
-          <button id="nextBtn">Continue</button>
+          <button id="backBtn" class="secondary">← Back</button>
+          <button id="nextBtn">Next →</button>
         </div>
       </section>
 
@@ -50,7 +52,7 @@
             <p class="eyebrow">Live quote</p>
             <h2 id="totalDue">$0</h2>
           </div>
-          <span class="savings-pill" id="savingsPill">$0 saved</span>
+          <span class="savings-pill hidden" id="savingsPill">$0 saved</span>
         </div>
         <div id="miniSummary" class="mini-summary"></div>
         <div id="promoList" class="promo-list"></div>
@@ -58,6 +60,11 @@
         <button id="resetBtn" class="secondary wide">Start over</button>
       </aside>
     </main>
+  </div>
+
+  <div class="action-bar">
+    <div class="action-total"><span>Total</span><strong id="barTotal">$0</strong></div>
+    <button id="barNext">Next →</button>
   </div>
 
   <div id="toast" class="toast hidden"></div>
