@@ -799,31 +799,11 @@
   ],
   "promos": [
     {
-      "id": "free-delivery",
-      "type": "automatic",
-      "name": "Free In-Home Delivery & Setup",
-      "description": "Current Sleep Number offer: free in-home delivery and setup with any smart bed.",
-      "discountAmount": 199.99,
-      "conditions": {
-        "requiresProduct": true
-      }
-    },
-    {
       "id": "military-first-responder",
       "type": "toggle",
-      "name": "Military / First Responder Discount",
-      "description": "SheerID-verified discount for active military, veterans, and first responders.",
-      "discountPercent": 20
-    },
-    {
-      "id": "manager-bundle",
-      "type": "toggle",
-      "name": "Manager Bundle Override",
-      "description": "Apply only with manager approval for qualifying accessory bundles.",
-      "discountPercent": 10,
-      "conditions": {
-        "minimumSubtotal": 500
-      }
+      "name": "Military / First Responder",
+      "description": "5% off for verified active military, veterans, and first responders.",
+      "discountPercent": 5
     }
   ],
   "sourceResults": [
