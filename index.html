@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#17120f" />
-  <title>Sleep Quote Studio</title>
+  <meta name="theme-color" content="#0d1b2a" />
+  <title>Sleep Number Quote Studio</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -12,35 +12,42 @@
   <div class="app-shell">
     <header class="hero">
       <div>
-        <p class="eyebrow">Daily catalog quote tool</p>
-        <h1>Sleep Quote Studio</h1>
-        <p class="subcopy">Refresh before work, then quote instantly from the cached catalog all day.</p>
+        <p class="eyebrow">Sleep Number · Internal sales tool</p>
+        <h1>Quote Studio</h1>
+        <p class="subcopy">Refresh before work. Quote instantly from the cached catalog all day, even offline.</p>
       </div>
-      <button id="installBtn" class="ghost hidden">Install app</button>
+      <div class="hero-actions">
+        <button id="installBtn" class="ghost hidden">Install app</button>
+        <button id="adminToggleBtn" class="ghost">Catalog health</button>
+      </div>
     </header>
+
+    <section id="adminPanel" class="admin-panel hidden"></section>
 
     <section class="status-card">
       <div>
         <span class="status-dot" id="statusDot"></span>
-        <strong id="catalogStatus">Loading catalog...</strong>
+        <strong id="catalogStatus">Loading catalog…</strong>
         <p id="catalogMeta">Checking saved data.</p>
       </div>
       <button id="refreshCatalogBtn">Refresh catalog</button>
     </section>
+
+    <div id="warningBar" class="warning-bar hidden"></div>
 
     <main class="quote-layout">
       <section class="panel builder-panel">
         <div class="step-header">
           <div>
             <p class="eyebrow" id="stepCounter">Step 1 of 8</p>
-            <h2 id="stepTitle">Choose mattress brand</h2>
+            <h2 id="stepTitle">Customer info</h2>
           </div>
           <div class="progress"><span id="progressBar"></span></div>
         </div>
         <div id="stepBody" class="step-body"></div>
         <div class="nav-row">
-          <button id="backBtn" class="secondary">Back</button>
-          <button id="nextBtn">Continue</button>
+          <button id="backBtn" class="secondary">← Back</button>
+          <button id="nextBtn">Continue →</button>
         </div>
       </section>
 
@@ -54,8 +61,11 @@
         </div>
         <div id="miniSummary" class="mini-summary"></div>
         <div id="promoList" class="promo-list"></div>
-        <button id="copyQuoteBtn" class="wide">Copy quote</button>
-        <button id="resetBtn" class="secondary wide">Start over</button>
+        <div class="summary-footer">
+          <p class="verify-note">⚠ Verify all prices &amp; promos before purchase.</p>
+          <button id="copyQuoteBtn" class="wide">Copy quote summary</button>
+          <button id="resetBtn" class="secondary wide">Start over</button>
+        </div>
       </aside>
     </main>
   </div>

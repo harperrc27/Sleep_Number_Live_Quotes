@@ -1,319 +1,881 @@
 {
-  "schemaVersion": 1,
-  "lastUpdated": "2026-06-24T00:00:11.865Z",
-  "sourceNotes": "Catalog updater ran with no active public sources. Add URLs in scripts/sources.json.",
-  "brands": [
+  "schemaVersion": 2,
+  "lastUpdated": "2026-06-25T02:56:05.056Z",
+  "metadata": {
+    "brand": "Sleep Number",
+    "note": "All prices are approximate based on publicly available data. Verify before purchase.",
+    "productCount": 8,
+    "promoCount": 8,
+    "hardwareRuleCount": 9
+  },
+  "sourceNotes": "Catalog refreshed from 7 source(s). 7 failed.",
+  "sourceResults": [
     {
-      "id": "tempur",
-      "name": "Tempur-Pedic",
-      "logoText": "TEMPUR",
-      "badge": "Premium",
-      "description": "Pressure relief and contouring foam feel."
+      "name": "Sleep Number mattresses",
+      "url": "https://www.sleepnumber.com/collections/beds",
+      "ok": false,
+      "error": "fetch failed"
     },
     {
-      "id": "sealy",
-      "name": "Sealy",
-      "logoText": "Sealy",
-      "badge": "Popular",
-      "description": "Supportive mattresses across value and premium lines."
+      "name": "Sleep Number c-Series",
+      "url": "https://www.sleepnumber.com/collections/c-series-smart-bed",
+      "ok": false,
+      "error": "fetch failed"
     },
     {
-      "id": "stearns",
-      "name": "Stearns & Foster",
-      "logoText": "S&F",
-      "badge": "Luxury",
-      "description": "Luxury crafted mattress collections."
+      "name": "Sleep Number p-Series",
+      "url": "https://www.sleepnumber.com/collections/p-series-smart-bed",
+      "ok": false,
+      "error": "fetch failed"
     },
     {
-      "id": "purple",
-      "name": "Purple",
-      "logoText": "Purple",
-      "badge": "Cooling",
-      "description": "Gel grid comfort and airflow-focused support."
+      "name": "Sleep Number i-Series",
+      "url": "https://www.sleepnumber.com/collections/i-series-smart-bed",
+      "ok": false,
+      "error": "fetch failed"
     },
     {
-      "id": "beautyrest",
-      "name": "Beautyrest",
-      "logoText": "Beautyrest",
-      "badge": "Hybrid",
-      "description": "Pocketed coil support and comfort layers."
+      "name": "Sleep Number FlexFit bases",
+      "url": "https://www.sleepnumber.com/collections/adjustable-bases",
+      "ok": false,
+      "error": "fetch failed"
     },
     {
-      "id": "serta",
-      "name": "Serta",
-      "logoText": "Serta",
-      "badge": "Value",
-      "description": "Comfortable everyday mattress options."
+      "name": "Sleep Number accessories",
+      "url": "https://www.sleepnumber.com/collections/accessories",
+      "ok": false,
+      "error": "fetch failed"
+    },
+    {
+      "name": "Sleep Number bedding",
+      "url": "https://www.sleepnumber.com/collections/bedding",
+      "ok": false,
+      "error": "fetch failed"
     }
   ],
   "products": [
     {
-      "id": "tempur-adapt-queen-medium",
-      "brandId": "tempur",
-      "series": "TEMPUR-Adapt",
-      "model": "Medium",
-      "type": "Foam",
-      "size": "Queen",
-      "comfort": "Medium",
-      "retailPrice": 2199,
-      "salePrice": 1999
+      "id": "c2",
+      "name": "c2 Smart Bed",
+      "series": "c Series",
+      "badge": "Entry Level",
+      "description": "Entry-level Sleep Number Smart Bed. Adjustable firmness settings, SleepIQ® technology included.",
+      "features": [
+        "Adjustable firmness 0–100",
+        "SleepIQ® sleep tracking",
+        "Responsive Air® technology",
+        "Dual-sided adjustment on splits"
+      ],
+      "category": "mattress",
+      "productUrl": "https://www.sleepnumber.com/products/c2-smart-bed",
+      "imageUrl": "",
+      "tags": [
+        "smart-bed",
+        "c-series"
+      ],
+      "pricing": {
+        "Twin": 849,
+        "Twin XL": 999,
+        "Full": 1099,
+        "Queen": 1099,
+        "King": 1499,
+        "Cal King": 1499,
+        "FlexTop King": 1699,
+        "Split King": 1799
+      },
+      "retailPricing": {
+        "Twin": 999,
+        "Twin XL": 1199,
+        "Full": 1299,
+        "Queen": 1299,
+        "King": 1799,
+        "Cal King": 1799,
+        "FlexTop King": 1999,
+        "Split King": 2099
+      },
+      "verificationRequired": true,
+      "confidenceScore": 0.75,
+      "lastVerified": "2026-06-25"
     },
     {
-      "id": "tempur-proadapt-queen-medium-hybrid",
-      "brandId": "tempur",
-      "series": "TEMPUR-ProAdapt",
-      "model": "Medium Hybrid",
-      "type": "Hybrid",
-      "size": "Queen",
-      "comfort": "Medium",
-      "retailPrice": 3399,
-      "salePrice": 2999
+      "id": "c4",
+      "name": "c4 Smart Bed",
+      "series": "c Series",
+      "badge": "Popular",
+      "description": "Upgraded comfort layers over the c2. Responsive Air® technology with more cushioning.",
+      "features": [
+        "Adjustable firmness 0–100",
+        "SleepIQ® sleep tracking",
+        "Enhanced comfort layer",
+        "Responsive Air® technology"
+      ],
+      "category": "mattress",
+      "productUrl": "https://www.sleepnumber.com/products/c4-smart-bed",
+      "imageUrl": "",
+      "tags": [
+        "smart-bed",
+        "c-series"
+      ],
+      "pricing": {
+        "Twin": 1099,
+        "Twin XL": 1299,
+        "Full": 1399,
+        "Queen": 1399,
+        "King": 1799,
+        "Cal King": 1799,
+        "FlexTop King": 1999,
+        "Split King": 2199
+      },
+      "retailPricing": {
+        "Twin": 1299,
+        "Twin XL": 1499,
+        "Full": 1599,
+        "Queen": 1599,
+        "King": 2099,
+        "Cal King": 2099,
+        "FlexTop King": 2299,
+        "Split King": 2499
+      },
+      "verificationRequired": true,
+      "confidenceScore": 0.75,
+      "lastVerified": "2026-06-25"
     },
     {
-      "id": "tempur-breeze-king-firm",
-      "brandId": "tempur",
-      "series": "TEMPUR-Breeze",
-      "model": "Firm",
-      "type": "Cooling Foam",
-      "size": "King",
-      "comfort": "Firm",
-      "retailPrice": 4899,
-      "salePrice": 4499
+      "id": "p5",
+      "name": "p5 Smart Bed",
+      "series": "p Series",
+      "badge": "Best Value",
+      "description": "The most popular Sleep Number Smart Bed. Premium comfort with enhanced pressure relief.",
+      "features": [
+        "Adjustable firmness 0–100",
+        "SleepIQ® sleep tracking",
+        "Premium comfort layers",
+        "Responsive Air® technology",
+        "Temperature-balancing cover"
+      ],
+      "category": "mattress",
+      "productUrl": "https://www.sleepnumber.com/products/p5-smart-bed",
+      "imageUrl": "",
+      "tags": [
+        "smart-bed",
+        "p-series",
+        "best-seller"
+      ],
+      "pricing": {
+        "Twin": 1399,
+        "Twin XL": 1699,
+        "Full": 1799,
+        "Queen": 1799,
+        "King": 2299,
+        "Cal King": 2299,
+        "FlexTop King": 2599,
+        "Split King": 2799
+      },
+      "retailPricing": {
+        "Twin": 1699,
+        "Twin XL": 1999,
+        "Full": 2099,
+        "Queen": 2099,
+        "King": 2699,
+        "Cal King": 2699,
+        "FlexTop King": 2999,
+        "Split King": 3199
+      },
+      "verificationRequired": true,
+      "confidenceScore": 0.75,
+      "lastVerified": "2026-06-25"
     },
     {
-      "id": "sealy-posturepedic-queen-plush",
-      "brandId": "sealy",
-      "series": "Posturepedic",
-      "model": "Plus Plush",
-      "type": "Hybrid",
-      "size": "Queen",
-      "comfort": "Plush",
-      "retailPrice": 1299,
-      "salePrice": 1099
+      "id": "p6",
+      "name": "p6 Smart Bed",
+      "series": "p Series",
+      "badge": "Premium",
+      "description": "Advanced pressure relief with plush comfort layers. Designed for side and combination sleepers.",
+      "features": [
+        "Adjustable firmness 0–100",
+        "SleepIQ® sleep tracking",
+        "Advanced pressure relief",
+        "Plush comfort layers",
+        "Temperature-balancing cover"
+      ],
+      "category": "mattress",
+      "productUrl": "https://www.sleepnumber.com/products/p6-smart-bed",
+      "imageUrl": "",
+      "tags": [
+        "smart-bed",
+        "p-series"
+      ],
+      "pricing": {
+        "Twin": 1799,
+        "Twin XL": 2099,
+        "Full": 2199,
+        "Queen": 2199,
+        "King": 2799,
+        "Cal King": 2799,
+        "FlexTop King": 3099,
+        "Split King": 3299
+      },
+      "retailPricing": {
+        "Twin": 2099,
+        "Twin XL": 2399,
+        "Full": 2499,
+        "Queen": 2499,
+        "King": 3199,
+        "Cal King": 3199,
+        "FlexTop King": 3499,
+        "Split King": 3699
+      },
+      "verificationRequired": true,
+      "confidenceScore": 0.75,
+      "lastVerified": "2026-06-25"
     },
     {
-      "id": "sealy-essentials-full-medium",
-      "brandId": "sealy",
-      "series": "Essentials",
-      "model": "Medium",
-      "type": "Innerspring",
-      "size": "Full",
-      "comfort": "Medium",
-      "retailPrice": 699,
-      "salePrice": 599
+      "id": "i8",
+      "name": "i8 Smart Bed",
+      "series": "i Series",
+      "badge": "Recommended",
+      "description": "Enhanced smart features with FlexFit compatibility and advanced SleepIQ® insights.",
+      "features": [
+        "Adjustable firmness 0–100",
+        "SleepIQ® sleep tracking",
+        "Responsive Air® technology",
+        "FlexFit™ adjustable base compatible",
+        "Advanced sleep insights"
+      ],
+      "category": "mattress",
+      "productUrl": "https://www.sleepnumber.com/products/i8-smart-bed",
+      "imageUrl": "",
+      "tags": [
+        "smart-bed",
+        "i-series",
+        "flexfit-compatible"
+      ],
+      "pricing": {
+        "Twin": 2099,
+        "Twin XL": 2499,
+        "Full": 2599,
+        "Queen": 2699,
+        "King": 3299,
+        "Cal King": 3299,
+        "FlexTop King": 3699,
+        "Split King": 3899
+      },
+      "retailPricing": {
+        "Twin": 2499,
+        "Twin XL": 2999,
+        "Full": 3099,
+        "Queen": 3199,
+        "King": 3899,
+        "Cal King": 3899,
+        "FlexTop King": 4299,
+        "Split King": 4499
+      },
+      "verificationRequired": true,
+      "confidenceScore": 0.75,
+      "lastVerified": "2026-06-25"
     },
     {
-      "id": "stearns-estate-queen-firm",
-      "brandId": "stearns",
-      "series": "Estate",
-      "model": "Firm",
-      "type": "Luxury Hybrid",
-      "size": "Queen",
-      "comfort": "Firm",
-      "retailPrice": 2499,
-      "salePrice": 2299
+      "id": "i10",
+      "name": "i10 Smart Bed",
+      "series": "i Series",
+      "badge": "Top Tier",
+      "description": "Premium i Series with the most advanced comfort and sleep tracking technology.",
+      "features": [
+        "Adjustable firmness 0–100",
+        "SleepIQ® sleep tracking",
+        "Ultimate pressure relief",
+        "FlexFit™ adjustable base compatible",
+        "Advanced sleep insights",
+        "Temperature-balancing cover"
+      ],
+      "category": "mattress",
+      "productUrl": "https://www.sleepnumber.com/products/i10-smart-bed",
+      "imageUrl": "",
+      "tags": [
+        "smart-bed",
+        "i-series",
+        "flexfit-compatible",
+        "premium"
+      ],
+      "pricing": {
+        "Twin": 2699,
+        "Twin XL": 3099,
+        "Full": 3199,
+        "Queen": 3299,
+        "King": 3999,
+        "Cal King": 3999,
+        "FlexTop King": 4499,
+        "Split King": 4699
+      },
+      "retailPricing": {
+        "Twin": 3199,
+        "Twin XL": 3699,
+        "Full": 3799,
+        "Queen": 3899,
+        "King": 4699,
+        "Cal King": 4699,
+        "FlexTop King": 5199,
+        "Split King": 5399
+      },
+      "verificationRequired": true,
+      "confidenceScore": 0.75,
+      "lastVerified": "2026-06-25"
     },
     {
-      "id": "purple-plus-queen",
-      "brandId": "purple",
-      "series": "Purple",
-      "model": "Plus",
-      "type": "GelFlex",
-      "size": "Queen",
-      "comfort": "Medium",
-      "retailPrice": 1899,
-      "salePrice": 1699
+      "id": "360-i7",
+      "name": "360® Smart Bed i7",
+      "series": "360 Smart Bed",
+      "badge": "Smart",
+      "description": "360® Smart Bed with advanced auto-adjusting comfort and SleepIQ® responsive features.",
+      "features": [
+        "Adjustable firmness 0–100",
+        "SleepIQ® sleep tracking",
+        "Automatically adjusts to your sleep",
+        "Responsive air technology",
+        "FlexFit™ compatible"
+      ],
+      "category": "mattress",
+      "productUrl": "https://www.sleepnumber.com/products/360-smart-bed",
+      "imageUrl": "",
+      "tags": [
+        "smart-bed",
+        "360-series",
+        "flexfit-compatible",
+        "auto-adjust"
+      ],
+      "pricing": {
+        "Queen": 3499,
+        "King": 4299,
+        "Cal King": 4299,
+        "FlexTop King": 4799,
+        "Split King": 4999
+      },
+      "retailPricing": {
+        "Queen": 4099,
+        "King": 4999,
+        "Cal King": 4999,
+        "FlexTop King": 5499,
+        "Split King": 5699
+      },
+      "verificationRequired": true,
+      "confidenceScore": 0.7,
+      "lastVerified": "2026-06-25"
     },
     {
-      "id": "beautyrest-black-queen-medium",
-      "brandId": "beautyrest",
-      "series": "Black",
-      "model": "Medium",
-      "type": "Hybrid",
-      "size": "Queen",
-      "comfort": "Medium",
-      "retailPrice": 3199,
-      "salePrice": 2799
-    },
-    {
-      "id": "serta-perfect-sleeper-queen-plush",
-      "brandId": "serta",
-      "series": "Perfect Sleeper",
-      "model": "Plush",
-      "type": "Hybrid",
-      "size": "Queen",
-      "comfort": "Plush",
-      "retailPrice": 1199,
-      "salePrice": 999
+      "id": "360-i9",
+      "name": "360® Smart Bed i9",
+      "series": "360 Smart Bed",
+      "badge": "Ultimate",
+      "description": "Top-of-the-line 360® Smart Bed with the highest comfort rating and full auto-adjustment.",
+      "features": [
+        "Adjustable firmness 0–100",
+        "SleepIQ® sleep tracking",
+        "Auto-adjusting while you sleep",
+        "Ultimate pressure-relief layers",
+        "FlexFit™ compatible",
+        "Temperature balancing"
+      ],
+      "category": "mattress",
+      "productUrl": "https://www.sleepnumber.com/products/360-smart-bed",
+      "imageUrl": "",
+      "tags": [
+        "smart-bed",
+        "360-series",
+        "flexfit-compatible",
+        "auto-adjust",
+        "premium"
+      ],
+      "pricing": {
+        "Queen": 3999,
+        "King": 4799,
+        "Cal King": 4799,
+        "FlexTop King": 5299,
+        "Split King": 5499
+      },
+      "retailPricing": {
+        "Queen": 4699,
+        "King": 5599,
+        "Cal King": 5599,
+        "FlexTop King": 6099,
+        "Split King": 6299
+      },
+      "verificationRequired": true,
+      "confidenceScore": 0.7,
+      "lastVerified": "2026-06-25"
     }
   ],
   "addons": [
     {
       "id": "none",
       "category": "none",
-      "name": "None",
+      "name": "None / Skip",
       "description": "Skip this section.",
       "price": 0
     },
     {
-      "id": "basic-foundation-queen",
+      "id": "modular-base-standard",
       "category": "foundation",
-      "name": "Basic Foundation",
-      "description": "Non-adjustable support base.",
-      "price": 249
+      "name": "Modular Base (Standard)",
+      "description": "Non-adjustable Sleep Number modular support base with standard legs.",
+      "price": 299,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/products/modular-base"
     },
     {
-      "id": "low-profile-foundation",
+      "id": "modular-base-low-profile",
       "category": "foundation",
-      "name": "Low Profile Foundation",
-      "description": "Lower non-adjustable foundation.",
-      "price": 279
+      "name": "Modular Base (Low Profile)",
+      "description": "Non-adjustable Sleep Number modular base for a lower bed height.",
+      "price": 299,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/products/modular-base"
     },
     {
-      "id": "adjustable-basic",
+      "id": "platform-frame",
+      "category": "foundation",
+      "name": "Platform Bed Frame",
+      "description": "Compatible platform frame with slat support for Sleep Number mattresses.",
+      "price": 499,
+      "verificationRequired": true,
+      "warnings": [
+        "verify-flat-support",
+        "verify-adjustable-clearance"
+      ]
+    },
+    {
+      "id": "flexfit-1",
       "category": "adjustable-base",
-      "name": "Head-Up Adjustable Base",
-      "description": "Adjustable head positioning.",
-      "price": 699
+      "name": "FlexFit™ 1 Adjustable Base",
+      "description": "Head-up adjustable base. Great entry-level adjustable option.",
+      "price": 999,
+      "verificationRequired": true,
+      "features": [
+        "Head-up adjustment",
+        "Zero-gravity preset",
+        "Anti-snore preset",
+        "Under-bed lighting"
+      ],
+      "productUrl": "https://www.sleepnumber.com/products/flexfit-1"
     },
     {
-      "id": "adjustable-premium",
+      "id": "flexfit-2",
       "category": "adjustable-base",
-      "name": "Premium Adjustable Base",
-      "description": "Head/foot adjust, massage, presets.",
-      "price": 1199
+      "name": "FlexFit™ 2 Adjustable Base",
+      "description": "Head and foot adjustable base with massage and preset positions.",
+      "price": 1499,
+      "verificationRequired": true,
+      "features": [
+        "Head and foot adjustment",
+        "Massage",
+        "Zero-gravity preset",
+        "Anti-snore preset",
+        "Under-bed lighting",
+        "Wireless remote"
+      ],
+      "productUrl": "https://www.sleepnumber.com/products/flexfit-2"
     },
     {
-      "id": "split-king-adjustable",
+      "id": "flexfit-3",
       "category": "adjustable-base",
-      "name": "Split King Adjustable Base",
-      "description": "Dual-side adjustable support.",
-      "price": 1999
+      "name": "FlexFit™ 3 Adjustable Base",
+      "description": "Premium adjustable base with full head/foot adjustment, massage, and smart features.",
+      "price": 2499,
+      "verificationRequired": true,
+      "features": [
+        "Full head and foot adjustment",
+        "Dual-zone massage",
+        "Snore response",
+        "Smart home integration",
+        "App control",
+        "Wireless remote",
+        "Under-bed lighting"
+      ],
+      "productUrl": "https://www.sleepnumber.com/products/flexfit-3"
     },
     {
-      "id": "bed-frame",
+      "id": "flexfit-split-king",
+      "category": "adjustable-base",
+      "name": "FlexFit™ Split King (Pair)",
+      "description": "Two FlexFit bases for a Split King — each partner controls their own side independently.",
+      "price": 2998,
+      "verificationRequired": true,
+      "warnings": [
+        "requires-split-king-or-flexfit-king-mattress"
+      ],
+      "productUrl": "https://www.sleepnumber.com/products/flexfit-1"
+    },
+    {
+      "id": "integrated-base",
+      "category": "integrated-base",
+      "name": "Integrated Adjustable Base",
+      "description": "Base with integrated frame — adjustable, no separate frame needed.",
+      "price": 1799,
+      "verificationRequired": true,
+      "features": [
+        "Head and foot adjustment",
+        "Integrated legs/frame",
+        "No separate platform needed"
+      ],
+      "productUrl": "https://www.sleepnumber.com/products/integrated-adjustable-base"
+    },
+    {
+      "id": "sn-upholstered-bed",
       "category": "furniture",
-      "name": "Bed Frame",
-      "description": "Simple metal support frame.",
-      "price": 99
+      "name": "Sleep Number Upholstered Bed",
+      "description": "Sleep Number branded upholstered bed frame. Designed for Sleep Number bases.",
+      "price": 1299,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/collections/beds"
     },
     {
-      "id": "headboard",
+      "id": "sn-headboard",
       "category": "furniture",
-      "name": "Headboard",
-      "description": "Upholstered headboard option.",
-      "price": 399
+      "name": "Sleep Number Headboard (Panel)",
+      "description": "Sleep Number panel headboard. Compatible with Sleep Number bases and bracket kits.",
+      "price": 599,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/collections/beds"
     },
     {
-      "id": "nightstand",
+      "id": "sn-footboard",
       "category": "furniture",
-      "name": "Nightstand",
-      "description": "Bedroom storage add-on.",
-      "price": 349
+      "name": "Sleep Number Footboard",
+      "description": "Sleep Number footboard. Verify compatibility with adjustable base before purchase.",
+      "price": 399,
+      "verificationRequired": true,
+      "warnings": [
+        "footboard-adj-base-compat"
+      ],
+      "productUrl": "https://www.sleepnumber.com/collections/beds"
     },
     {
-      "id": "dresser",
+      "id": "sn-storage-base",
       "category": "furniture",
-      "name": "Dresser",
-      "description": "Matching bedroom dresser.",
-      "price": 899
+      "name": "Sleep Number Storage Base",
+      "description": "Under-bed storage base with drawers. Non-adjustable.",
+      "price": 999,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/collections/beds"
     },
     {
-      "id": "waterproof-protector",
-      "category": "protection-layer",
-      "name": "Waterproof Mattress Protector",
-      "description": "Protects against spills and stains.",
-      "price": 129
+      "id": "headboard-bracket-kit",
+      "category": "hardware",
+      "name": "Headboard Bracket Kit",
+      "description": "Required to attach most headboards to Sleep Number FlexFit adjustable bases.",
+      "price": 119,
+      "verificationRequired": true,
+      "triggeredBy": "adjustable-base+headboard",
+      "productUrl": "https://www.sleepnumber.com/products/headboard-bracket-kit"
     },
     {
-      "id": "cooling-protector",
-      "category": "protection-layer",
-      "name": "Cooling Protector",
-      "description": "Breathable protective layer.",
-      "price": 169
+      "id": "footboard-bracket-kit",
+      "category": "hardware",
+      "name": "Footboard Bracket Kit",
+      "description": "Connector kit for footboard attachment. Verify clearance with adjustable base.",
+      "price": 79,
+      "verificationRequired": true,
+      "triggeredBy": "footboard-compat",
+      "productUrl": "https://www.sleepnumber.com/products/footboard-bracket-kit"
     },
     {
-      "id": "memory-topper",
-      "category": "comfort-layer",
-      "name": "Memory Foam Topper",
-      "description": "Adds pressure-relieving comfort.",
-      "price": 249
+      "id": "retainer-bar",
+      "category": "hardware",
+      "name": "Retainer Bar",
+      "description": "Prevents mattress from sliding on adjustable base. Recommended for FlexFit bases.",
+      "price": 79,
+      "verificationRequired": true,
+      "triggeredBy": "adjustable-base",
+      "productUrl": "https://www.sleepnumber.com/products/retainer-bar"
     },
     {
-      "id": "cooling-topper",
-      "category": "comfort-layer",
-      "name": "Cooling Topper",
-      "description": "Adds cooling comfort layer.",
-      "price": 299
+      "id": "modular-base-legs-standard",
+      "category": "hardware",
+      "name": "Modular Base Legs (Standard Height)",
+      "description": "Standard-height replacement legs for Sleep Number modular base.",
+      "price": 49,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/products/modular-base-legs"
     },
     {
-      "id": "cooling-pillow",
+      "id": "modular-base-legs-tall",
+      "category": "hardware",
+      "name": "Modular Base Legs (Tall / Raised)",
+      "description": "Taller legs to raise bed height. For customers needing easier bed entry.",
+      "price": 69,
+      "verificationRequired": true,
+      "triggeredBy": "height-concern-higher",
+      "productUrl": "https://www.sleepnumber.com/products/modular-base-legs"
+    },
+    {
+      "id": "modular-base-legs-low",
+      "category": "hardware",
+      "name": "Modular Base Legs (Low Profile)",
+      "description": "Low-profile legs for a lower bed height. For customers wanting lower profile.",
+      "price": 49,
+      "verificationRequired": true,
+      "triggeredBy": "height-concern-lower",
+      "productUrl": "https://www.sleepnumber.com/products/modular-base-legs"
+    },
+    {
+      "id": "wireless-remote",
+      "category": "hardware",
+      "name": "SleepIQ® Wireless Remote",
+      "description": "Replacement or additional wireless remote for Sleep Number adjustable bases.",
+      "price": 79,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/products/wireless-remote"
+    },
+    {
+      "id": "power-cord-kit",
+      "category": "hardware",
+      "name": "Power Cord Kit",
+      "description": "Replacement power cord kit for Sleep Number bases.",
+      "price": 39,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/products/power-cord"
+    },
+    {
+      "id": "air-chamber-cap",
+      "category": "hardware",
+      "name": "Air Chamber Cap",
+      "description": "Replacement cap for Sleep Number air chamber.",
+      "price": 19,
+      "verificationRequired": true
+    },
+    {
+      "id": "smart-pump",
+      "category": "hardware",
+      "name": "Smart Pump Replacement",
+      "description": "Replacement dual smart pump for Sleep Number mattresses.",
+      "price": 299,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/products/smart-pump"
+    },
+    {
+      "id": "support-bar",
+      "category": "hardware",
+      "name": "Support / Center Support Bar",
+      "description": "Center support bar for King/Cal King split configurations.",
+      "price": 89,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/products/support-bar"
+    },
+    {
+      "id": "truetemp-pillow-standard",
       "category": "pillow",
-      "name": "Cooling Pillow",
-      "description": "Cooling comfort pillow.",
-      "price": 149
+      "name": "True Temp® Pillow (Standard)",
+      "description": "Sleep Number True Temp® pillow with temperature-balancing material.",
+      "price": 119,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/products/true-temp-pillow"
     },
     {
-      "id": "foam-pillow",
+      "id": "truetemp-pillow-king",
       "category": "pillow",
-      "name": "Memory Foam Pillow",
-      "description": "Contour support pillow.",
-      "price": 119
+      "name": "True Temp® Pillow (King)",
+      "description": "King-size Sleep Number True Temp® pillow.",
+      "price": 139,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/products/true-temp-pillow"
     },
     {
-      "id": "sheet-set",
-      "category": "bedding",
-      "name": "Sheet Set",
-      "description": "Soft everyday sheet set.",
-      "price": 129
+      "id": "sn-pillow-classic",
+      "category": "pillow",
+      "name": "Sleep Number Classic Pillow",
+      "description": "Adjustable fill pillow. Add or remove fill to customize loft.",
+      "price": 89,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/products/classic-pillow"
     },
     {
-      "id": "cooling-sheets",
+      "id": "truetemp-sheets-queen",
       "category": "bedding",
-      "name": "Cooling Sheet Set",
-      "description": "Breathable cooling sheets.",
-      "price": 199
+      "name": "True Temp® Sheet Set (Queen)",
+      "description": "Temperature-balancing sheets designed for Sleep Number mattresses.",
+      "price": 179,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/products/true-temp-sheets"
+    },
+    {
+      "id": "truetemp-sheets-king",
+      "category": "bedding",
+      "name": "True Temp® Sheet Set (King / Cal King)",
+      "description": "King or Cal King temperature-balancing sheets.",
+      "price": 209,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/products/true-temp-sheets"
+    },
+    {
+      "id": "sleepiq-sheets-queen",
+      "category": "bedding",
+      "name": "Performance Sheet Set (Queen)",
+      "description": "Soft, breathable performance sheets for Sleep Number mattresses.",
+      "price": 129,
+      "verificationRequired": true
+    },
+    {
+      "id": "mattress-pad",
+      "category": "bedding",
+      "name": "Sleep Number Mattress Pad",
+      "description": "Thin, breathable mattress pad for added surface protection.",
+      "price": 99,
+      "verificationRequired": true
+    },
+    {
+      "id": "mattress-protector",
+      "category": "bedding",
+      "name": "Mattress Protector",
+      "description": "Waterproof mattress protector. Protects the air chamber and comfort layers.",
+      "price": 129,
+      "verificationRequired": true,
+      "productUrl": "https://www.sleepnumber.com/products/mattress-protector"
+    },
+    {
+      "id": "comforter-medium",
+      "category": "bedding",
+      "name": "True Temp® Comforter (Medium Warmth)",
+      "description": "Medium-warmth temperature-balancing comforter.",
+      "price": 149,
+      "verificationRequired": true
     },
     {
       "id": "plan-3",
       "category": "protection-plan",
       "name": "3-Year Protection Plan",
-      "description": "Basic accidental protection.",
-      "price": 149
+      "description": "Covers accidental damage to mattress and base.",
+      "price": 149,
+      "verificationRequired": true
     },
     {
       "id": "plan-5",
       "category": "protection-plan",
       "name": "5-Year Complete Protection",
-      "description": "Recommended coverage for mattress/base/furniture.",
-      "price": 249
+      "description": "Recommended for mattress + adjustable base + furniture combinations.",
+      "price": 249,
+      "verificationRequired": true
     },
     {
       "id": "plan-10",
       "category": "protection-plan",
       "name": "10-Year Premium Protection",
-      "description": "Longest protection plan option.",
-      "price": 399
+      "description": "Maximum coverage for premium Sleep Number systems.",
+      "price": 399,
+      "verificationRequired": true
+    }
+  ],
+  "hardwareRules": [
+    {
+      "id": "rule-adj-headboard",
+      "label": "Adjustable base + headboard",
+      "conditions": {
+        "baseCategories": [
+          "adjustable-base"
+        ],
+        "hasHeadboard": true
+      },
+      "recommendation": "recommended",
+      "message": "Headboard Bracket Kit is recommended to attach a headboard to a FlexFit adjustable base.",
+      "productId": "headboard-bracket-kit"
+    },
+    {
+      "id": "rule-adj-retainer-bar",
+      "label": "Adjustable base → retainer bar",
+      "conditions": {
+        "baseCategories": [
+          "adjustable-base"
+        ]
+      },
+      "recommendation": "recommended",
+      "message": "Retainer Bar is recommended to prevent mattress shifting on an adjustable base.",
+      "productId": "retainer-bar"
+    },
+    {
+      "id": "rule-adj-footboard-warning",
+      "label": "Adjustable base + footboard",
+      "conditions": {
+        "baseCategories": [
+          "adjustable-base",
+          "integrated-base"
+        ],
+        "hasFootboard": true
+      },
+      "recommendation": "warning",
+      "message": "Footboards may conflict with base articulation. Verify clearance and compatibility before purchase."
+    },
+    {
+      "id": "rule-third-party-headboard",
+      "label": "Third-party headboard",
+      "conditions": {
+        "headboardType": "third-party"
+      },
+      "recommendation": "verify",
+      "message": "Verify bolt spacing, clearance, and bracket compatibility for third-party headboard before quoting."
+    },
+    {
+      "id": "rule-platform-adj-base",
+      "label": "Platform bed / slats with adjustable base",
+      "conditions": {
+        "isPlatformBed": true,
+        "baseCategories": [
+          "adjustable-base"
+        ]
+      },
+      "recommendation": "verify",
+      "message": "Verify flat support surface and clearance for adjustable base with platform bed or slat system."
+    },
+    {
+      "id": "rule-no-base",
+      "label": "No base selected",
+      "conditions": {
+        "noBase": true
+      },
+      "recommendation": "recommended",
+      "message": "No base selected. A Modular Base or FlexFit Base is required for proper mattress support.",
+      "productId": "modular-base-standard"
+    },
+    {
+      "id": "rule-height-higher",
+      "label": "Customer wants bed higher",
+      "conditions": {
+        "heightConcern": "higher"
+      },
+      "recommendation": "recommended",
+      "message": "Tall Modular Base Legs available to raise bed height.",
+      "productId": "modular-base-legs-tall"
+    },
+    {
+      "id": "rule-height-lower",
+      "label": "Customer wants bed lower",
+      "conditions": {
+        "heightConcern": "lower"
+      },
+      "recommendation": "recommended",
+      "message": "Low-Profile Modular Base Legs available to lower bed height.",
+      "productId": "modular-base-legs-low"
+    },
+    {
+      "id": "rule-split-king-support-bar",
+      "label": "Split King / FlexTop King → center support bar",
+      "conditions": {
+        "sizes": [
+          "Split King",
+          "FlexTop King"
+        ]
+      },
+      "recommendation": "recommended",
+      "message": "Center Support Bar recommended for Split King and FlexTop King configurations.",
+      "productId": "support-bar"
     }
   ],
   "promos": [
     {
-      "id": "mattress-200-off",
+      "id": "save-on-sleep-system",
       "type": "automatic",
-      "name": "$200 Mattress Savings",
-      "description": "Applies to mattress purchases over $999.",
-      "discountAmount": 200,
-      "conditions": {
-        "requiresProduct": true,
-        "minimumSubtotal": 999
-      }
-    },
-    {
-      "id": "adjustable-bundle-300",
-      "type": "automatic",
-      "name": "$300 Adjustable Base Bundle",
-      "description": "Applies when mattress and adjustable base are selected.",
+      "name": "Sleep System Savings",
+      "description": "Savings applied when mattress + adjustable base are purchased together. Verify current amount.",
       "discountAmount": 300,
+      "verificationRequired": true,
+      "confidenceScore": 0.6,
       "conditions": {
         "requiresCategories": [
           "mattress",
@@ -323,50 +885,85 @@
       }
     },
     {
-      "id": "premium-system-500",
+      "id": "premium-system-savings",
       "type": "automatic",
-      "name": "$500 Premium Sleep System Savings",
-      "description": "Applies to complete sleep systems over $4000.",
+      "name": "Premium Sleep System Savings",
+      "description": "Additional savings on qualifying premium sleep systems. Verify current promo.",
       "discountAmount": 500,
+      "verificationRequired": true,
+      "confidenceScore": 0.5,
       "conditions": {
         "minimumSubtotal": 4000
       }
     },
     {
+      "id": "free-flexfit1",
+      "type": "toggle",
+      "name": "Free FlexFit 1 Base Promo",
+      "description": "Occasional promotion: Free FlexFit 1 base with qualifying mattress purchase. Verify current eligibility.",
+      "discountAmount": 999,
+      "verificationRequired": true,
+      "confidenceScore": 0.4,
+      "conditions": {
+        "requiresCategories": [
+          "mattress"
+        ],
+        "requiresAddonId": "flexfit-1"
+      }
+    },
+    {
+      "id": "financing-promo",
+      "type": "toggle",
+      "name": "0% APR Financing (verify terms)",
+      "description": "Sleep Number occasionally offers 0% APR financing for qualified buyers. Verify current terms and duration.",
+      "discountAmount": 0,
+      "verificationRequired": true,
+      "isFinancing": true,
+      "confidenceScore": 0.6
+    },
+    {
       "id": "military",
       "type": "toggle",
       "name": "Military Discount",
-      "description": "Use only with valid qualification/verification.",
-      "discountPercent": 10
+      "description": "Available to active duty, veterans, and their families. Requires ID verification.",
+      "discountPercent": 10,
+      "verificationRequired": true,
+      "customerQualificationRequired": true
     },
     {
       "id": "first-responder",
       "type": "toggle",
       "name": "First Responder Discount",
-      "description": "Use only with valid qualification/verification.",
-      "discountPercent": 10
-    },
-    {
-      "id": "teacher",
-      "type": "toggle",
-      "name": "Teacher Discount",
-      "description": "Use only with valid qualification/verification.",
-      "discountPercent": 10
+      "description": "Available to fire, police, EMS, and other first responders. Requires ID verification.",
+      "discountPercent": 10,
+      "verificationRequired": true,
+      "customerQualificationRequired": true
     },
     {
       "id": "manager-approval",
       "type": "toggle",
       "name": "Manager-Approved Discount",
-      "description": "Use only when a manager approves the override.",
-      "discountAmount": 100
+      "description": "Use only with manager authorization. Enter approved amount in the custom discount field.",
+      "discountAmount": 0,
+      "verificationRequired": true
     },
     {
       "id": "price-match",
       "type": "toggle",
       "name": "Price Match",
-      "description": "Use when price match requirements are met.",
-      "discountAmount": 150
+      "description": "Use only when price match policy requirements are satisfied.",
+      "discountAmount": 0,
+      "verificationRequired": true
     }
   ],
-  "sourceResults": []
+  "financing": {
+    "available": true,
+    "note": "0% APR financing may be available for qualified buyers. Verify current terms, duration, and minimum purchase requirements.",
+    "verificationRequired": true
+  },
+  "delivery": {
+    "standard": "White Glove Delivery & Setup",
+    "note": "Professional delivery and setup is typically included or available. Verify current delivery fees and scheduling requirements.",
+    "verificationRequired": true
+  }
 }
