@@ -1,23 +1,91 @@
 {
   "apiBase": "https://www.sleepnumber.com/api/storefront",
-  "note": "Bed pricing is pulled live from Sleep Number's Storefront REST API. Each collection category endpoint (/categories/{slug}) returns products[] whose variants[] carry real per-size regular/sale pricing in cents. Brands, addons, and promos are curated in data/catalog.json and preserved across live updates.",
-  "type": "Smart Bed",
-  "comfort": "Adjustable",
+  "note": "Beds, furniture, sheets, pads, pillows and integrated bases are priced live from the Sleep Number Storefront REST API. Bases, delivery, warranty, tax and compatibility are curated from researched live data (some are not exposed as API price endpoints).",
+  "taxRateDefault": 5.5,
+  "sizeOrder": ["Twin", "Twin XL", "Full", "Queen", "King", "California King", "Split King", "Split California King", "FlexTop King", "FlexTop California King"],
+
+  "types": [
+    { "id": "essential", "name": "Essential", "badge": "Foam comfort", "brandId": "comfortmode", "blurb": "Adjustable foam smart beds (each side 0-100) with SleepIQ tracking." },
+    { "id": "advanced", "name": "Advanced", "badge": "Most popular", "brandId": "comfortnext", "blurb": "Enhanced comfort + edge support, FlexFit adjustable-base ready." },
+    { "id": "climate", "name": "Climate", "badge": "Temperature", "brandId": "climate", "blurb": "Temperature-balancing beds - ClimateCool cools; Climate360 heats + cools." }
+  ],
+
   "collections": [
     { "slug": "mattresses-comfortmode-collection", "brandId": "comfortmode", "series": "ComfortMode Collection" },
     { "slug": "mattresses-comfortnext-collection", "brandId": "comfortnext", "series": "ComfortNext Collection" },
     { "slug": "mattresses-climate-collection", "brandId": "climate", "series": "Climate Collection" }
   ],
-  "sizeOrder": [
-    "Twin",
-    "Twin XL",
-    "Full",
-    "Queen",
-    "King",
-    "California King",
-    "Split King",
-    "Split California King",
-    "FlexTop King",
-    "FlexTop California King"
+
+  "integratedBaseCategory": "integrated-base",
+
+  "basesByBrand": {
+    "comfortmode": [
+      { "id": "cm-foundation", "name": "Foundation", "kind": "foundation", "price": 299, "desc": "Low-profile foundation." },
+      { "id": "cm-foundation-legs", "name": "Foundation & Legs", "kind": "foundation", "price": 599, "desc": "Foundation with modular legs." },
+      { "id": "cm-adjustable", "name": "Adjustable Base", "kind": "adjustable", "price": 999, "desc": "Head + foot articulation." }
+    ],
+    "comfortnext": [
+      { "id": "cn-foundation", "name": "Foundation", "kind": "foundation", "price": 299, "desc": "Low-profile foundation." },
+      { "id": "cn-foundation-legs", "name": "Foundation & Legs", "kind": "foundation", "price": 599, "desc": "Foundation with modular legs." },
+      { "id": "cn-adjustable", "name": "Adjustable Base", "kind": "adjustable", "price": 1199, "desc": "Head + foot articulation." },
+      { "id": "cn-flexfit2", "name": "FlexFit 2 Adjustable Base", "kind": "flexfit", "price": 1799, "desc": "Partner Snore, foot warming, presets." },
+      { "id": "cn-flexfit3", "name": "FlexFit 3 Adjustable Base", "kind": "flexfit", "price": 2399, "salePrice": 2079, "desc": "Full articulation, massage, underbed light." }
+    ],
+    "climate": [
+      { "id": "cl-integrated", "name": "Integrated Base", "kind": "integrated", "perSizeFromSlug": "ib-1080", "default": true, "desc": "Required base. Per-size pricing from live API." },
+      { "id": "cl-integrated-frame", "name": "Integrated Base & Frame", "kind": "integrated", "perSizeFromSlug": "ibf-1080", "desc": "Integrated base with frame." },
+      { "id": "cl-flexfit2", "name": "FlexFit 2 Adjustable Base", "kind": "flexfit", "price": 1999, "desc": "Adjustable upgrade for ClimateCool." }
+    ]
+  },
+  "baseRequiredBrands": ["climate"],
+  "modelIncludedBase": {
+    "Climate360 Smart Bed": { "name": "Integrated FlexFit base (included)", "note": "Climate360 is an all-in-one - its adjustable base is built in and included in the bed price." }
+  },
+
+  "furnitureSeries": [
+    { "id": "lifestyle", "name": "Lifestyle Collection", "blurb": "Premium upholstered beds + accessories." },
+    { "id": "signature", "name": "Signature Collection", "blurb": "Upholstered beds and headboards." },
+    { "id": "essential", "name": "Essential Collection", "blurb": "Value upholstered headboards." }
+  ],
+  "furnitureSources": [
+    { "slug": "lifestyle-collection", "seriesId": "lifestyle" },
+    { "slug": "signature-upholstered-beds", "seriesId": "signature", "kind": "bed" },
+    { "slug": "signature-upholstered-headboards", "seriesId": "signature", "kind": "headboard" },
+    { "slug": "essential-upholstered-headboards", "seriesId": "essential", "kind": "headboard" }
+  ],
+  "furnitureAccessorySlugs": ["side-table", "support-bar"],
+
+  "sheetsCategory": "sheets-pillowcases",
+  "padsCategory": "mattress-pads-toppers",
+  "pillowSlugs": ["pillow-comfortfit", "downcomfort", "pillow-pcp", "responsefit-pillow", "true-temp-plush-pillow", "naturalfit-pillow", "down-alt-pillow"],
+
+  "hardware": [
+    { "id": "hw-flexfit-legs", "name": "FlexFit Adjustable Legs", "price": 79.99, "desc": "Height-adjustable legs for adjustable bases." },
+    { "id": "hw-retainer-bar", "name": "Retainer Bar", "price": 79.99, "desc": "Keeps mattress in place on adjustable bases." },
+    { "id": "hw-bunkie", "name": "Bunkie Board", "price": 199, "desc": "Rigid support panel for slatted/platform frames." },
+    { "id": "hw-multifit-bracket", "name": "Multi-Fit Headboard Bracket", "price": 49.99, "desc": "Attach a headboard to a smart bed frame." },
+    { "id": "hw-ab-bracket", "name": "Adjustable Base Headboard Bracket", "price": 99.99, "desc": "Attach a headboard to an adjustable base." },
+    { "id": "hw-smart-remote", "name": "Sleep Number Smart Remote", "price": 49.99, "desc": "Physical remote for firmness control." },
+    { "id": "hw-360-remote", "name": "FlexFit 360 Remote", "price": 49.99, "desc": "Replacement remote for FlexFit bases." }
+  ],
+
+  "delivery": [
+    { "id": "del-doorstep", "name": "Doorstep Delivery", "price": 0, "desc": "Curbside / doorstep drop-off (accessories & bedding ship free)." },
+    { "id": "del-inhome", "name": "In-Home Delivery & Setup", "price": 199.99, "default": true, "desc": "Professional in-home delivery, setup and packaging removal for your smart bed." },
+    { "id": "del-inhome-removal", "name": "In-Home Setup + Mattress Removal", "price": 269.99, "desc": "In-home setup plus haul-away of one old mattress." }
+  ],
+  "disposalFees": [
+    { "id": "haul-base", "name": "Old base / foundation haul-away", "price": 50, "desc": "Remove an old foundation or adjustable base." }
+  ],
+  "deliveryNote": "No delivery promotion is currently active. In-home setup is the standard option for smart beds.",
+
+  "warranty": [
+    { "id": "warranty-15yr", "name": "15-Year Limited Warranty", "price": 0, "included": true, "desc": "Standard on all smart beds - included at no charge." },
+    { "id": "warranty-base", "name": "Adjustable Base Limited Warranty", "price": 0, "included": true, "desc": "2-year full + limited coverage on adjustable bases - included." }
+  ],
+  "warrantyNote": "No paid extended warranty is offered on smart beds; the 15-year limited warranty is included.",
+
+  "promos": [
+    { "id": "military-first-responder", "type": "toggle", "name": "Military / First Responder", "description": "5% off for verified active military, veterans, and first responders.", "discountPercent": 5 }
   ]
 }
