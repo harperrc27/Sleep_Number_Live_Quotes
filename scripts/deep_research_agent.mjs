@@ -70,7 +70,7 @@ function guessBrandId(value = '') {
 function guessSeries(value = '') { return String(value).split(/[-–|]/)[0].trim() || 'Imported'; }
 function guessSize(value = '') {
   const v = String(value).toLowerCase();
-  return ['Twin XL','Twin','Full','Queen','King','California King'].find((s) => v.includes(s.toLowerCase())) || 'Queen';
+  return ['Twin XL', 'California King', 'King', 'Queen', 'Full', 'Twin'].find((s) => v.includes(s.toLowerCase())) || 'Queen';
 }
 function guessComfort(value = '') {
   const v = String(value).toLowerCase();
@@ -103,7 +103,7 @@ async function fetchText(url, retries = 3) {
     } catch (err) {
       if (attempt === retries) throw err;
       const delay = attempt * 1500;
-      console.log(`  ↻ retry ${attempt}/${retries - 1} for ${url} (${err.message}) — waiting ${delay}ms`);
+      console.log(`  ↻ retry ${attempt}/${retries} for ${url} (${err.message}) — waiting ${delay}ms`);
       await sleep(delay);
     }
   }
@@ -338,12 +338,12 @@ async function main() {
       const subSrc   = { name: `${parentSource.name} (sub)`, url };
       const products = extractProductsFromHtml(html, subSrc);
       const promos   = extractPromosFromHtml(html, subSrc);
-      deepResults.push({ url, parentSource: parentSource.name, products, promos, ok: true });
+      deepResults.push({ url, parentSource: parentSource.name, html, products, promos, ok: true });
       if (products.length || promos.length) {
         console.log(`     ✓ ${products.length} products, ${promos.length} promos`);
       }
     } catch (err) {
-      deepResults.push({ url, parentSource: parentSource.name, products: [], promos: [], ok: false, error: err.message });
+      deepResults.push({ url, parentSource: parentSource.name, html: '', products: [], promos: [], ok: false, error: err.message });
       console.log(`     ✗ ${err.message}`);
     }
   }

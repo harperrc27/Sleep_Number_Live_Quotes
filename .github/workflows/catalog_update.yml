@@ -24,9 +24,9 @@ permissions:
 jobs:
   fast-update:
     name: Fast Catalog Update
-    # Run on the 5 AM cron, or when mode is "fast" or "both" (manual), or on 6 AM cron
+    # Scheduled: only on the 5 AM cron (10 UTC). Manual: when mode is "fast" or "both".
     if: >
-      github.event_name == 'schedule' ||
+      (github.event_name == 'schedule' && github.event.schedule == '0 10 * * *') ||
       github.event.inputs.mode == 'fast' ||
       github.event.inputs.mode == 'both'
     runs-on: ubuntu-latest
@@ -53,15 +53,14 @@ jobs:
 
   deep-research:
     name: Deep Research Agent
-    # Run on the 6 AM cron, or when mode is "deep" or "both" (manual)
-    # Deep agent runs after fast update when both are requested
-    needs: [fast-update]
+    # Scheduled: only on the 6 AM cron (11 UTC). Manual "both": runs after fast-update.
+    # Manual "deep": runs standalone (no fast-update dependency).
+    needs: >-
+      ${{ (github.event.inputs.mode == 'both') && 'fast-update' || '' }}
     if: >
-      always() && (
-        github.event_name == 'schedule' ||
-        github.event.inputs.mode == 'deep' ||
-        github.event.inputs.mode == 'both'
-      )
+      (github.event_name == 'schedule' && github.event.schedule == '0 11 * * *') ||
+      github.event.inputs.mode == 'deep' ||
+      github.event.inputs.mode == 'both'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

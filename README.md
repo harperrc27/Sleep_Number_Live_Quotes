@@ -109,11 +109,16 @@ Only use logo files you are allowed to use for your workplace tool.
 | Fast updater | `0 10 * * *` | 5 AM |
 | Deep research | `0 11 * * *` | 6 AM |
 
-During Central Standard Time (UTC-6), adjust both crons by one hour:
+During Central Standard Time (UTC-6), adjust each cron in `.github/workflows/catalog_update.yml` by one hour:
 
 ```yaml
-- cron: '0 11 * * *'   # fast  → 5 AM CST
-- cron: '0 12 * * *'   # deep  → 6 AM CST
+# Before (CDT / UTC-5):
+- cron: '0 10 * * *'   # fast updater  → 5 AM CDT
+- cron: '0 11 * * *'   # deep research → 6 AM CDT
+
+# After (CST / UTC-6):
+- cron: '0 11 * * *'   # fast updater  → 5 AM CST
+- cron: '0 12 * * *'   # deep research → 6 AM CST
 ```
 
 ## Important
