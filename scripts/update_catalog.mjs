@@ -83,31 +83,29 @@ async function main() {
   }
   products.sort((a, b) => (brandOrder.indexOf(a.brandId) - brandOrder.indexOf(b.brandId)) || (sizeRank(a.size) - sizeRank(b.size)) || (a.retailPrice - b.retailPrice));
 
-  // ---- 2. Integrated bases (per-size, for Climate required bases) ----
-  const integratedPerSize = {};
-  try {
-    const data = await fetchJson(`${apiBase}/categories/${config.integratedBaseCategory}`);
-    for (const p of (data.products || [])) integratedPerSize[p.slug] = perSizeMap(p.variants);
-    sourceResults.push({ source: config.integratedBaseCategory, ok: true, rows: Object.keys(integratedPerSize).length });
-  } catch (e) { sourceResults.push({ source: config.integratedBaseCategory, ok: false, error: e.message }); }
-
-  // Resolve curated bases, injecting live per-size pricing where flagged.
+  // ---- 2. Bases (priced live from their bundle products: sell_min = sale, original_min = retail) ----
   const basesByBrand = {};
+  let baseRows = 0;
   for (const [brandId, list] of Object.entries(config.basesByBrand || {})) {
-    basesByBrand[brandId] = list.map((b) => {
+    basesByBrand[brandId] = [];
+    for (const b of list) {
       const out = { id: b.id, name: b.name, kind: b.kind, desc: b.desc || '' };
       if (b.default) out.default = true;
-      if (b.perSizeFromSlug && integratedPerSize[b.perSizeFromSlug]) {
-        out.perSize = integratedPerSize[b.perSizeFromSlug];
-        out.fromSale = fromPrices(out.perSize).fromSale;
-        out.fromRetail = fromPrices(out.perSize).fromRetail;
-      } else {
-        out.retail = b.salePrice ? b.price : b.price;
-        out.price = b.salePrice ?? b.price;
+      let price = b.price ?? 0, retail = b.retail ?? b.price ?? 0;
+      if (b.bundleSlug) {
+        try {
+          const bundle = await fetchJson(`${apiBase}/products/${b.bundleSlug}`);
+          price = dollars(bundle.sell_min_price);
+          retail = dollars(bundle.original_min_price) || price;
+          baseRows++;
+        } catch (e) { sourceResults.push({ source: `base:${b.bundleSlug}`, ok: false, error: e.message }); }
       }
-      return out;
-    });
+      out.price = price;
+      out.retail = Math.max(retail, price);
+      basesByBrand[brandId].push(out);
+    }
   }
+  sourceResults.push({ source: 'bases', ok: true, rows: baseRows });
 
   // ---- 3. Furniture (3 series) ----
   const furniture = [];
@@ -156,21 +154,31 @@ async function main() {
     sourceResults.push({ source: config.padsCategory, ok: true, rows: pads.length });
   } catch (e) { sourceResults.push({ source: config.padsCategory, ok: false, error: e.message }); }
 
-  // ---- 6. Pillows (via search, matched to curated slug list) ----
+  // ---- 6. Pillows (fetch each for Shape x Size variants with per-variant sale pricing) ----
   const pillows = [];
-  try {
-    const data = await fetchJson(`${apiBase}/search?q=pillow`);
-    const wanted = new Set(config.pillowSlugs || []);
-    const bySlug = new Map((data.products || []).map((p) => [p.slug, p]));
-    for (const s of (config.pillowSlugs || [])) {
-      const p = bySlug.get(s);
-      if (!p) continue;
-      const retail = dollars(p.original_min_price);
-      const sale = dollars(p.sell_min_price) || retail;
-      pillows.push({ id: p.slug, name: (p.name || p.slug).replace(/\s+/g, ' ').trim(), retail, sale, saleMax: dollars(p.sell_max_price) || sale });
-    }
-    sourceResults.push({ source: 'search:pillow', ok: true, rows: pillows.length });
-  } catch (e) { sourceResults.push({ source: 'search:pillow', ok: false, error: e.message }); }
+  for (const slug of (config.pillowSlugs || [])) {
+    try {
+      const p = await fetchJson(`${apiBase}/products/${slug}`);
+      const shapes = [], sizes = [], variants = {};
+      for (const v of (p.variants || [])) {
+        const shape = v.details && Array.isArray(v.details.Shape) ? v.details.Shape[0] : 'Standard';
+        const size = v.details && Array.isArray(v.details.Size) ? v.details.Size[0] : 'Standard';
+        const retail = dollars(v.regular), sale = dollars(v.sale ?? v.regular);
+        if (!retail && !sale) continue; // skip unavailable/zero variants
+        if (!shapes.includes(shape)) shapes.push(shape);
+        if (!sizes.includes(size)) sizes.push(size);
+        variants[`${shape}|${size}`] = { retail, sale: Math.min(sale || retail, retail) };
+      }
+      if (!Object.keys(variants).length) continue;
+      const sales = Object.values(variants).map((x) => x.sale);
+      pillows.push({
+        id: p.slug, name: (p.name || p.slug).replace(/\s+/g, ' ').trim(),
+        shapes, sizes, variants, fromSale: Math.min(...sales),
+        fromRetail: Math.min(...Object.values(variants).map((x) => x.retail))
+      });
+    } catch (e) { sourceResults.push({ source: `pillow:${slug}`, ok: false, error: e.message }); }
+  }
+  sourceResults.push({ source: 'pillows', ok: true, rows: pillows.length });
 
   // ---- Assemble ----
   const brands = brandOrder.map((id) => ({ id, ...BRAND_META[id] }));
@@ -194,6 +202,7 @@ async function main() {
     disposalFees: config.disposalFees || [],
     deliveryNote: config.deliveryNote || '',
     warranty: config.warranty || [],
+    protectionPlans: config.protectionPlans || [],
     warrantyNote: config.warrantyNote || '',
     promos: config.promos || [],
     sourceResults
@@ -205,7 +214,10 @@ async function main() {
   console.log(`Catalog rebuilt from live API:`);
   console.log(`  beds: ${products.length} (${perBrand})`);
   console.log(`  furniture: ${furniture.length}, sheets: ${sheets.length}, pads: ${pads.length}, pillows: ${pillows.length}, hardware: ${catalog.hardware.length}`);
-  console.log(`  bases: ${Object.entries(basesByBrand).map(([k, v]) => `${k}=${v.length}`).join(', ')}; delivery: ${catalog.delivery.length}; warranty: ${catalog.warranty.length}; tax ${catalog.taxRateDefault}%`);
+  console.log(`  bases: ${Object.entries(basesByBrand).map(([k, v]) => `${k}=${v.length}`).join(', ')}; delivery: ${catalog.delivery.length}; protection plans: ${catalog.protectionPlans.length}; tax ${catalog.taxRateDefault}%`);
+  const onSale = [];
+  for (const [k, v] of Object.entries(basesByBrand)) for (const b of v) if (b.retail > b.price) onSale.push(`${b.id} ${b.price}/${b.retail}`);
+  console.log(`  bases on sale: ${onSale.join(', ') || 'none'}`);
   const bad = sourceResults.filter((r) => !r.ok);
   if (bad.length) console.log('  WARNINGS: ' + bad.map((b) => `${b.source}:${b.error}`).join('; '));
 }

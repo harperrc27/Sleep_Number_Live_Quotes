@@ -28,8 +28,8 @@ const $ = (id) => document.getElementById(id);
 function defaultQuote() {
   return {
     size: null, typeId: null, brandId: null, productId: null,
-    baseId: null, furniture: {}, hardware: {}, sheets: {}, pillows: {}, pads: {},
-    deliveryId: null, disposal: {}, toggles: {}, customDiscount: 0, taxRate: null,
+    baseId: null, furniture: {}, hardware: {}, sheets: {}, pillows: {}, pillowSel: {}, pads: {},
+    deliveryId: null, disposal: {}, protection: {}, toggles: {}, customDiscount: 0, taxRate: null,
     comparisons: []
   };
 }
@@ -207,8 +207,12 @@ function includedBaseFor(model) { return (catalog.modelIncludedBase || {})[model
 function basePriceById(id, size) {
   const bed = selectedBed(); if (!bed) return 0;
   const b = basesForBrand(bed.brandId).find((x) => x.id === id);
-  if (!b) return 0;
-  return b.perSize ? (b.perSize[size]?.sale ?? b.fromSale ?? 0) : (b.price ?? 0);
+  return b ? (b.price ?? 0) : 0;
+}
+function baseRetailById(id) {
+  const bed = selectedBed(); if (!bed) return 0;
+  const b = basesForBrand(bed.brandId).find((x) => x.id === id);
+  return b ? (b.retail ?? b.price ?? 0) : 0;
 }
 
 // ---------- card builders ----------
@@ -289,13 +293,13 @@ function renderBase() {
   if (required && !quote.baseId) { const d = bases.find((b) => b.default) || bases[0]; if (d) { quote.baseId = d.id; saveQuote(); } }
   const items = required ? bases : [{ id: 'none', name: 'Skip — no base', desc: 'Use your own frame or foundation.', kind: 'none' }, ...bases];
   const cards = items.map((b, i) => {
-    const price = b.id === 'none' ? 0 : basePriceById(b.id, bed.size);
     const reqNote = (required && b.default) ? 'Required • recommended' : (b.kind === 'flexfit' ? 'Adjustable' : '');
-    const extra = b.id === 'none' ? '<span class="badge">No charge</span>'
-      : `${sizeAvailable(b, bed.size) || b.price ? priceTag(b.perSize ? sizeRetail(b, bed.size) : (b.retail ?? b.price), price, !b.perSize && false) : `<span class="badge">${money(price)}</span>`}`;
+    const extra = b.id === 'none'
+      ? '<span class="badge">No charge</span>'
+      : priceTag(b.retail ?? b.price, b.price);
     return optionCard({ id: b.id, index: i, title: b.name, subtitle: [b.desc, reqNote].filter(Boolean).join(' • '), selected: quote.baseId === b.id, extra });
   }).join('');
-  const note = required ? `<p class="note-line">Climate beds require a base — one is preselected. ${escapeHtml(bed.size)} pricing shown.</p>` : '';
+  const note = required ? `<p class="note-line">Climate beds require a base — one is preselected.</p>` : '';
   return `${note}<div class="grid">${cards}</div>`;
 }
 
@@ -338,13 +342,42 @@ function renderBedding() {
   return `<p class="helper">All current sheet & pillowcase sets, priced live. Add or pass.</p><div class="grid">${grid}</div>`;
 }
 
-// ---------- step 7: pillows ----------
+// ---------- step 7: pillows (shape + size variant picker) ----------
+function pillowSel(p) {
+  quote.pillowSel = quote.pillowSel || {};
+  const cur = quote.pillowSel[p.id];
+  const shape = cur && p.shapes.includes(cur.shape) ? cur.shape : p.shapes[0];
+  const size = cur && p.sizes.includes(cur.size) ? cur.size : (p.sizes.includes('Standard') ? 'Standard' : p.sizes[0]);
+  return { shape, size };
+}
+function pillowVariant(p, shape, size) { return p.variants[`${shape}|${size}`] || null; }
+function pillowQtyKey(p) { const { shape, size } = pillowSel(p); return `${p.id}::${shape}::${size}`; }
+function pillowAddedCount(p) {
+  return Object.entries(quote.pillows || {}).filter(([k]) => k.startsWith(p.id + '::')).reduce((s, [, q]) => s + q, 0);
+}
 function renderPillows() {
-  const grid = (catalog.pillows || []).map((p, i) => {
-    const tag = p.retail > p.sale ? priceTag(p.retail, p.sale, true) : `<div class="price-block"><span class="from">from </span><span class="now">${money(p.sale)}</span></div>`;
-    return qtyCard({ bucket: 'pillows', id: p.id, index: i, title: p.name, sub: 'Pillow', priceHtml: tag });
+  const cards = (catalog.pillows || []).map((p, i) => {
+    const { shape, size } = pillowSel(p);
+    const v = pillowVariant(p, shape, size) || { retail: p.fromRetail, sale: p.fromSale };
+    const qtyKey = pillowQtyKey(p);
+    const qty = quote.pillows?.[qtyKey] || 0;
+    const totalForPillow = pillowAddedCount(p);
+    const shapeChips = p.shapes.length > 1
+      ? `<div class="chips tiny" data-pillow-shapes="${p.id}">${p.shapes.map((s) => `<button class="chip ${s === shape ? 'active' : ''}" data-pillow-shape="${p.id}|${escapeHtml(s)}">${escapeHtml(s)}</button>`).join('')}</div>` : '';
+    const sizeChips = p.sizes.length > 1
+      ? `<div class="chips tiny" data-pillow-sizes="${p.id}">${p.sizes.map((s) => `<button class="chip ${s === size ? 'active' : ''}" data-pillow-size="${p.id}|${escapeHtml(s)}">${escapeHtml(s)}</button>`).join('')}</div>` : '';
+    const key = i < 9 ? `<kbd class="pick-key">${i + 1}</kbd>` : '';
+    return `<div class="card-option qty-card pillow-card ${qty ? 'selected' : ''}" data-pick data-pillow-add="${p.id}">
+      ${key}${priceTag(v.retail, v.sale)}
+      <h3>${escapeHtml(p.name)}</h3>
+      ${shapeChips}${sizeChips}
+      <div class="qty-row">
+        <button class="secondary" data-pillow-minus="${p.id}">−</button><span>${qty}</span><button data-pillow-plus="${p.id}">+</button>
+        ${totalForPillow > qty ? `<span class="qty-note">${totalForPillow} total</span>` : ''}
+      </div>
+    </div>`;
   }).join('');
-  return `<p class="helper">Current pillow lineup, priced live (from price shown — loft/size varies).</p><div class="grid">${grid}</div>`;
+  return `<p class="helper">Pick a style and Standard / King size — prices update live. Add as many as you like.</p><div class="grid">${cards}</div>`;
 }
 
 // ---------- step 8: pads / protection ----------
@@ -365,10 +398,47 @@ function renderDelivery() {
     ${fees ? `<h3 class="mini-title">Add-on disposal</h3><div class="grid">${fees}</div>` : ''}`;
 }
 
-// ---------- step 10: warranty ----------
+// ---------- step 10: warranty + paid protection plans ----------
+function applicablePlans() {
+  const bed = selectedBed();
+  const baseKind = currentBaseKind();
+  const hasFurniture = anyQty(quote.furniture);
+  return (catalog.protectionPlans || []).filter((p) => {
+    const a = p.appliesTo || {};
+    if (a.allBeds) return !!bed;
+    if (a.brands && bed && a.brands.includes(bed.brandId)) return true;
+    if (a.baseKinds && a.baseKinds.includes(baseKind)) return true;
+    if (a.requiresFurniture && hasFurniture) return true;
+    return false;
+  });
+}
+function currentBaseKind() {
+  const bed = selectedBed(); if (!bed) return null;
+  if (includedBaseFor(bed.model)) return 'integrated';
+  const b = basesForBrand(bed.brandId).find((x) => x.id === quote.baseId);
+  return b ? b.kind : null;
+}
 function renderWarranty() {
-  const items = (catalog.warranty || []).map((w) => `<li><strong>${escapeHtml(w.name)}</strong> — ${w.included ? 'Included' : money2(w.price)}<br><span class="muted">${escapeHtml(w.desc || '')}</span></li>`).join('');
+  const items = (catalog.warranty || []).filter((w) => {
+    const a = w.appliesTo;
+    if (!a) return true;
+    if (a.baseKinds) return a.baseKinds.includes(currentBaseKind());
+    return true;
+  }).map((w) => `<li><strong>${escapeHtml(w.name)}</strong> — Included<br><span class="muted">${escapeHtml(w.desc || '')}</span></li>`).join('');
+  const plans = applicablePlans();
+  const planCards = plans.length ? plans.map((p) => {
+    const on = !!quote.protection?.[p.id];
+    const save = p.retail && p.retail > p.price ? `<span class="save-tag">Save ${money(p.retail - p.price)}</span>` : '';
+    const was = p.retail && p.retail > p.price ? `<span class="was">${money2(p.retail)}</span>` : '';
+    return `<label class="toggle-row plan ${on ? 'on' : ''}">
+      <input type="checkbox" data-plan-toggle="${p.id}" ${on ? 'checked' : ''}>
+      <span><strong>${escapeHtml(p.name)}</strong><p>${escapeHtml(p.desc || '')}</p></span>
+      <span class="plan-price"><strong>${money2(p.price)}</strong>${was}${save}</span>
+    </label>`;
+  }).join('') : '<p class="helper">No optional protection plans apply to this configuration.</p>';
   return `<div class="included-card"><p class="eyebrow">Included coverage</p><ul class="perks">${items}</ul></div>
+    <h3 class="mini-title">Optional protection plans</h3>
+    <div class="toggle-list">${planCards}</div>
     ${catalog.warrantyNote ? `<p class="note-line">${escapeHtml(catalog.warrantyNote)}</p>` : ''}`;
 }
 
@@ -390,7 +460,18 @@ function renderQuote() {
   const bed = selectedBed();
   if (!bed) return `<p class="helper">Build a quote first. <button class="linkbtn" data-jump="0">Start →</button></p>`;
   const calc = calculateQuote();
-  const lines = calc.lines.map((l) => `<div class="summary-line"><span>${escapeHtml(l.label)}</span><strong>${money2(l.amount)}</strong></div>`).join('');
+  // group lines for readability
+  const order = ['Bed', 'Base', 'Furniture', 'Hardware', 'Bedding', 'Pillows', 'Protection', 'Protection plan', 'Delivery', 'Discounts', 'Tax'];
+  const groups = {};
+  for (const l of calc.lines) { (groups[l.group || 'Other'] ||= []).push(l); }
+  const groupOrder = [...order.filter((g) => groups[g]), ...Object.keys(groups).filter((g) => !order.includes(g))];
+  const lines = groupOrder.map((g) => {
+    const rows = groups[g].map((l) => {
+      const neg = l.amount < 0;
+      return `<div class="qline ${neg ? 'neg' : ''}"><span>${escapeHtml(l.label)}</span><strong>${neg ? '−' : ''}${money2(Math.abs(l.amount))}</strong></div>`;
+    }).join('');
+    return `<div class="qgroup"><div class="qgroup-h">${escapeHtml(g)}</div>${rows}</div>`;
+  }).join('');
 
   // hot-swap selectors
   const sameSet = catalog.products.filter((p) => p.brandId === bed.brandId && p.size === bed.size).sort((a, b) => a.salePrice - b.salePrice);
@@ -423,17 +504,26 @@ function renderQuote() {
 
   return `
     <div class="quote-final">
+      <div class="quote-hero">
+        <div>
+          <p class="eyebrow">Estimated total</p>
+          <p class="quote-hero-total">${money2(calc.total)}</p>
+          <p class="quote-hero-bed">${escapeHtml(bed.model)} • ${escapeHtml(quote.size)} • ${escapeHtml(baseLabel())}</p>
+        </div>
+        ${calc.savings > 0 ? `<div class="quote-hero-save"><strong>${money(calc.savings)}</strong><span>total savings</span></div>` : ''}
+      </div>
       <div class="hotswap">
-        <h3 class="mini-title">Hot-swap</h3>
+        <h3 class="mini-title">Hot-swap a product</h3>
         <div class="form-grid">
           <label class="field"><span>Bed</span><select data-swap="bed">${bedOpts}</select></label>
           <label class="field"><span>Base</span><select data-swap="base">${baseOpts}</select></label>
         </div>
       </div>
-      <div class="final-lines">${lines}</div>
+      <div class="qbreakdown">${lines}</div>
       <div class="final-total"><span>Estimated total</span><strong>${money2(calc.total)}</strong></div>
+      <p class="qfine">Includes 100-night trial + 15-year limited warranty. Final pricing/eligibility may depend on verification and current store policy.</p>
       <div class="compare">
-        <div class="compare-head"><h3 class="mini-title">Compare (up to 3)</h3>
+        <div class="compare-head"><h3 class="mini-title">Compare quotes (up to 3)</h3>
           <div class="compare-actions">
             <button class="secondary" id="saveCompare" ${comps.length >= 3 ? 'disabled' : ''}>Save current</button>
             ${comps.length ? '<button class="secondary" id="clearCompare">Clear</button>' : ''}
@@ -476,6 +566,38 @@ function bindStepEvents(step) {
   const cc = $('clearCompare'); if (cc) cc.addEventListener('click', () => { quote.comparisons = []; saveQuote(); render(); });
   document.querySelectorAll('[data-comp-remove]').forEach((b) => b.addEventListener('click', () => { quote.comparisons.splice(Number(b.dataset.compRemove), 1); saveQuote(); render(); }));
   const qc = $('quoteCopy'); if (qc) qc.addEventListener('click', copyQuote);
+
+  // pillow shape/size selection
+  document.querySelectorAll('[data-pillow-shape]').forEach((b) => b.addEventListener('click', (e) => {
+    e.stopPropagation(); const [id, shape] = b.dataset.pillowShape.split('|');
+    quote.pillowSel = quote.pillowSel || {}; quote.pillowSel[id] = { ...(quote.pillowSel[id] || {}), shape }; saveQuote(); render();
+  }));
+  document.querySelectorAll('[data-pillow-size]').forEach((b) => b.addEventListener('click', (e) => {
+    e.stopPropagation(); const [id, size] = b.dataset.pillowSize.split('|');
+    quote.pillowSel = quote.pillowSel || {}; quote.pillowSel[id] = { ...(quote.pillowSel[id] || {}), size }; saveQuote(); render();
+  }));
+  document.querySelectorAll('[data-pillow-add]').forEach((card) => card.addEventListener('click', (e) => {
+    if (e.target.closest('[data-pillow-shape],[data-pillow-size],[data-pillow-minus],[data-pillow-plus]')) return;
+    changePillow(card.dataset.pillowAdd, 1);
+  }));
+  document.querySelectorAll('[data-pillow-plus]').forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); changePillow(e.currentTarget.dataset.pillowPlus, 1); }));
+  document.querySelectorAll('[data-pillow-minus]').forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); changePillow(e.currentTarget.dataset.pillowMinus, -1); }));
+
+  // protection plan toggles
+  document.querySelectorAll('[data-plan-toggle]').forEach((input) => input.addEventListener('change', () => {
+    quote.protection = quote.protection || {}; quote.protection[input.dataset.planToggle] = input.checked;
+    if (!input.checked) delete quote.protection[input.dataset.planToggle];
+    saveQuote(); render();
+  }));
+}
+
+function changePillow(pillowId, delta) {
+  const p = (catalog.pillows || []).find((x) => x.id === pillowId); if (!p) return;
+  const key = pillowQtyKey(p);
+  quote.pillows = quote.pillows || {};
+  quote.pillows[key] = Math.max(0, (quote.pillows[key] || 0) + delta);
+  if (!quote.pillows[key]) delete quote.pillows[key];
+  saveQuote(); render();
 }
 
 function onCardPick(step, id) {
@@ -535,47 +657,59 @@ function calculateQuote() {
   const size = quote.size;
   const bed = selectedBed();
   if (bed) {
-    lines.push({ label: `${bed.model} (${bed.size})`, amount: bed.salePrice });
+    lines.push({ group: 'Bed', label: `${bed.model} (${bed.size})`, amount: bed.salePrice });
     subtotal += bed.salePrice; savings += Math.max(0, bed.retailPrice - bed.salePrice);
   }
   // base
   if (bed) {
     const inc = includedBaseFor(bed.model);
-    if (inc) lines.push({ label: `${inc.name}`, amount: 0 });
+    if (inc) lines.push({ group: 'Base', label: `${inc.name}`, amount: 0 });
     else if (quote.baseId && quote.baseId !== 'none') {
       const b = basesForBrand(bed.brandId).find((x) => x.id === quote.baseId);
       if (b) {
-        const price = basePriceById(b.id, size);
-        const retail = b.perSize ? sizeRetail(b, size) : (b.retail ?? price);
-        lines.push({ label: b.name, amount: price }); subtotal += price; savings += Math.max(0, retail - price);
+        const price = b.price ?? 0;
+        const retail = b.retail ?? price;
+        lines.push({ group: 'Base', label: b.name, amount: price }); subtotal += price; savings += Math.max(0, retail - price);
       }
     }
   }
   // accessory buckets
   const buckets = [
-    ['furniture', catalog.furniture], ['sheets', catalog.sheets], ['pads', catalog.pads]
+    ['furniture', catalog.furniture, 'Furniture'], ['sheets', catalog.sheets, 'Bedding'], ['pads', catalog.pads, 'Protection']
   ];
-  for (const [bucket, list] of buckets) {
+  for (const [bucket, list, group] of buckets) {
     for (const [id, qty] of Object.entries(quote[bucket] || {})) {
       const it = listById(list, id); if (!it || !qty) continue;
       const sale = sizeSale(it, size), retail = sizeRetail(it, size);
-      lines.push({ label: `${it.name} × ${qty}`, amount: sale * qty }); subtotal += sale * qty; savings += Math.max(0, (retail - sale) * qty);
+      lines.push({ group, label: `${it.name} × ${qty}`, amount: sale * qty }); subtotal += sale * qty; savings += Math.max(0, (retail - sale) * qty);
     }
   }
-  for (const [id, qty] of Object.entries(quote.pillows || {})) {
-    const it = listById(catalog.pillows, id); if (!it || !qty) continue;
-    lines.push({ label: `${it.name} × ${qty}`, amount: it.sale * qty }); subtotal += it.sale * qty; savings += Math.max(0, (it.retail - it.sale) * qty);
+  // pillows (variant keys: pillowId::shape::size)
+  for (const [key, qty] of Object.entries(quote.pillows || {})) {
+    if (!qty) continue;
+    const [pid, shape, sz] = key.split('::');
+    const p = listById(catalog.pillows, pid); if (!p) continue;
+    const v = p.variants[`${shape}|${sz}`]; if (!v) continue;
+    lines.push({ group: 'Pillows', label: `${p.name} — ${shape}/${sz} × ${qty}`, amount: v.sale * qty });
+    subtotal += v.sale * qty; savings += Math.max(0, (v.retail - v.sale) * qty);
   }
   for (const [id, qty] of Object.entries(quote.hardware || {})) {
     const it = listById(catalog.hardware, id); if (!it || !qty) continue;
-    lines.push({ label: `${it.name} × ${qty}`, amount: it.price * qty }); subtotal += it.price * qty;
+    lines.push({ group: 'Hardware', label: `${it.name} × ${qty}`, amount: it.price * qty }); subtotal += it.price * qty;
   }
   // delivery + disposal
   const del = listById(catalog.delivery, quote.deliveryId);
-  if (del && del.price) { lines.push({ label: del.name, amount: del.price }); subtotal += del.price; }
+  if (del && del.price) { lines.push({ group: 'Delivery', label: del.name, amount: del.price }); subtotal += del.price; }
   for (const [id, qty] of Object.entries(quote.disposal || {})) {
     const it = listById(catalog.disposalFees, id); if (!it || !qty) continue;
-    lines.push({ label: it.name, amount: it.price * qty }); subtotal += it.price * qty;
+    lines.push({ group: 'Delivery', label: it.name, amount: it.price * qty }); subtotal += it.price * qty;
+  }
+  // protection plans
+  for (const [id, on] of Object.entries(quote.protection || {})) {
+    if (!on) continue;
+    const pl = listById(catalog.protectionPlans, id); if (!pl) continue;
+    lines.push({ group: 'Protection plan', label: pl.name, amount: pl.price }); subtotal += pl.price;
+    if (pl.retail && pl.retail > pl.price) savings += pl.retail - pl.price;
   }
 
   // discounts
@@ -591,8 +725,9 @@ function calculateQuote() {
   const taxRate = Number(quote.taxRate || 0) / 100;
   const taxable = Math.max(0, subtotal - promoDiscount - customDiscount);
   const tax = Math.round(taxable * taxRate * 100) / 100;
-  if (customDiscount) lines.push({ label: 'Manual discount', amount: -customDiscount });
-  if (tax) lines.push({ label: `Sales tax (${quote.taxRate}%)`, amount: tax });
+  for (const p of promos) lines.push({ group: 'Discounts', label: p.name, amount: -p.amount });
+  if (customDiscount) lines.push({ group: 'Discounts', label: 'Manual discount', amount: -customDiscount });
+  if (tax) lines.push({ group: 'Tax', label: `Sales tax (${quote.taxRate}%)`, amount: tax });
   const total = Math.max(0, taxable + tax);
   return { lines, subtotal, promos, savings: savings + promoDiscount + customDiscount, total };
 }
@@ -605,7 +740,7 @@ function renderSummary() {
   $('savingsPill').classList.toggle('hidden', calc.savings <= 0);
   pulse($('totalDue'));
   $('miniSummary').innerHTML = calc.lines.length
-    ? calc.lines.map((l) => `<div class="summary-line"><span>${escapeHtml(l.label)}</span><strong>${money2(l.amount)}</strong></div>`).join('')
+    ? calc.lines.filter((l) => l.group !== 'Discounts').map((l) => `<div class="summary-line"><span>${escapeHtml(l.label)}</span><strong>${money2(l.amount)}</strong></div>`).join('')
     : '<p class="helper">Pick a size & type to start.</p>';
   const promoHtml = calc.promos.map((p) => `<div class="promo-item"><strong>${escapeHtml(p.name)}</strong><span>-${money2(p.amount)}</span></div>`).join('');
   const perk = bed ? `<div class="promo-item perk"><strong>Included</strong><span>15-yr warranty + trial</span></div>` : '';

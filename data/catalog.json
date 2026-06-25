@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-06-25T06:08:19.556Z",
-  "sourceNotes": "Beds, furniture, sheets, pads, pillows and integrated bases are priced live from the Sleep Number Storefront REST API. Bases, delivery, warranty, tax and compatibility are curated from researched live data (some are not exposed as API price endpoints).",
+  "lastUpdated": "2026-06-25T06:50:10.667Z",
+  "sourceNotes": "Beds, furniture, sheets, pads, pillows and bases are priced live from the Sleep Number Storefront REST API (bases from their bundle products so sale pricing is captured). Delivery, warranty/protection, tax and compatibility are curated.",
   "taxRateDefault": 5.5,
   "types": [
     {
@@ -577,24 +577,24 @@
         "name": "Foundation",
         "kind": "foundation",
         "desc": "Low-profile foundation.",
-        "retail": 299,
-        "price": 299
+        "price": 299,
+        "retail": 299
       },
       {
         "id": "cm-foundation-legs",
         "name": "Foundation & Legs",
         "kind": "foundation",
         "desc": "Foundation with modular legs.",
-        "retail": 599,
-        "price": 599
+        "price": 599,
+        "retail": 599
       },
       {
         "id": "cm-adjustable",
         "name": "Adjustable Base",
         "kind": "adjustable",
         "desc": "Head + foot articulation.",
-        "retail": 999,
-        "price": 999
+        "price": 999,
+        "retail": 1099
       }
     ],
     "comfortnext": [
@@ -603,40 +603,40 @@
         "name": "Foundation",
         "kind": "foundation",
         "desc": "Low-profile foundation.",
-        "retail": 299,
-        "price": 299
+        "price": 299,
+        "retail": 299
       },
       {
         "id": "cn-foundation-legs",
         "name": "Foundation & Legs",
         "kind": "foundation",
         "desc": "Foundation with modular legs.",
-        "retail": 599,
-        "price": 599
+        "price": 599,
+        "retail": 599
       },
       {
         "id": "cn-adjustable",
         "name": "Adjustable Base",
         "kind": "adjustable",
         "desc": "Head + foot articulation.",
-        "retail": 1199,
-        "price": 1199
+        "price": 1199,
+        "retail": 1199
       },
       {
         "id": "cn-flexfit2",
         "name": "FlexFit 2 Adjustable Base",
         "kind": "flexfit",
         "desc": "Partner Snore, foot warming, presets.",
-        "retail": 1799,
-        "price": 1799
+        "price": 1799,
+        "retail": 1799
       },
       {
         "id": "cn-flexfit3",
         "name": "FlexFit 3 Adjustable Base",
         "kind": "flexfit",
         "desc": "Full articulation, massage, underbed light.",
-        "retail": 2399,
-        "price": 2079
+        "price": 2079.2,
+        "retail": 2399
       }
     ],
     "climate": [
@@ -644,78 +644,26 @@
         "id": "cl-integrated",
         "name": "Integrated Base",
         "kind": "integrated",
-        "desc": "Required base. Per-size pricing from live API.",
+        "desc": "Required base. Slim integrated support.",
         "default": true,
-        "perSize": {
-          "Twin": {
-            "retail": 299,
-            "sale": 299
-          },
-          "Twin XL": {
-            "retail": 299,
-            "sale": 299
-          },
-          "Full": {
-            "retail": 449,
-            "sale": 449
-          },
-          "Queen": {
-            "retail": 449,
-            "sale": 449
-          },
-          "King": {
-            "retail": 549,
-            "sale": 549
-          },
-          "California King": {
-            "retail": 549,
-            "sale": 549
-          }
-        },
-        "fromSale": 299,
-        "fromRetail": 299
+        "price": 424.15,
+        "retail": 499
       },
       {
         "id": "cl-integrated-frame",
         "name": "Integrated Base & Frame",
         "kind": "integrated",
         "desc": "Integrated base with frame.",
-        "perSize": {
-          "Twin": {
-            "retail": 599,
-            "sale": 599
-          },
-          "Twin XL": {
-            "retail": 599,
-            "sale": 599
-          },
-          "Full": {
-            "retail": 749,
-            "sale": 749
-          },
-          "Queen": {
-            "retail": 749,
-            "sale": 749
-          },
-          "King": {
-            "retail": 849,
-            "sale": 849
-          },
-          "California King": {
-            "retail": 849,
-            "sale": 849
-          }
-        },
-        "fromSale": 599,
-        "fromRetail": 599
+        "price": 679.14,
+        "retail": 798.99
       },
       {
         "id": "cl-flexfit2",
         "name": "FlexFit 2 Adjustable Base",
         "kind": "flexfit",
         "desc": "Adjustable upgrade for ClimateCool.",
-        "retail": 1999,
-        "price": 1999
+        "price": 1699.15,
+        "retail": 1999
       }
     ]
   },
@@ -1831,80 +1779,295 @@
     {
       "id": "pillow-comfortfit",
       "name": "ComfortFit™ Pillow",
-      "retail": 99.99,
-      "sale": 69.99,
-      "saleMax": 111.99
+      "shapes": [
+        "Classic",
+        "Curved",
+        "Ultimate"
+      ],
+      "sizes": [
+        "Standard",
+        "King"
+      ],
+      "variants": {
+        "Classic|Standard": {
+          "retail": 99.99,
+          "sale": 69.99
+        },
+        "Curved|Standard": {
+          "retail": 119.99,
+          "sale": 83.99
+        },
+        "Ultimate|Standard": {
+          "retail": 139.99,
+          "sale": 97.99
+        },
+        "Classic|King": {
+          "retail": 119.99,
+          "sale": 83.99
+        },
+        "Curved|King": {
+          "retail": 139.99,
+          "sale": 97.99
+        },
+        "Ultimate|King": {
+          "retail": 159.99,
+          "sale": 111.99
+        }
+      },
+      "fromSale": 69.99,
+      "fromRetail": 99.99
     },
     {
       "id": "downcomfort",
       "name": "DownComfort™ Pillow",
-      "retail": 199.99,
-      "sale": 139.99,
-      "saleMax": 216.99
+      "shapes": [
+        "Classic",
+        "Curved",
+        "Ultimate"
+      ],
+      "sizes": [
+        "Standard",
+        "King"
+      ],
+      "variants": {
+        "Classic|Standard": {
+          "retail": 199.99,
+          "sale": 139.99
+        },
+        "Curved|Standard": {
+          "retail": 229.99,
+          "sale": 160.99
+        },
+        "Classic|King": {
+          "retail": 249.99,
+          "sale": 174.99
+        },
+        "Ultimate|Standard": {
+          "retail": 259.99,
+          "sale": 181.99
+        },
+        "Curved|King": {
+          "retail": 279.99,
+          "sale": 195.99
+        },
+        "Ultimate|King": {
+          "retail": 309.99,
+          "sale": 216.99
+        }
+      },
+      "fromSale": 139.99,
+      "fromRetail": 199.99
     },
     {
       "id": "pillow-pcp",
       "name": "PlushComfort™ Pillow",
-      "retail": 89.99,
-      "sale": 45,
-      "saleMax": 45
+      "shapes": [
+        "Curved"
+      ],
+      "sizes": [
+        "King"
+      ],
+      "variants": {
+        "Curved|King": {
+          "retail": 89.99,
+          "sale": 45
+        }
+      },
+      "fromSale": 45,
+      "fromRetail": 89.99
     },
     {
       "id": "responsefit-pillow",
       "name": "ResponseFit™ Pillow",
-      "retail": 109.99,
-      "sale": 76.99,
-      "saleMax": 125.99
+      "shapes": [
+        "Classic",
+        "Curved",
+        "Ultimate"
+      ],
+      "sizes": [
+        "Standard",
+        "King"
+      ],
+      "variants": {
+        "Classic|Standard": {
+          "retail": 109.99,
+          "sale": 76.99
+        },
+        "Classic|King": {
+          "retail": 139.99,
+          "sale": 97.99
+        },
+        "Curved|Standard": {
+          "retail": 129.99,
+          "sale": 90.99
+        },
+        "Curved|King": {
+          "retail": 159.99,
+          "sale": 111.99
+        },
+        "Ultimate|Standard": {
+          "retail": 149.99,
+          "sale": 104.99
+        },
+        "Ultimate|King": {
+          "retail": 179.99,
+          "sale": 125.99
+        }
+      },
+      "fromSale": 76.99,
+      "fromRetail": 109.99
     },
     {
       "id": "true-temp-plush-pillow",
       "name": "True Temp™ Plush pillow",
-      "retail": 109.99,
-      "sale": 76.99,
-      "saleMax": 125.99
+      "shapes": [
+        "Classic",
+        "Contour",
+        "Ultimate"
+      ],
+      "sizes": [
+        "Standard",
+        "King"
+      ],
+      "variants": {
+        "Classic|Standard": {
+          "retail": 109.99,
+          "sale": 76.99
+        },
+        "Classic|King": {
+          "retail": 139.99,
+          "sale": 97.99
+        },
+        "Contour|Standard": {
+          "retail": 129.99,
+          "sale": 90.99
+        },
+        "Contour|King": {
+          "retail": 159.99,
+          "sale": 111.99
+        },
+        "Ultimate|Standard": {
+          "retail": 149.99,
+          "sale": 104.99
+        },
+        "Ultimate|King": {
+          "retail": 179.99,
+          "sale": 125.99
+        }
+      },
+      "fromSale": 76.99,
+      "fromRetail": 109.99
     },
     {
       "id": "naturalfit-pillow",
       "name": "NaturalFit™ pillow",
-      "retail": 159.99,
-      "sale": 111.99,
-      "saleMax": 167.99
+      "shapes": [
+        "Classic",
+        "Curved",
+        "Ultimate"
+      ],
+      "sizes": [
+        "Standard",
+        "King"
+      ],
+      "variants": {
+        "Classic|Standard": {
+          "retail": 159.99,
+          "sale": 111.99
+        },
+        "Classic|King": {
+          "retail": 199.99,
+          "sale": 139.99
+        },
+        "Curved|Standard": {
+          "retail": 179.99,
+          "sale": 125.99
+        },
+        "Curved|King": {
+          "retail": 219.99,
+          "sale": 153.99
+        },
+        "Ultimate|Standard": {
+          "retail": 199.99,
+          "sale": 139.99
+        },
+        "Ultimate|King": {
+          "retail": 239.99,
+          "sale": 167.99
+        }
+      },
+      "fromSale": 111.99,
+      "fromRetail": 159.99
     },
     {
       "id": "down-alt-pillow",
       "name": "Down Alternative Pillow",
-      "retail": 49.99,
-      "sale": 34.99,
-      "saleMax": 76.99
+      "shapes": [
+        "Classic",
+        "Curved",
+        "Ultimate"
+      ],
+      "sizes": [
+        "Standard",
+        "King"
+      ],
+      "variants": {
+        "Classic|Standard": {
+          "retail": 49.99,
+          "sale": 34.99
+        },
+        "Classic|King": {
+          "retail": 69.99,
+          "sale": 48.99
+        },
+        "Curved|Standard": {
+          "retail": 69.99,
+          "sale": 48.99
+        },
+        "Curved|King": {
+          "retail": 89.99,
+          "sale": 62.99
+        },
+        "Ultimate|Standard": {
+          "retail": 89.99,
+          "sale": 62.99
+        },
+        "Ultimate|King": {
+          "retail": 109.99,
+          "sale": 76.99
+        }
+      },
+      "fromSale": 34.99,
+      "fromRetail": 49.99
     }
   ],
   "delivery": [
     {
-      "id": "del-doorstep",
-      "name": "Doorstep Delivery",
-      "price": 0,
-      "desc": "Curbside / doorstep drop-off (accessories & bedding ship free)."
+      "id": "del-standard",
+      "name": "Standard Delivery",
+      "price": 100,
+      "desc": "Doorstep / threshold delivery of your smart bed."
     },
     {
       "id": "del-inhome",
       "name": "In-Home Delivery & Setup",
-      "price": 199.99,
+      "price": 250,
       "default": true,
-      "desc": "Professional in-home delivery, setup and packaging removal for your smart bed."
+      "desc": "Professional in-home delivery, full setup and packaging removal."
     },
     {
       "id": "del-inhome-removal",
-      "name": "In-Home Setup + Mattress Removal",
-      "price": 269.99,
+      "name": "In-Home Delivery, Setup + Mattress Removal",
+      "price": 350,
       "desc": "In-home setup plus haul-away of one old mattress."
     }
   ],
   "disposalFees": [
     {
-      "id": "haul-base",
-      "name": "Old base / foundation haul-away",
-      "price": 50,
-      "desc": "Remove an old foundation or adjustable base."
+      "id": "haul-old",
+      "name": "Old mattress / base removal",
+      "price": 99.99,
+      "desc": "Haul-away and disposal of one old mattress or base."
     }
   ],
   "deliveryNote": "No delivery promotion is currently active. In-home setup is the standard option for smart beds.",
@@ -1912,19 +2075,69 @@
     {
       "id": "warranty-15yr",
       "name": "15-Year Limited Warranty",
-      "price": 0,
       "included": true,
       "desc": "Standard on all smart beds - included at no charge."
     },
     {
       "id": "warranty-base",
       "name": "Adjustable Base Limited Warranty",
-      "price": 0,
       "included": true,
-      "desc": "2-year full + limited coverage on adjustable bases - included."
+      "desc": "2-year full + limited coverage on adjustable bases - included.",
+      "appliesTo": {
+        "baseKinds": [
+          "adjustable",
+          "flexfit"
+        ]
+      }
     }
   ],
-  "warrantyNote": "No paid extended warranty is offered on smart beds; the 15-year limited warranty is included.",
+  "protectionPlans": [
+    {
+      "id": "pp-premium",
+      "name": "Premium Protection Plan (5-Year)",
+      "price": 199.99,
+      "retail": 249.99,
+      "desc": "Accidental damage, stains and structural coverage for your smart bed.",
+      "appliesTo": {
+        "allBeds": true
+      }
+    },
+    {
+      "id": "pp-climate",
+      "name": "Climate Series Protection (5-Year)",
+      "price": 299.99,
+      "retail": 349.99,
+      "desc": "Extended coverage tailored to Climate temperature-control systems.",
+      "appliesTo": {
+        "brands": [
+          "climate"
+        ]
+      }
+    },
+    {
+      "id": "pp-base",
+      "name": "Adjustable Base Extended Service (3-Year)",
+      "price": 99.99,
+      "desc": "Extends parts & labor on FlexFit adjustable bases beyond the included warranty.",
+      "appliesTo": {
+        "baseKinds": [
+          "adjustable",
+          "flexfit"
+        ]
+      }
+    },
+    {
+      "id": "pp-furniture",
+      "name": "Furniture Protection Plan (5-Year)",
+      "price": 149.99,
+      "retail": 179.99,
+      "desc": "Accidental damage & stain coverage for upholstered furniture.",
+      "appliesTo": {
+        "requiresFurniture": true
+      }
+    }
+  ],
+  "warrantyNote": "The 15-year limited warranty is included. Optional paid protection plans vary by store and may carry promos - confirm current pricing at checkout.",
   "promos": [
     {
       "id": "military-first-responder",
@@ -1951,9 +2164,9 @@
       "rows": 14
     },
     {
-      "source": "integrated-base",
+      "source": "bases",
       "ok": true,
-      "rows": 2
+      "rows": 11
     },
     {
       "source": "lifestyle-collection",
@@ -1986,7 +2199,7 @@
       "rows": 6
     },
     {
-      "source": "search:pillow",
+      "source": "pillows",
       "ok": true,
       "rows": 7
     }
