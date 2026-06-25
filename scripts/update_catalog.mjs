@@ -1,36 +1,30 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-// Live catalog updater.
-// Pulls REAL Sleep Number bed pricing from the public Storefront REST API and
-// regenerates the products[] in data/catalog.json. Brands, addons, and promos
-// are curated and preserved across runs (see scripts/sources.json "note").
+// Live + curated catalog updater for the guided Sleep Number quote flow.
+// Live: mattresses, integrated bases, furniture, sheets, pads, pillows (Storefront API).
+// Curated (from researched live data): types, bases, delivery, warranty, tax, compatibility.
 
 const root = process.cwd();
 const catalogPath = path.join(root, 'data', 'catalog.json');
 const sourcesPath = path.join(root, 'scripts', 'sources.json');
-
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36';
 
-const centsToDollars = (value) => {
-  if (value == null) return 0;
-  if (typeof value === 'number') return Math.round(value) / 100;
-  if (typeof value === 'object' && typeof value.cents === 'number') return Math.round(value.cents) / 100;
-  const n = Number(String(value).replace(/[^0-9.]/g, ''));
+const BRAND_META = {
+  comfortmode: { name: 'ComfortMode\u2122 Collection', logoText: 'ComfortMode', badge: 'Essential', description: 'Adjustable foam smart beds (each side 0-100) with SleepIQ\u00ae sleep tracking.' },
+  comfortnext: { name: 'ComfortNext\u2122 Collection', logoText: 'ComfortNext', badge: 'Most Popular', description: 'Enhanced comfort and edge support, FlexFit\u00ae adjustable-base ready, with DualAir\u2122.' },
+  climate: { name: 'Climate\u2122 Collection', logoText: 'Climate', badge: 'Premium', description: 'Temperature-balancing smart beds - ClimateCool\u00ae cools; Climate360\u00ae heats + cools.' }
+};
+
+const dollars = (v) => {
+  if (v == null) return 0;
+  if (typeof v === 'number') return Math.round(v) / 100 === v ? v : Math.round(v) / 100;
+  if (typeof v === 'object' && typeof v.cents === 'number') return Math.round(v.cents) / 100;
+  const n = Number(String(v).replace(/[^0-9.]/g, ''));
   return Number.isFinite(n) ? n : 0;
 };
-
 const slug = (s) => String(s).toLowerCase().replace(/[\u2122\u00ae]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-
-// "ComfortMode\u2122 Lux Mattress" -> "ComfortMode Lux Smart Bed"
-const toModel = (apiName) => {
-  const base = String(apiName)
-    .replace(/[\u2122\u00ae]/g, '')
-    .replace(/\bMattress\b/gi, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-  return `${base} Smart Bed`;
-};
+const toModel = (apiName) => `${String(apiName).replace(/[\u2122\u00ae]/g, '').replace(/\bMattress\b/gi, '').replace(/\s+/g, ' ').trim()} Smart Bed`;
 
 async function fetchJson(url) {
   const res = await fetch(url, { headers: { accept: 'application/json', 'user-agent': UA } });
@@ -38,84 +32,182 @@ async function fetchJson(url) {
   return res.json();
 }
 
+// Group variants by Size -> { size: { retail, sale } } using the cheapest variant per size.
+function perSizeMap(variants) {
+  const map = {};
+  for (const v of (variants || [])) {
+    const size = v.details && Array.isArray(v.details.Size) ? v.details.Size[0] : null;
+    if (!size) continue;
+    const retail = dollars(v.regular);
+    const sale = dollars(v.sale ?? v.regular);
+    if (!retail) continue;
+    if (!map[size] || sale < map[size].sale) map[size] = { retail, sale: Math.min(sale || retail, retail) };
+  }
+  return map;
+}
+function fromPrices(perSize) {
+  const sizes = Object.keys(perSize);
+  if (!sizes.length) return { fromRetail: 0, fromSale: 0 };
+  let fr = Infinity, fs2 = Infinity;
+  for (const s of sizes) { fr = Math.min(fr, perSize[s].retail); fs2 = Math.min(fs2, perSize[s].sale); }
+  return { fromRetail: fr, fromSale: fs2 };
+}
+
 async function main() {
-  const catalog = JSON.parse(await fs.readFile(catalogPath, 'utf8'));
   const config = JSON.parse(await fs.readFile(sourcesPath, 'utf8'));
   const apiBase = (config.apiBase || '').replace(/\/$/, '');
-  const collections = config.collections || [];
   const sizeOrder = config.sizeOrder || [];
   const sizeRank = (s) => { const i = sizeOrder.indexOf(s); return i === -1 ? 999 : i; };
-  const brandOrder = (catalog.brands || []).map((b) => b.id);
-
-  const products = [];
   const sourceResults = [];
 
-  for (const col of collections) {
-    const url = `${apiBase}/categories/${col.slug}`;
+  // ---- 1. Mattresses (per collection) ----
+  const products = [];
+  const brandOrder = config.collections.map((c) => c.brandId);
+  for (const col of config.collections) {
     try {
-      const data = await fetchJson(url);
-      const apiProducts = data.products || [];
+      const data = await fetchJson(`${apiBase}/categories/${col.slug}`);
       let rows = 0;
-      for (const p of apiProducts) {
+      for (const p of (data.products || [])) {
         const model = toModel(p.name || p.slug);
-        const variants = p.variants || [];
-        for (const v of variants) {
-          const size = (v.details && Array.isArray(v.details.Size) ? v.details.Size[0] : null) || v.name;
-          const retailPrice = centsToDollars(v.regular);
-          const salePrice = centsToDollars(v.sale ?? v.regular);
-          if (!size || !retailPrice) continue;
+        for (const [size, price] of Object.entries(perSizeMap(p.variants))) {
           products.push({
             id: `${slug(model.replace(/ Smart Bed$/, ''))}-${slug(size)}`,
-            brandId: col.brandId,
-            series: col.series,
-            model,
-            type: config.type || 'Smart Bed',
-            size,
-            comfort: config.comfort || 'Adjustable',
-            retailPrice,
-            salePrice: Math.min(salePrice || retailPrice, retailPrice)
+            brandId: col.brandId, series: col.series, model, type: 'Smart Bed',
+            size, retailPrice: price.retail, salePrice: price.sale
           });
           rows++;
         }
       }
-      sourceResults.push({ slug: col.slug, brandId: col.brandId, ok: true, products: rows });
-    } catch (error) {
-      sourceResults.push({ slug: col.slug, brandId: col.brandId, ok: false, error: error.message });
+      sourceResults.push({ source: col.slug, ok: true, rows });
+    } catch (e) { sourceResults.push({ source: col.slug, ok: false, error: e.message }); }
+  }
+  products.sort((a, b) => (brandOrder.indexOf(a.brandId) - brandOrder.indexOf(b.brandId)) || (sizeRank(a.size) - sizeRank(b.size)) || (a.retailPrice - b.retailPrice));
+
+  // ---- 2. Integrated bases (per-size, for Climate required bases) ----
+  const integratedPerSize = {};
+  try {
+    const data = await fetchJson(`${apiBase}/categories/${config.integratedBaseCategory}`);
+    for (const p of (data.products || [])) integratedPerSize[p.slug] = perSizeMap(p.variants);
+    sourceResults.push({ source: config.integratedBaseCategory, ok: true, rows: Object.keys(integratedPerSize).length });
+  } catch (e) { sourceResults.push({ source: config.integratedBaseCategory, ok: false, error: e.message }); }
+
+  // Resolve curated bases, injecting live per-size pricing where flagged.
+  const basesByBrand = {};
+  for (const [brandId, list] of Object.entries(config.basesByBrand || {})) {
+    basesByBrand[brandId] = list.map((b) => {
+      const out = { id: b.id, name: b.name, kind: b.kind, desc: b.desc || '' };
+      if (b.default) out.default = true;
+      if (b.perSizeFromSlug && integratedPerSize[b.perSizeFromSlug]) {
+        out.perSize = integratedPerSize[b.perSizeFromSlug];
+        out.fromSale = fromPrices(out.perSize).fromSale;
+        out.fromRetail = fromPrices(out.perSize).fromRetail;
+      } else {
+        out.retail = b.salePrice ? b.price : b.price;
+        out.price = b.salePrice ?? b.price;
+      }
+      return out;
+    });
+  }
+
+  // ---- 3. Furniture (3 series) ----
+  const furniture = [];
+  const accessorySet = new Set(config.furnitureAccessorySlugs || []);
+  for (const src of (config.furnitureSources || [])) {
+    try {
+      const data = await fetchJson(`${apiBase}/categories/${src.slug}`);
+      for (const p of (data.products || [])) {
+        const perSize = perSizeMap(p.variants);
+        if (!Object.keys(perSize).length) continue;
+        const kind = accessorySet.has(p.slug) ? 'accessory' : (src.kind || 'bed');
+        const fp = fromPrices(perSize);
+        furniture.push({
+          id: p.slug, seriesId: src.seriesId, kind,
+          name: (p.name || p.slug).replace(/\s+/g, ' ').trim(),
+          sizes: Object.keys(perSize), perSize, fromRetail: fp.fromRetail, fromSale: fp.fromSale
+        });
+      }
+      sourceResults.push({ source: src.slug, ok: true, rows: furniture.length });
+    } catch (e) { sourceResults.push({ source: src.slug, ok: false, error: e.message }); }
+  }
+
+  // ---- 4. Sheets ----
+  const sheets = [];
+  try {
+    const data = await fetchJson(`${apiBase}/categories/${config.sheetsCategory}`);
+    for (const p of (data.products || [])) {
+      const perSize = perSizeMap(p.variants);
+      if (!Object.keys(perSize).length) continue;
+      const fp = fromPrices(perSize);
+      sheets.push({ id: p.slug, name: (p.name || p.slug).replace(/\s+/g, ' ').trim(), sizes: Object.keys(perSize), perSize, fromRetail: fp.fromRetail, fromSale: fp.fromSale });
     }
-  }
+    sourceResults.push({ source: config.sheetsCategory, ok: true, rows: sheets.length });
+  } catch (e) { sourceResults.push({ source: config.sheetsCategory, ok: false, error: e.message }); }
 
-  if (!products.length) {
-    console.error('No products fetched from the Storefront API. Leaving catalog.json unchanged.');
-    console.error(JSON.stringify(sourceResults, null, 2));
-    process.exitCode = 1;
-    return;
-  }
+  // ---- 5. Mattress pads / protection ----
+  const pads = [];
+  try {
+    const data = await fetchJson(`${apiBase}/categories/${config.padsCategory}`);
+    for (const p of (data.products || [])) {
+      const perSize = perSizeMap(p.variants);
+      if (!Object.keys(perSize).length) continue;
+      const fp = fromPrices(perSize);
+      pads.push({ id: p.slug, name: (p.name || p.slug).replace(/\s+/g, ' ').trim(), sizes: Object.keys(perSize), perSize, fromRetail: fp.fromRetail, fromSale: fp.fromSale });
+    }
+    sourceResults.push({ source: config.padsCategory, ok: true, rows: pads.length });
+  } catch (e) { sourceResults.push({ source: config.padsCategory, ok: false, error: e.message }); }
 
-  // Stable de-dup by id, then sort by brand order, then size order, then price.
-  const byId = new Map();
-  for (const p of products) byId.set(p.id, p);
-  const sorted = [...byId.values()].sort((a, b) => {
-    const bo = brandOrder.indexOf(a.brandId) - brandOrder.indexOf(b.brandId);
-    if (bo !== 0) return bo;
-    const so = sizeRank(a.size) - sizeRank(b.size);
-    if (so !== 0) return so;
-    return a.retailPrice - b.retailPrice;
-  });
+  // ---- 6. Pillows (via search, matched to curated slug list) ----
+  const pillows = [];
+  try {
+    const data = await fetchJson(`${apiBase}/search?q=pillow`);
+    const wanted = new Set(config.pillowSlugs || []);
+    const bySlug = new Map((data.products || []).map((p) => [p.slug, p]));
+    for (const s of (config.pillowSlugs || [])) {
+      const p = bySlug.get(s);
+      if (!p) continue;
+      const retail = dollars(p.original_min_price);
+      const sale = dollars(p.sell_min_price) || retail;
+      pillows.push({ id: p.slug, name: (p.name || p.slug).replace(/\s+/g, ' ').trim(), retail, sale, saleMax: dollars(p.sell_max_price) || sale });
+    }
+    sourceResults.push({ source: 'search:pillow', ok: true, rows: pillows.length });
+  } catch (e) { sourceResults.push({ source: 'search:pillow', ok: false, error: e.message }); }
 
-  const nextCatalog = {
-    ...catalog,
+  // ---- Assemble ----
+  const brands = brandOrder.map((id) => ({ id, ...BRAND_META[id] }));
+  const catalog = {
     lastUpdated: new Date().toISOString(),
-    sourceNotes: config.note || 'Bed pricing pulled live from the Sleep Number Storefront API; brands, addons and promos are curated.',
-    sourceResults,
-    products: sorted
+    sourceNotes: config.note,
+    taxRateDefault: config.taxRateDefault ?? 0,
+    types: config.types,
+    brands,
+    products,
+    basesByBrand,
+    baseRequiredBrands: config.baseRequiredBrands || [],
+    modelIncludedBase: config.modelIncludedBase || {},
+    furnitureSeries: config.furnitureSeries || [],
+    furniture,
+    hardware: config.hardware || [],
+    sheets,
+    pads,
+    pillows,
+    delivery: config.delivery || [],
+    disposalFees: config.disposalFees || [],
+    deliveryNote: config.deliveryNote || '',
+    warranty: config.warranty || [],
+    warrantyNote: config.warrantyNote || '',
+    promos: config.promos || [],
+    sourceResults
   };
 
-  await fs.writeFile(catalogPath, JSON.stringify(nextCatalog, null, 2) + '\n', 'utf8');
-  const perBrand = brandOrder.map((id) => `${id}=${sorted.filter((p) => p.brandId === id).length}`).join(', ');
-  console.log(`Catalog updated from live API: ${sorted.length} products (${perBrand}); ${catalog.addons?.length || 0} addons + ${catalog.promos?.length || 0} promos preserved.`);
+  if (!products.length) { console.error('No mattresses fetched; leaving catalog unchanged.'); process.exitCode = 1; return; }
+  await fs.writeFile(catalogPath, JSON.stringify(catalog, null, 2) + '\n', 'utf8');
+  const perBrand = brandOrder.map((id) => `${id}=${products.filter((p) => p.brandId === id).length}`).join(', ');
+  console.log(`Catalog rebuilt from live API:`);
+  console.log(`  beds: ${products.length} (${perBrand})`);
+  console.log(`  furniture: ${furniture.length}, sheets: ${sheets.length}, pads: ${pads.length}, pillows: ${pillows.length}, hardware: ${catalog.hardware.length}`);
+  console.log(`  bases: ${Object.entries(basesByBrand).map(([k, v]) => `${k}=${v.length}`).join(', ')}; delivery: ${catalog.delivery.length}; warranty: ${catalog.warranty.length}; tax ${catalog.taxRateDefault}%`);
+  const bad = sourceResults.filter((r) => !r.ok);
+  if (bad.length) console.log('  WARNINGS: ' + bad.map((b) => `${b.source}:${b.error}`).join('; '));
 }
 
-main().catch((error) => {
-  console.error('Catalog update failed:', error.message);
-  process.exitCode = 1;
-});
+main().catch((e) => { console.error('Catalog update failed:', e.message); process.exitCode = 1; });
