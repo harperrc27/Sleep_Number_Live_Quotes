@@ -30,7 +30,7 @@ jobs:
           node-version: '20'
 
       - name: Run catalog updater
-        run: node scripts/update_catalog.mjs
+        run: npm run refresh:catalog
 
       - name: Commit catalog if changed
         run: |

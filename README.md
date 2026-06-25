@@ -138,10 +138,24 @@ Supported types: `"html"` (extracts JSON-LD structured data + promo patterns), `
 ## Running tests
 
 ```bash
+npm test
+```
+
+Or directly:
+
+```bash
 node tests/quote.test.mjs
 ```
 
 Tests cover: catalog schema validation, quote math, promo engine, hardware rules.
+
+## Refreshing the catalog locally
+
+```bash
+npm run refresh:catalog
+```
+
+This fetches the latest Sleep Number public pages and writes `data/catalog.json`.
 
 ## Known limitations
 
