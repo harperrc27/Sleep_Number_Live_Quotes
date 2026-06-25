@@ -190,7 +190,7 @@ function cleanJson(value) { return value.replace(/&quot;/g, '"').trim(); }
 function mergeById(primary, fallback) { return [...dedupeById(primary), ...fallback.filter(x => !primary.some(p => p.id === x.id))]; }
 function dedupeById(items) { return [...new Map(items.map(item => [item.id, item])).values()]; }
 function slug(value) { return String(value).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 80); }
-function guessBrandId(value = '') { const v = String(value).toLowerCase(); if (v.includes('tempur')) return 'tempur'; if (v.includes('sealy')) return 'sealy'; if (v.includes('stearns')) return 'stearns'; if (v.includes('purple')) return 'purple'; if (v.includes('beautyrest')) return 'beautyrest'; if (v.includes('serta')) return 'serta'; return 'sealy'; }
+function guessBrandId(value = '') { const v = String(value).toLowerCase(); if (v.includes('i10') || v.includes('i8') || v.includes('climate360')) return 'innovation'; if (v.includes('p6') || v.includes('p5') || v.includes('active grid')) return 'performance'; if (v.includes('c4') || v.includes('c2') || v.includes('c1')) return 'classic'; return 'classic'; }
 function guessSeries(value = '') { return String(value).split(/[-–|]/)[0].trim() || 'Imported'; }
 function guessSize(value = '') { const v = String(value).toLowerCase(); return ['Twin XL', 'Twin', 'Full', 'Queen', 'King', 'California King'].find(s => v.includes(s.toLowerCase())) || 'Queen'; }
 function guessComfort(value = '') { const v = String(value).toLowerCase(); if (v.includes('plush')) return 'Plush'; if (v.includes('firm')) return 'Firm'; if (v.includes('soft')) return 'Soft'; return 'Medium'; }

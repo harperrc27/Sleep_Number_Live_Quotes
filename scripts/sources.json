@@ -1,59 +1,41 @@
 {
   "sources": [
     {
-      "name": "Serta mattresses",
+      "name": "Sleep Number c2 Smart Bed",
       "type": "html",
-      "url": "https://www.serta.com/collections/mattresses",
-      "brandId": "serta"
+      "url": "https://www.sleepnumber.com/beds/c2-smart-bed",
+      "brandId": "classic"
     },
     {
-      "name": "Serta promotions",
+      "name": "Sleep Number c4 Smart Bed",
       "type": "html",
-      "url": "https://www.serta.com/pages/promotions",
-      "brandId": "serta"
+      "url": "https://www.sleepnumber.com/beds/c4-smart-bed",
+      "brandId": "classic"
     },
     {
-      "name": "Beautyrest mattresses",
+      "name": "Sleep Number p5 Smart Bed",
       "type": "html",
-      "url": "https://www.beautyrest.com/collections/compare-mattresses",
-      "brandId": "beautyrest"
+      "url": "https://www.sleepnumber.com/beds/p5-smart-bed",
+      "brandId": "performance"
     },
     {
-      "name": "Beautyrest promotions",
+      "name": "Sleep Number p6 Smart Bed",
       "type": "html",
-      "url": "https://www.beautyrest.com/pages/promotions",
-      "brandId": "beautyrest"
+      "url": "https://www.sleepnumber.com/beds/p6-smart-bed",
+      "brandId": "performance"
     },
     {
-      "name": "Purple Restore Hybrid",
+      "name": "Sleep Number i8 Smart Bed",
       "type": "html",
-      "url": "https://purple.com/mattresses/restore",
-      "brandId": "purple"
+      "url": "https://www.sleepnumber.com/beds/i8-smart-bed",
+      "brandId": "innovation"
     },
     {
-      "name": "Purple RestorePlus Hybrid",
+      "name": "Sleep Number i10 Smart Bed",
       "type": "html",
-      "url": "https://purple.com/mattresses/restore-plus",
-      "brandId": "purple"
-    },
-    {
-      "name": "Purple RestorePremier Hybrid",
-      "type": "html",
-      "url": "https://purple.com/mattresses/restore-premier",
-      "brandId": "purple"
-    },
-    {
-      "name": "Purple Original Mattress",
-      "type": "html",
-      "url": "https://purple.com/mattresses/purple-mattress",
-      "brandId": "purple"
-    },
-    {
-      "name": "Purple July 4th sale promos",
-      "type": "html",
-      "url": "https://purple.com/4th-july-mattress-sale",
-      "brandId": "purple"
+      "url": "https://www.sleepnumber.com/beds/i10-smart-bed",
+      "brandId": "innovation"
     }
   ],
-  "notes": "Serta/Beautyrest: Shopify static HTML with full JSON-LD prices. Purple: per-size JSON-LD prices on individual product pages. Tempur-Pedic/Sealy/Stearns use JS-only React SPA — not scrapable via static HTML. Update promo URLs seasonally. brandId overrides which catalog brand each source maps to."
+  "notes": "Sleep Number's site is a JavaScript SPA — static HTML scraping may not yield prices. If all sources fail, the hand-curated starter catalog in data/catalog.json is used. Update prices manually in catalog.json from the current Sleep Number price sheet."
 }
