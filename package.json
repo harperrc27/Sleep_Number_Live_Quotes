@@ -1,0 +1,14 @@
+{
+  "name": "sleep-quote-studio",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Phone-friendly, offline-first mattress quote builder for GitHub Pages.",
+  "scripts": {
+    "refresh:catalog": "node scripts/update_catalog.mjs",
+    "deep:research": "node scripts/deep_research_agent.mjs",
+    "test": "node --test tests/quote.test.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -7,7 +7,8 @@ A phone-friendly, offline-first mattress quote builder for GitHub Pages.
 - Loads a static catalog from `data/catalog.json`
 - Saves the catalog locally in the browser for offline quoting
 - Guides the quote flow: brand/logo-style cards, mattress, base, furniture, layers, bedding/pillows, protection plans, promos/discounts
-- Runs a GitHub Actions updater every morning at 5 AM Central during daylight saving time
+- Runs a **fast catalog updater** every morning at 5 AM Central (fetches configured sources, one pass)
+- Runs a **deep research agent** every morning at 6 AM Central (multi-pass: discover sub-pages → reconcile across sources → validate → report)
 - Supports manual catalog refresh from the app
 
 ## Setup
@@ -19,15 +20,56 @@ A phone-friendly, offline-first mattress quote builder for GitHub Pages.
 5. Tap **Refresh catalog** before going onto restricted Wi-Fi.
 6. Add the site to your phone home screen.
 
-## Add real product sources
+## Catalog update agents
 
-Edit:
+### Fast updater (`scripts/update_catalog.mjs`)
 
-```json
-scripts/sources.json
+Single-pass fetcher. Reads every source in `scripts/sources.json`, extracts structured product data (JSON-LD) and promo text, and merges results into `data/catalog.json`. Runs at **5 AM Central**.
+
+### Deep research agent (`scripts/deep_research_agent.mjs`)
+
+Slow, methodical multi-pass agent. Runs at **6 AM Central** (one hour after the fast updater so it always starts from a fresh catalog).
+
+**Eight phases:**
+
+| Phase | What it does |
+|-------|-------------|
+| 1 – Primary Fetch | Fetches all configured sources with polite delays and automatic retries |
+| 2 – Link Discovery | Finds product/promo sub-page links on each primary page |
+| 3 – Deep Fetch | Fetches every discovered sub-page (up to 15 per source) |
+| 4 – Reconcile | Groups the same product across sources; uses **median pricing** to smooth out stale or outlier prices |
+| 5 – Promo Deep Scan | Re-scans all collected HTML with an expanded 9-pattern promo ruleset (dollar-off, percent-off, free items, gift cards, financing) |
+| 6 – Validate | Schema checks, price-range sanity, brand-ID consistency; flags anomalies |
+| 7 – Report | Writes `data/research-report.json` — a full audit trail of every phase |
+| 8 – Catalog Merge | Merges validated products and promos; attaches a `deepResearch` summary block to the catalog |
+
+**Confidence scoring:** products found in 3+ sources are rated `high`; 2 sources `medium`; 1 source `low`. Confidence levels appear in the research report.
+
+Run locally:
+
+```bash
+node scripts/deep_research_agent.mjs
 ```
 
-Add public product/deal pages or JSON feeds:
+Or via npm:
+
+```bash
+npm run deep:research
+```
+
+## Running both agents manually
+
+Go to **Actions → Update Catalog → Run workflow** and choose a mode:
+
+| Mode | What runs |
+|------|-----------|
+| `fast` | Fast updater only |
+| `deep` | Deep research agent only |
+| `both` | Fast updater first, then deep research agent |
+
+## Add real product sources
+
+Edit `scripts/sources.json`. The file already contains the public product and promo pages for every brand in the catalog. Add additional public pages:
 
 ```json
 {
@@ -37,7 +79,7 @@ Add public product/deal pages or JSON feeds:
 }
 ```
 
-The updater tries structured product data first, then basic text/promo extraction. Most real websites need a little tuning after the first test run.
+The updater tries structured product data (JSON-LD) first, then basic text/promo extraction. The deep research agent will also follow links it discovers on each configured page.
 
 ## Replace text-logo cards with actual logos
 
@@ -60,18 +102,23 @@ Then update `data/catalog.json` brand records:
 
 Only use logo files you are allowed to use for your workplace tool.
 
-## 5 AM schedule
+## Schedule
 
-The workflow uses:
+| Agent | Cron | Central time (DST) |
+|-------|------|--------------------|
+| Fast updater | `0 10 * * *` | 5 AM |
+| Deep research | `0 11 * * *` | 6 AM |
+
+During Central Standard Time (UTC-6), adjust each cron in `.github/workflows/catalog_update.yml` by one hour:
 
 ```yaml
-cron: '0 10 * * *'
-```
+# Before (CDT / UTC-5):
+- cron: '0 10 * * *'   # fast updater  → 5 AM CDT
+- cron: '0 11 * * *'   # deep research → 6 AM CDT
 
-That is 5 AM Central during daylight saving time. During Central Standard Time, switch to:
-
-```yaml
-cron: '0 11 * * *'
+# After (CST / UTC-6):
+- cron: '0 11 * * *'   # fast updater  → 5 AM CST
+- cron: '0 12 * * *'   # deep research → 6 AM CST
 ```
 
 ## Important

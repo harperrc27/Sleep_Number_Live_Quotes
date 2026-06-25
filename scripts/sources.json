@@ -1,15 +1,50 @@
 {
   "sources": [
     {
-      "name": "Example public JSON feed",
-      "type": "json",
-      "url": ""
+      "name": "Tempur-Pedic Mattresses",
+      "type": "html",
+      "url": "https://www.tempurpedic.com/mattresses/"
     },
     {
-      "name": "Example public promo page",
+      "name": "Tempur-Pedic Deals",
       "type": "html",
-      "url": ""
+      "url": "https://www.tempurpedic.com/deals/"
+    },
+    {
+      "name": "Sealy Mattresses",
+      "type": "html",
+      "url": "https://www.sealy.com/mattresses/"
+    },
+    {
+      "name": "Stearns & Foster Mattresses",
+      "type": "html",
+      "url": "https://www.stearnsandfoster.com/mattresses/"
+    },
+    {
+      "name": "Purple Mattresses",
+      "type": "html",
+      "url": "https://purple.com/mattresses"
+    },
+    {
+      "name": "Purple Deals",
+      "type": "html",
+      "url": "https://purple.com/pages/deals"
+    },
+    {
+      "name": "Beautyrest Mattresses",
+      "type": "html",
+      "url": "https://www.beautyrest.com/mattresses"
+    },
+    {
+      "name": "Serta Mattresses",
+      "type": "html",
+      "url": "https://www.serta.com/mattresses/"
+    },
+    {
+      "name": "Serta Deals",
+      "type": "html",
+      "url": "https://www.serta.com/sale/"
     }
   ],
-  "notes": "Add public product/promo URLs here. Leave blank entries while testing the sample catalog."
+  "notes": "Public product and promo pages for catalog brands. Only public pages — do not add login-protected or employee-only URLs. The deep research agent will also follow product sub-links discovered from these pages."
 }
